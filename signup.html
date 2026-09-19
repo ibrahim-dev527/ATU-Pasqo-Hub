@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account | ATU PQ Hub</title>
+<meta name="description" content="Sign up for a free ATU PQ Hub account with your Student ID to download past questions.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://atupqhub.netlify.app/signup.html">
+<meta name="theme-color" content="#14315D">
+<link rel="icon" type="image/png" href="images/atu-logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Create Account | ATU PQ Hub">
+<meta property="og:description" content="Sign up for a free ATU PQ Hub account with your Student ID to download past questions.">
+<meta property="og:url" content="https://atupqhub.netlify.app/signup.html">
+<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:site_name" content="ATU PQ Hub">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Create Account | ATU PQ Hub">
+<meta name="twitter:description" content="Sign up for a free ATU PQ Hub account with your Student ID to download past questions.">
+<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--blue:#14315D;--blue-dark:#0A1B36;--gold:#D8A727;--blue-light:#2F5A96;--white:#FFFFFF;--off-white:#FFF8F8;--dark:#0F0F0F;--gray:#6B7280;--gray-light:#F9F9F9;--shadow:0 4px 24px rgba(23,70,162,0.15);--radius:16px;--radius-sm:8px;--transition:all 0.35s cubic-bezier(0.4,0,0.2,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:'Poppins',sans-serif;color:var(--dark);background:var(--off-white);min-height:100vh;display:grid;grid-template-columns:1fr 1fr}
+a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+.auth-left{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 50%,#0D2547 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px;min-height:100vh}
+.auth-left::before{content:'';position:absolute;inset:0;opacity:0.04;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.auth-left-inner{position:relative;z-index:2;text-align:center;width:100%}
+.auth-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--white);letter-spacing:3px;margin-bottom:32px}.auth-logo span{color:var(--gold)}
+.auth-img-wrap{width:140px;height:140px;border-radius:50%;overflow:hidden;border:4px solid rgba(255,255,255,0.2);margin:0 auto 24px;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
+.auth-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:top}
+.auth-img-placeholder{width:100%;height:100%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);font-size:0.8rem;text-align:center}
+.auth-left h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--white);letter-spacing:2px;margin-bottom:8px}.auth-left h2 span{color:var(--gold)}
+.auth-left p{color:rgba(255,255,255,0.75);font-size:0.85rem;line-height:1.7;max-width:320px;margin:0 auto 20px}
+.benefits{display:flex;flex-direction:column;gap:10px;text-align:left;max-width:280px;margin:0 auto}
+.benefit{display:flex;align-items:flex-start;gap:10px;font-size:0.8rem;color:rgba(255,255,255,0.85)}
+.benefit-check{width:20px;height:20px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:0.65rem;flex-shrink:0;color:var(--dark);font-weight:700;margin-top:1px}
+.auth-circles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.auth-circle{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,0.06)}
+.auth-circle:nth-child(1){width:400px;height:400px;top:-150px;right:-150px}
+.auth-circle:nth-child(2){width:300px;height:300px;bottom:-100px;left:-100px;border-color:rgba(37,99,235,0.1)}
+.auth-right{display:flex;align-items:center;justify-content:center;padding:48px;background:var(--white);overflow-y:auto}
+.auth-form-wrap{width:100%;max-width:460px}
+.auth-form-title{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--dark);letter-spacing:2px;margin-bottom:4px}.auth-form-title span{color:var(--blue)}
+.auth-form-subtitle{color:var(--gray);font-size:0.88rem;margin-bottom:28px}
+.form-group{margin-bottom:18px}
+.form-label{display:block;font-size:0.82rem;font-weight:600;color:var(--dark);margin-bottom:8px}
+.form-input,.form-select{width:100%;padding:13px 16px;border:2px solid rgba(23,70,162,0.12);border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:0.88rem;color:var(--dark);background:var(--off-white);transition:var(--transition);outline:none}
+.form-input:focus,.form-select:focus{border-color:var(--blue);background:var(--white);box-shadow:0 0 0 4px rgba(23,70,162,0.08)}
+.input-group{position:relative}.input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1rem}.input-group .form-input,.input-group .form-select{padding-left:44px}
+.eye-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;color:var(--gray)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.password-strength{height:4px;border-radius:4px;background:var(--gray-light);margin-top:8px;overflow:hidden}
+.password-strength-bar{height:100%;border-radius:4px;transition:var(--transition);width:0}
+.password-hint{font-size:0.7rem;color:var(--gray);margin-top:4px}
+.checkbox-group{display:flex;align-items:flex-start;gap:10px;margin-bottom:20px}
+.checkbox-group input[type="checkbox"]{width:16px;height:16px;margin-top:2px;accent-color:var(--blue);flex-shrink:0}
+.checkbox-group label{font-size:0.78rem;color:var(--gray);line-height:1.5}
+.checkbox-group a{color:var(--blue)}
+.btn-auth{width:100%;padding:14px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:var(--white);border:none;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-auth:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(23,70,162,0.3)}.btn-auth:disabled{opacity:0.7;cursor:not-allowed;transform:none}
+.auth-switch{text-align:center;font-size:0.85rem;color:var(--gray);margin-top:16px}.auth-switch a{color:var(--blue);font-weight:600}.auth-switch a:hover{text-decoration:underline}
+.alert{padding:12px 16px;border-radius:var(--radius-sm);font-size:0.82rem;font-weight:500;margin-bottom:16px;display:none}
+.alert.error{background:rgba(23,70,162,0.08);color:var(--blue);border:1px solid rgba(23,70,162,0.2)}
+.alert.success{background:rgba(16,185,129,0.08);color:#065f46;border:1px solid rgba(16,185,129,0.2)}
+.alert.visible{display:block}
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:var(--white);border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.auth-back{display:inline-flex;align-items:center;gap:6px;color:var(--gray);font-size:0.82rem;margin-bottom:20px;transition:var(--transition)}.auth-back:hover{color:var(--blue)}
+@media(max-width:768px){body{grid-template-columns:1fr}.auth-left{min-height:auto;padding:40px 24px}.auth-right{padding:32px 24px}.form-row{grid-template-columns:1fr}.auth-img-wrap{width:100px;height:100px}}
+</style>
+</head>
+<body>
+
+<!-- LEFT PANEL -->
+<div class="auth-left">
+  <div class="auth-circles"><div class="auth-circle"></div><div class="auth-circle"></div></div>
+  <div class="auth-left-inner">
+    <div class="auth-logo">ATU <span>PQ Hub</span></div>
+    <div class="auth-img-wrap">
+      <img src="images/Moyole1.jpg" alt="Omar Sulley Bin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="auth-img-placeholder">📷 Moyole</div>
+    </div>
+    <h2>Join the <span>Community!</span></h2>
+    <p>Create your free ATU PQ Hub account and unlock all the benefits of our growing student platform.</p>
+    <div class="benefits">
+      <div class="benefit"><div class="benefit-check">✓</div><span>Free access to 500+ past questions</span></div>
+      <div class="benefit"><div class="benefit-check">✓</div><span>Track everything you've downloaded</span></div>
+      <div class="benefit"><div class="benefit-check">✓</div><span>Get notified when new PQs are added</span></div>
+      <div class="benefit"><div class="benefit-check">✓</div><span>Request a past question you can't find</span></div>
+      <div class="benefit"><div class="benefit-check">✓</div><span>Sign in with just your Student ID</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT PANEL: SIGNUP FORM -->
+<div class="auth-right">
+  <div class="auth-form-wrap">
+    <a href="index.html" class="auth-back">← Back to Home</a>
+    <h1 class="auth-form-title">Create <span>Account</span></h1>
+    <p class="auth-form-subtitle">Join ATU PQ Hub — it's completely free!</p>
+
+    <div class="alert error" id="errorAlert"></div>
+    <div class="alert success" id="successAlert"></div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">First Name *</label>
+        <div class="input-group"><span class="input-icon">👤</span><input type="text" class="form-input" id="firstName" placeholder="First name" autocomplete="given-name"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name *</label>
+        <div class="input-group"><span class="input-icon">👤</span><input type="text" class="form-input" id="lastName" placeholder="Last name" autocomplete="family-name"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Student ID *</label>
+      <div class="input-group"><span class="input-icon">🎓</span><input type="text" class="form-input" id="signupStudentId" placeholder="e.g. 01234567B" autocomplete="username"></div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Contact Number *</label>
+      <div class="input-group"><span class="input-icon">📞</span><input type="tel" class="form-input" id="signupPhone" placeholder="e.g. 024 XXX XXXX" autocomplete="tel"></div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Faculty</label>
+        <div class="input-group">
+          <span class="input-icon">🏛️</span>
+          <select class="form-select" id="signupFaculty">
+            <option value="">Select Faculty</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Department</label>
+        <div class="input-group">
+          <span class="input-icon">📂</span>
+          <select class="form-select" id="signupDepartment">
+            <option value="">Select Department</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Level</label>
+        <div class="input-group">
+          <span class="input-icon">📚</span>
+          <select class="form-select" id="signupLevel">
+            <option value="">Select Level</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Password *</label>
+      <div class="input-group">
+        <span class="input-icon">🔒</span>
+        <input type="password" class="form-input" id="signupPassword" placeholder="Create a strong password" oninput="checkStrength(this.value)" autocomplete="new-password">
+        <button class="eye-toggle" onclick="togglePassword('signupPassword', this)" type="button">👁️</button>
+      </div>
+      <div class="password-strength"><div class="password-strength-bar" id="strengthBar"></div></div>
+      <div class="password-hint" id="strengthText">Use 8+ characters, with numbers and symbols</div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Confirm Password *</label>
+      <div class="input-group">
+        <span class="input-icon">🔒</span>
+        <input type="password" class="form-input" id="confirmPassword" placeholder="Repeat your password" autocomplete="new-password">
+        <button class="eye-toggle" onclick="togglePassword('confirmPassword', this)" type="button">👁️</button>
+      </div>
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="agreeTerms">
+      <label for="agreeTerms">I agree to ATU PQ Hub's terms of service and I support the platform's mission of free academic access for all ATU students.</label>
+    </div>
+
+    <button class="btn-auth" id="signupBtn" onclick="handleSignup()">
+      <span id="signupBtnText">🎓 Create Free Account</span>
+      <div class="spinner" id="signupSpinner" style="display:none"></div>
+    </button>
+
+    <div class="auth-switch">Already have an account? <a href="login.html">Sign In →</a></div>
+
+    <div style="margin-top:20px;padding:14px;background:rgba(37,99,235,0.08);border-radius:var(--radius-sm);border:1px solid rgba(37,99,235,0.2)">
+      <p style="font-size:0.72rem;color:var(--gray);line-height:1.6"><strong style="color:#b45309">⚙️ Developer:</strong> Configure Supabase URL + Key in <code>js/pq-hub.js</code>. Create a <code>users</code> table with columns: id, student_id, name, contact, faculty, level, created_at.</p>
+    </div>
+  </div>
+</div>
+
+<script src="js/pq-hub.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  pqhubFillFacultySelect(document.getElementById('signupFaculty'));
+  pqhubFillDepartmentSelect(document.getElementById('signupDepartment'), '');
+  pqhubFillLevelSelect(document.getElementById('signupLevel'));
+  pqhubLinkFacultyToDepartment(document.getElementById('signupFaculty'), document.getElementById('signupDepartment'));
+});
+// =============================================
+// SIGNUP FUNCTION — Student ID based account
+// =============================================
+async function handleSignup() {
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const studentId = document.getElementById('signupStudentId').value.trim();
+  const phone = document.getElementById('signupPhone').value.trim();
+  const faculty = document.getElementById('signupFaculty').value;
+  const department = document.getElementById('signupDepartment').value;
+  const level = document.getElementById('signupLevel').value;
+  const password = document.getElementById('signupPassword').value;
+  const confirmPwd = document.getElementById('confirmPassword').value;
+  const agreed = document.getElementById('agreeTerms').checked;
+  const btn = document.getElementById('signupBtn');
+  const btnText = document.getElementById('signupBtnText');
+  const spinner = document.getElementById('signupSpinner');
+
+  // === VALIDATION ===
+  if (!firstName || !lastName) { showAlert('error', '⚠️ Please enter your full name.'); return; }
+  if (!studentId) { showAlert('error', '⚠️ Please enter your Student ID.'); return; }
+  if (!phone) { showAlert('error', '⚠️ Please enter your contact number.'); return; }
+  if (password.length < 8) { showAlert('error', '⚠️ Password must be at least 8 characters.'); return; }
+  if (password !== confirmPwd) { showAlert('error', '⚠️ Passwords do not match.'); return; }
+  if (!agreed) { showAlert('error', '⚠️ Please agree to the terms to continue.'); return; }
+
+  if (!sb) {
+    showAlert('error', '⚙️ Supabase is not configured yet. Add your Supabase credentials in js/pq-hub.js.');
+    return;
+  }
+
+  btn.disabled = true; btnText.textContent = 'Creating account...'; spinner.style.display = 'block';
+  hideAlert('error'); hideAlert('success');
+
+  try {
+    await pqhubSignUp({
+      fullName: firstName + ' ' + lastName,
+      studentId,
+      contact: phone,
+      password,
+      faculty,
+      department,
+      level
+    });
+
+    showAlert('success', '🎉 Account created successfully! Taking you to your dashboard...');
+    setTimeout(() => { window.location.href = 'user-dashboard.html'; }, 2000);
+
+  } catch (err) {
+    showAlert('error', '❌ ' + (err.message || 'Could not create your account. Please try again.'));
+  } finally {
+    btn.disabled = false; btnText.textContent = '🎓 Create Free Account'; spinner.style.display = 'none';
+  }
+}
+
+// Password strength checker
+function checkStrength(pwd) {
+  const bar = document.getElementById('strengthBar');
+  const text = document.getElementById('strengthText');
+  let strength = 0;
+  if (pwd.length >= 8) strength++;
+  if (/[A-Z]/.test(pwd)) strength++;
+  if (/[0-9]/.test(pwd)) strength++;
+  if (/[^A-Za-z0-9]/.test(pwd)) strength++;
+  const colors = ['','#ef4444','#f97316','#eab308','#22c55e'];
+  const labels = ['','Weak','Fair','Good','Strong 💪'];
+  const widths = ['0%','25%','50%','75%','100%'];
+  bar.style.width = widths[strength] || '0%';
+  bar.style.background = colors[strength] || 'transparent';
+  text.textContent = strength > 0 ? `Password strength: ${labels[strength]}` : 'Use 8+ characters, numbers and symbols';
+  text.style.color = colors[strength] || 'var(--gray)';
+}
+
+function togglePassword(id, btn) {
+  const input = document.getElementById(id);
+  if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+  else { input.type = 'password'; btn.textContent = '👁️'; }
+}
+
+function showAlert(type, msg) { const el=document.getElementById(type==='error'?'errorAlert':'successAlert'); el.textContent=msg; el.classList.add('visible'); }
+function hideAlert(type) { const el=document.getElementById(type==='error'?'errorAlert':'successAlert'); el.classList.remove('visible'); }
+</script>
+</body>
+</html>

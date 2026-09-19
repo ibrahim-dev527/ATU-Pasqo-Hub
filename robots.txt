@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /login.html
+Disallow: /signup.html
+Disallow: /dashboard.html
+Disallow: /user-dashboard.html
+Disallow: /setup.html
+
+Sitemap: https://atupqhub.netlify.app/sitemap.xml

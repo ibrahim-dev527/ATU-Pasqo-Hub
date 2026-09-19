@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATU PQ Hub | Free Past Questions for Accra Technical University</title>
+<meta name="description" content="Download free ATU past examination questions by faculty, department, level and year. Built for Accra Technical University students, brought to you by Omar Sulley Bin (Officer Moyole), SRC Part-Time Representative.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://atupqhub.netlify.app/">
+<meta name="theme-color" content="#14315D">
+<link rel="icon" type="image/png" href="images/atu-logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ATU PQ Hub | Free Past Questions for Accra Technical University">
+<meta property="og:description" content="Download free ATU past examination questions by faculty, department, level and year. Built for Accra Technical University students, brought to you by Omar Sulley Bin (Officer Moyole), SRC Part-Time Representative.">
+<meta property="og:url" content="https://atupqhub.netlify.app/">
+<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:site_name" content="ATU PQ Hub">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ATU PQ Hub | Free Past Questions for Accra Technical University">
+<meta name="twitter:description" content="Download free ATU past examination questions by faculty, department, level and year. Built for Accra Technical University students, brought to you by Omar Sulley Bin (Officer Moyole), SRC Part-Time Representative.">
+<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#14315D;--blue-dark:#0A1B36;--red-light:#FF2D55;--gold:#D8A727;--blue-light:#2F5A96;--white:#FFFFFF;--off-white:#FFF8F8;--dark:#0F0F0F;--dark2:#1C1C1E;--gray:#6B7280;--gray-light:#F9F9F9;--shadow:0 4px 24px rgba(23,70,162,0.15);--shadow-lg:0 12px 48px rgba(23,70,162,0.25);--radius:16px;--radius-sm:8px;--transition:all 0.35s cubic-bezier(0.4,0,0.2,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{font-family:'Poppins',sans-serif;color:var(--dark);background:var(--off-white);overflow-x:hidden}
+img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
+
+/* PAGE LOADER */
+#page-loader{position:fixed;inset:0;background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 50%,#0D2547 100%);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 0.8s ease,visibility 0.8s ease}
+#page-loader.fade-out{opacity:0;visibility:hidden}
+.loader-logos{display:flex;align-items:center;gap:10px}
+.loader-logo-wrap{width:76px;height:76px;border-radius:50%;overflow:hidden;border:3px solid var(--gold);box-shadow:0 0 30px rgba(216,167,39,0.5);animation:loaderPulse 1.5s ease-in-out infinite;background:var(--white);flex-shrink:0}
+.loader-logo-wrap img{width:100%;height:100%;object-fit:cover;object-position:top}
+.loader-logo-fallback{width:100%;height:100%;background:linear-gradient(135deg,#0A1B36,#14315D);display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,0.7);font-size:0.62rem;text-align:center;line-height:1.3}
+.loader-logo-plus{font-size:1.1rem;color:rgba(255,255,255,0.45);font-weight:300;flex-shrink:0}
+@keyframes loaderPulse{0%,100%{transform:scale(1);box-shadow:0 0 30px rgba(216,167,39,0.5)}50%{transform:scale(1.05);box-shadow:0 0 44px rgba(216,167,39,0.8)}}
+.loader-vote{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--white);letter-spacing:4px}.loader-vote span{color:var(--gold)}
+.loader-brief{color:rgba(255,255,255,0.75);font-size:0.85rem;max-width:340px;text-align:center;line-height:1.6;margin-top:-8px}
+.loader-bar{width:200px;height:4px;background:rgba(255,255,255,0.2);border-radius:4px;overflow:hidden}
+.loader-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:4px;width:0;animation:loadBar 3s ease forwards}
+@keyframes loadBar{0%{width:0}100%{width:100%}}
+.loader-dots{display:flex;gap:8px}
+.loader-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4)}
+.loader-dot:nth-child(1){animation:dotBounce 1.2s 0s ease-in-out infinite}
+.loader-dot:nth-child(2){animation:dotBounce 1.2s 0.2s ease-in-out infinite}
+.loader-dot:nth-child(3){animation:dotBounce 1.2s 0.4s ease-in-out infinite}
+@keyframes dotBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-10px);background:var(--gold)}}
+
+/* MOYOLE WELCOME POPUP */
+#moyole-popup-overlay{position:fixed;inset:0;background:rgba(10,20,40,0.7);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px}
+#moyole-popup-overlay.show{display:flex}
+.moyole-popup-card{background:var(--white);border-radius:20px;max-width:360px;width:100%;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:popupIn 0.4s cubic-bezier(0.4,0,0.2,1)}
+@keyframes popupIn{from{opacity:0;transform:scale(0.9) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.moyole-popup-close{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.4);color:var(--white);border:none;font-size:1rem;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center}
+.moyole-popup-close:hover{background:rgba(0,0,0,0.6)}
+.moyole-popup-img{width:100%;height:280px;background:linear-gradient(135deg,var(--blue-dark),var(--blue));display:flex;align-items:center;justify-content:center}
+.moyole-popup-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+.moyole-popup-img-fallback{color:rgba(255,255,255,0.6);font-size:0.85rem;text-align:center}
+.moyole-popup-body{padding:20px 24px 24px;text-align:center}
+.moyole-popup-body h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;color:var(--dark);margin-bottom:6px}
+.moyole-popup-body h3 span{color:var(--blue)}
+.moyole-popup-body p{color:var(--gray);font-size:0.85rem;line-height:1.6;margin-bottom:16px}
+.moyole-popup-body .btn{width:100%}
+
+/* NAVBAR */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;height:70px;display:flex;align-items:center;justify-content:space-between;background:transparent;transition:var(--transition)}
+#navbar.scrolled{background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(23,70,162,0.12)}
+#navbar.scrolled .nav-logo{color:var(--blue)}
+#navbar.scrolled .nav-links a{color:var(--dark)}
+#navbar.scrolled .nav-links a:hover{color:var(--blue)}
+#navbar.scrolled .hamburger span{background:var(--dark)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--white);letter-spacing:2px;line-height:1.1}.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{color:var(--white);font-size:0.82rem;font-weight:500;padding:6px 10px;border-radius:6px;transition:var(--transition)}
+.nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.15);color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--dark)!important;font-weight:700!important;padding:8px 16px!important;border-radius:8px!important}
+.nav-cta:hover{background:var(--gold-light)!important;transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:var(--transition)}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+#mobile-menu{position:fixed;top:70px;right:-100%;width:280px;height:calc(100vh - 70px);background:var(--white);z-index:999;padding:24px;transition:right 0.35s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,0.1)}
+#mobile-menu.open{right:0}
+.mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:4px}
+.mobile-nav-links a{display:block;padding:12px 16px;color:var(--dark);font-weight:500;border-radius:var(--radius-sm);transition:var(--transition);font-size:0.9rem}
+.mobile-nav-links a:hover{background:var(--gray-light);color:var(--blue);padding-left:24px}
+.mobile-nav-links .mob-cta{background:var(--blue);color:var(--white)!important;text-align:center;margin-top:12px;border-radius:var(--radius-sm)}
+
+/* ========== HERO SWIPER ========== */
+#hero{position:relative;width:100%;height:100vh;min-height:600px;overflow:hidden}
+
+/* Background image slides */
+.hero-slides{position:absolute;inset:0;z-index:0}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background-size:cover;background-position:center;background-repeat:no-repeat;transform:scale(1)}
+.hero-slide.active{opacity:1;animation:kenBurns 8s ease-out forwards}
+@keyframes kenBurns{from{transform:scale(1)}to{transform:scale(1.07)}}
+
+/* Overlay */
+.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(110deg,rgba(8,0,4,0.85) 0%,rgba(139,10,30,0.6) 55%,rgba(0,0,0,0.3) 100%)}
+
+/* Arrow buttons */
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.25);color:var(--white);font-size:1.1rem;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.hero-arrow:hover{background:rgba(255,255,255,0.22);border-color:var(--gold);color:var(--gold)}
+.hero-arrow.prev{left:20px}.hero-arrow.next{right:20px}
+
+/* Content */
+.hero-content-layer{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:1fr 400px;gap:40px;align-items:center;max-width:1200px;margin:0 auto;padding:100px 24px 80px}
+
+.hero-text{animation:heroFadeUp 0.9s 0.3s both}
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:var(--white);padding:6px 16px;border-radius:30px;font-size:0.75rem;font-weight:600;margin-bottom:20px;backdrop-filter:blur(8px);letter-spacing:0.5px}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.4)}}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,5.5rem);line-height:0.95;color:var(--white);margin-bottom:8px;letter-spacing:2px}
+.hero-title span{color:var(--gold)}
+.hero-subtitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,2.2vw,1.4rem);color:rgba(255,255,255,0.65);letter-spacing:4px;margin-bottom:20px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.hero-tag{background:rgba(37,99,235,0.18);border:1px solid rgba(37,99,235,0.35);color:var(--gold-light);padding:4px 12px;border-radius:20px;font-size:0.72rem;font-weight:600}
+.hero-desc{color:rgba(255,255,255,0.8);font-size:0.95rem;line-height:1.75;margin-bottom:32px;max-width:480px}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-sm);font-weight:600;font-size:0.9rem;transition:var(--transition);cursor:pointer;border:none;font-family:'Poppins',sans-serif}
+.btn-primary{background:var(--gold);color:var(--dark)}.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,0.4)}
+.btn-outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,0.4)}.btn-outline:hover{background:rgba(255,255,255,0.1);border-color:var(--white);transform:translateY(-2px)}
+
+/* Right photo card */
+.hero-photo-card{animation:heroFadeRight 1s 0.5s both}
+@keyframes heroFadeRight{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:translateX(0)}}
+.hero-photo-frame{border-radius:20px;overflow:hidden;height:420px;border:3px solid rgba(255,255,255,0.2);box-shadow:0 24px 60px rgba(0,0,0,0.5),0 0 0 1px rgba(37,99,235,0.12);position:relative}
+.hero-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.hero-photo-placeholder{width:100%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(0,0,0,0.4));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);font-size:0.85rem;text-align:center;padding:20px}
+.hero-photo-badge{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);background:var(--white);border-radius:14px;padding:12px 20px;display:flex;gap:20px;box-shadow:0 8px 32px rgba(0,0,0,0.2);white-space:nowrap;border-top:3px solid var(--gold)}
+.hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--blue);line-height:1;text-align:center}
+.hero-stat-label{font-size:0.6rem;color:var(--gray);font-weight:500;text-transform:uppercase;letter-spacing:1px;text-align:center}
+
+/* Caption + dots */
+.hero-caption{position:absolute;bottom:80px;left:0;right:0;z-index:3;text-align:center}
+.hero-caption span{display:inline-block;background:rgba(0,0,0,0.5);color:rgba(255,255,255,0.8);font-size:0.73rem;padding:5px 18px;border-radius:20px;backdrop-filter:blur(6px);letter-spacing:1.5px;font-weight:500;text-transform:uppercase}
+.hero-nav{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:10px}
+.hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.35);cursor:pointer;transition:var(--transition);border:none;padding:0}
+.hero-dot.active{background:var(--gold);width:28px;border-radius:4px}
+
+/* SECTIONS */
+.section{padding:80px 24px}.section-inner{max-width:1200px;margin:0 auto}
+.section-label{display:inline-block;background:rgba(23,70,162,0.08);color:var(--blue);padding:4px 14px;border-radius:20px;font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);color:var(--dark);line-height:1.1;margin-bottom:12px}.section-title span{color:var(--blue)}
+.section-desc{color:var(--gray);max-width:560px;line-height:1.7;margin-bottom:40px}
+.section-head-center{text-align:center}.section-head-center .section-desc{margin:0 auto 40px}
+
+/* CAMPUS GALLERY */
+#campus-gallery{background:var(--dark);padding:80px 0}
+.gallery-wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+#campus-gallery .section-label{background:rgba(37,99,235,0.15);color:var(--gold)}
+#campus-gallery .section-title{color:var(--white)}
+#campus-gallery .section-desc{color:rgba(255,255,255,0.55)}
+
+/* Main gallery grid */
+.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:240px 180px;gap:10px;margin-bottom:10px}
+.gallery-item{overflow:hidden;border-radius:10px;cursor:pointer;position:relative;background:rgba(255,255,255,0.04)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.55s ease}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,0.78));opacity:0;transition:var(--transition);display:flex;align-items:flex-end;padding:14px}
+.gallery-item:hover .gallery-item-overlay{opacity:1}
+.gallery-caption{color:var(--white);font-size:0.78rem;font-weight:600;letter-spacing:0.5px}
+.gallery-item.feature{grid-column:1;grid-row:1/3}
+.gallery-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);font-size:1.8rem;gap:8px}
+.gallery-img-placeholder span{font-size:0.72rem;color:rgba(255,255,255,0.2)}
+
+/* Row 2 small thumbnails */
+.gallery-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.gallery-thumb{height:120px;overflow:hidden;border-radius:8px;cursor:pointer;position:relative;background:rgba(255,255,255,0.04)}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease}
+.gallery-thumb:hover img{transform:scale(1.08)}
+.gallery-thumb-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.5);opacity:0;transition:var(--transition);display:flex;align-items:center;justify-content:center}
+.gallery-thumb:hover .gallery-thumb-overlay{opacity:1}
+.gallery-thumb-overlay span{color:var(--white);font-size:0.7rem;font-weight:600;text-align:center;padding:4px}
+
+/* FACULTIES */
+#faculties-section{background:var(--white)}
+.faculties-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+.faculty-card{background:var(--off-white);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(23,70,162,0.07);transition:var(--transition);cursor:pointer}
+.faculty-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.fc-img-wrap{height:160px;overflow:hidden;position:relative}
+.fc-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+.faculty-card:hover .fc-img-wrap img{transform:scale(1.06)}
+.fc-img-placeholder{width:100%;height:100%;background:rgba(23,70,162,0.06);display:flex;align-items:center;justify-content:center;font-size:2.5rem}
+.fc-body{padding:20px}
+.fc-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--dark);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.fc-desc{font-size:0.78rem;color:var(--gray);line-height:1.6;margin-bottom:14px}
+.fc-bottom{display:flex;align-items:center;justify-content:space-between}
+.fc-count{font-size:0.72rem;font-weight:700;color:var(--blue)}
+.fc-arrow{width:30px;height:30px;border-radius:50%;background:rgba(23,70,162,0.08);display:flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--blue);transition:var(--transition)}
+.faculty-card:hover .fc-arrow{background:var(--blue);color:var(--white)}
+
+/* TRENDING */
+#trending{background:var(--gray-light)}
+.trending-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.pq-card{background:var(--white);border-radius:var(--radius);padding:20px;border:1px solid rgba(0,0,0,0.06);transition:var(--transition);display:flex;flex-direction:column;gap:12px}
+.pq-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.pq-card-header{display:flex;align-items:center;justify-content:space-between}
+.pq-badge{background:rgba(23,70,162,0.1);color:var(--blue);font-size:0.65rem;font-weight:700;padding:3px 10px;border-radius:12px;text-transform:uppercase}
+.pq-year{font-size:0.75rem;color:var(--gray);font-weight:500}
+.pq-title{font-weight:600;font-size:0.88rem;color:var(--dark);line-height:1.4}
+.pq-meta{display:flex;flex-wrap:wrap;gap:6px}
+.pq-meta-tag{font-size:0.7rem;color:var(--gray)}
+.pq-footer{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(--gray-light)}
+.pq-downloads{font-size:0.7rem;color:var(--gray);font-weight:500}
+.btn-download{background:var(--blue);color:var(--white);padding:7px 16px;border-radius:var(--radius-sm);font-size:0.78rem;font-weight:600;transition:var(--transition);border:none;cursor:pointer;font-family:'Poppins',sans-serif}
+.btn-download:hover{background:var(--blue-dark);transform:translateY(-1px)}
+
+/* ABOUT */
+#about-section{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-images{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:300px 160px;gap:12px}
+.about-img-main{grid-column:1;grid-row:1/3;border-radius:20px;overflow:hidden;border:3px solid rgba(23,70,162,0.1);box-shadow:var(--shadow-lg)}
+.about-img-main img,.about-img-sec img{width:100%;height:100%;object-fit:cover;object-position:top}
+.about-img-sec{border-radius:var(--radius-sm);overflow:hidden;border:2px solid rgba(23,70,162,0.07)}
+.about-img-placeholder{width:100%;height:100%;background:linear-gradient(135deg,var(--blue-dark),var(--blue));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);font-size:0.8rem;text-align:center;padding:12px}
+.about-features{display:flex;flex-direction:column;gap:14px;margin:20px 0 28px}
+.about-feature{display:flex;gap:14px;align-items:flex-start}
+.about-feature-icon{width:44px;height:44px;border-radius:10px;background:rgba(23,70,162,0.08);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.about-feature-text strong{display:block;font-weight:600;font-size:0.88rem;color:var(--dark);margin-bottom:2px}
+.about-feature-text span{font-size:0.78rem;color:var(--gray);line-height:1.5}
+
+/* VIDEO */
+#video-section{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 100%);padding:80px 24px}
+.video-inner{max-width:900px;margin:0 auto;text-align:center}
+.video-frame{border-radius:20px;overflow:hidden;position:relative;padding-top:56.25%;box-shadow:0 24px 80px rgba(0,0,0,0.4)}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+
+/* TESTIMONIALS */
+#testimonials{background:var(--gray-light)}
+.testimonials-slider{position:relative;overflow:hidden}
+.testimonials-track{display:flex;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
+.testimonial-card{min-width:100%;padding:4px}
+.testimonial-inner{background:var(--white);border-radius:20px;padding:40px;text-align:center;max-width:700px;margin:0 auto;box-shadow:var(--shadow)}
+.testimonial-stars{color:var(--gold);font-size:1.2rem;margin-bottom:20px;letter-spacing:4px}
+.testimonial-quote{font-size:1.05rem;line-height:1.8;color:var(--dark);font-weight:500;margin-bottom:24px;font-style:italic}
+.testimonial-author{display:flex;align-items:center;justify-content:center;gap:12px}
+.testimonial-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-light));display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-size:1rem}
+.testimonial-author-info strong{display:block;font-weight:700;font-size:0.9rem}
+.testimonial-author-info span{font-size:0.78rem;color:var(--gray)}
+.slider-controls{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:32px}
+.slider-btn{width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);background:transparent;color:var(--blue);font-size:1.1rem;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center}
+.slider-btn:hover{background:var(--blue);color:var(--white)}
+.slider-dots{display:flex;gap:8px}
+.slider-dot{width:8px;height:8px;border-radius:50%;background:rgba(23,70,162,0.2);cursor:pointer;transition:var(--transition);border:none}
+.slider-dot.active{background:var(--blue);width:24px;border-radius:4px}
+
+/* CTA BANNER */
+#cta-banner{background:linear-gradient(135deg,var(--dark2) 0%,#2d0a0a 100%);padding:80px 24px}
+.cta-inner{max-width:800px;margin:0 auto;text-align:center}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4rem);color:var(--white);line-height:1.1;margin-bottom:16px}.cta-title span{color:var(--gold)}
+.cta-desc{color:rgba(255,255,255,0.7);font-size:1rem;line-height:1.7;margin-bottom:36px}
+.cta-buttons{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.btn-gold{background:var(--gold);color:var(--dark);font-weight:700}.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,0.4)}
+.btn-white{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,0.3)}.btn-white:hover{background:rgba(255,255,255,0.08);border-color:var(--white)}
+
+/* FOOTER */
+#footer{background:var(--dark);color:rgba(255,255,255,0.8);padding:80px 24px 0}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr 1.5fr;gap:40px;padding-bottom:60px}
+.footer-brand .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);letter-spacing:2px;margin-bottom:12px}.footer-brand .footer-logo span{color:var(--gold)}
+.footer-brand p{font-size:0.82rem;line-height:1.8;color:rgba(255,255,255,0.6);margin-bottom:20px}
+.footer-campaign-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(23,70,162,0.2);border:1px solid rgba(23,70,162,0.3);padding:6px 14px;border-radius:20px;font-size:0.75rem;font-weight:600;color:var(--blue-light)}
+.footer-col h4{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--white);letter-spacing:2px;margin-bottom:20px;position:relative;padding-bottom:12px}
+.footer-col h4::after{content:'';position:absolute;bottom:0;left:0;width:32px;height:2px;background:var(--blue)}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul a{font-size:0.82rem;color:rgba(255,255,255,0.6);transition:var(--transition)}.footer-col ul a:hover{color:var(--gold);padding-left:6px}
+.footer-contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;font-size:0.82rem}
+.footer-contact-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0}
+.footer-contact-item a{color:rgba(255,255,255,0.7);transition:var(--transition)}.footer-contact-item a:hover{color:var(--gold)}
+.footer-social{display:flex;gap:10px;margin-top:20px}
+.social-btn{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:1rem;color:rgba(255,255,255,0.7);transition:var(--transition);text-decoration:none}
+.social-btn:hover{background:var(--blue);color:var(--white);transform:translateY(-2px)}
+.footer-dev{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.04);border-radius:var(--radius-sm);padding:12px;margin-top:16px;border:1px solid rgba(255,255,255,0.06)}
+.dev-img-wrap{width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0}
+.dev-img-wrap img{width:100%;height:100%;object-fit:cover}
+.dev-img-placeholder{width:100%;height:100%;background:linear-gradient(135deg,var(--blue),var(--gold));display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-size:1rem}
+.dev-info strong{display:block;font-size:0.82rem;color:var(--white);font-weight:600}.dev-info span{font-size:0.72rem;color:var(--gold)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:24px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:0.78rem;color:rgba(255,255,255,0.4)}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:0.78rem;color:rgba(255,255,255,0.4);transition:var(--transition)}.footer-bottom-links a:hover{color:var(--gold)}
+
+/* CHATBOT */
+#chatbot{position:fixed;bottom:24px;right:24px;z-index:1001}
+.chatbot-toggle{width:56px;height:56px;border-radius:50%;background:var(--blue);color:var(--white);border:none;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 20px rgba(23,70,162,0.4);transition:var(--transition);display:flex;align-items:center;justify-content:center}.chatbot-toggle:hover{background:var(--blue-dark);transform:scale(1.08)}
+.chatbot-bubble{position:absolute;bottom:68px;right:0;width:300px;background:var(--white);border-radius:20px 20px 4px 20px;box-shadow:0 12px 48px rgba(0,0,0,0.15);overflow:hidden;transform:scale(0.85) translateY(12px);transform-origin:bottom right;opacity:0;pointer-events:none;transition:var(--transition)}.chatbot-bubble.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.chatbot-head{background:linear-gradient(135deg,var(--blue),var(--blue-dark));padding:16px 20px;color:var(--white)}.chatbot-head strong{display:block;font-size:0.9rem}.chatbot-head span{font-size:0.75rem;opacity:0.8}
+.chatbot-options{padding:16px;display:flex;flex-direction:column;gap:8px}
+.chatbot-option{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:var(--gray-light);border:none;cursor:pointer;font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:500;color:var(--dark);transition:var(--transition);text-align:left;width:100%}.chatbot-option:hover{background:rgba(23,70,162,0.08);color:var(--blue)}
+.chatbot-option-icon{width:32px;height:32px;border-radius:8px;background:rgba(23,70,162,0.1);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.chatbot-footer{padding:12px 16px;border-top:1px solid var(--gray-light);text-align:center;font-size:0.72rem;color:var(--gray)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-content-layer{grid-template-columns:1fr;padding-top:120px}
+  .hero-photo-card{display:none}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px}
+  .gallery-item.feature{grid-column:1/3;grid-row:1}
+  .gallery-thumbs{grid-template-columns:repeat(3,1fr)}
+  .about-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .footer-brand{grid-column:1/-1}
+}
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:flex}
+  .hero-content-layer{padding:90px 20px 80px}
+  .hero-buttons{flex-direction:column;align-items:flex-start}
+  .gallery-grid{grid-template-columns:1fr 1fr;gap:6px}
+  .gallery-thumbs{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr}.footer-brand{grid-column:auto}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .about-images{grid-template-columns:1fr 1fr;grid-template-rows:220px 140px}
+}
+@media(max-width:480px){
+  .gallery-grid{grid-template-columns:1fr 1fr;gap:5px}
+  .gallery-grid .gallery-item{height:140px}
+  .gallery-item.feature{grid-column:1/3;height:180px}
+  .gallery-thumbs{grid-template-columns:1fr 1fr}
+  .section{padding:60px 16px}
+}
+</style>
+<link rel="preload" as="image" href="images/atu-logo.png">
+<link rel="preload" as="image" href="images/src-logo.png">
+<link rel="preload" as="image" href="images/moyole-logo.jpg">
+<link rel="stylesheet" href="css/carousel.css">
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div id="page-loader">
+  <div class="loader-logos">
+    <div class="loader-logo-wrap">
+      <img src="images/atu-logo.png" alt="Accra Technical University" onerror="this.parentElement.innerHTML='<div class=&quot;loader-logo-fallback&quot;>🏛️<br>ATU</div>'">
+    </div>
+    <div class="loader-logo-plus">×</div>
+    <div class="loader-logo-wrap">
+      <img src="images/src-logo.png" alt="ATU SRC" onerror="this.parentElement.innerHTML='<div class=&quot;loader-logo-fallback&quot;>🎓<br>SRC</div>'">
+    </div>
+    <div class="loader-logo-plus">×</div>
+    <div class="loader-logo-wrap">
+      <img src="images/moyole-logo.jpg" alt="Omar Sulley Bin" onerror="this.parentElement.innerHTML='<div class=&quot;loader-logo-fallback&quot;>📷<br>Omar</div>'">
+    </div>
+  </div>
+  <div class="loader-vote">ATU <span>PQ Hub</span></div>
+  <p class="loader-brief">Free past questions for every ATU student — brought to you by Omar Sulley Bin.</p>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  <div class="loader-dots"><div class="loader-dot"></div><div class="loader-dot"></div><div class="loader-dot"></div></div>
+</div>
+
+<!-- MOYOLE WELCOME POPUP (shows once per visit) -->
+<div id="moyole-popup-overlay">
+  <div class="moyole-popup-card">
+    <button class="moyole-popup-close" onclick="closeMoyolePopup()" aria-label="Close">✕</button>
+    <div class="moyole-popup-img">
+      <img src="images/Moyole1.jpg" alt="Omar Sulley Bin" onerror="this.parentElement.innerHTML='<div class=&quot;moyole-popup-img-fallback&quot;>📷<br>Add Moyole1.jpg</div>'">
+    </div>
+    <div class="moyole-popup-body">
+      <h3>Welcome to <span>ATU PQ Hub</span></h3>
+      <p>Free past questions for every ATU student — brought to you by Omar Sulley Bin, SRC Part-Time Representative.</p>
+      <a href="past-questions.html" class="btn btn-primary">📚 Browse Past Questions</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">ATU <span>PQ Hub</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="faculties.html">Faculties</a></li>
+    <li><a href="past-questions.html">Past Questions</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="vision.html">Vision</a></li>
+    <li><a href="help.html">Help</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="login.html" class="nav-cta">Login / Signup</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div id="mobile-menu">
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">🏠 Home</a></li><li><a href="faculties.html">🏛️ Faculties</a></li>
+    <li><a href="past-questions.html">📚 Past Questions</a></li><li><a href="about.html">👤 About</a></li>
+    <li><a href="mission.html">🎯 Mission</a></li><li><a href="vision.html">🔭 Vision</a></li>
+    <li><a href="help.html">🆘 Help</a></li><li><a href="contact.html">📞 Contact</a></li>
+    <li><a href="login.html" class="mob-cta">Login / Signup</a></li>
+  </ul>
+</div>
+
+<!-- ===== HERO SWIPER ===== -->
+<section id="hero">
+  <!-- Background slides — images set via JavaScript below -->
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide active"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+  </div>
+  <div class="hero-overlay"></div>
+
+  <!-- Arrows -->
+  <button class="hero-arrow prev" onclick="heroSlide(-1)" aria-label="Previous">&#8592;</button>
+  <button class="hero-arrow next" onclick="heroSlide(1)" aria-label="Next">&#8594;</button>
+
+  <!-- Content grid -->
+  <div class="hero-content-layer">
+    <!-- Left: Text -->
+    <div class="hero-text">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Brought to you by Omar Sulley Bin, SRC Part-Time Representative</div>
+      <h1 class="hero-title">ATU <span>PQ Hub</span></h1>
+      <p class="hero-subtitle">Every ATU past question, in one place</p>
+      <div class="hero-tags">
+        <span class="hero-tag">2 Solid</span>
+      </div>
+      <p class="hero-desc">Your one-stop academic resource platform for Accra Technical University. Search, filter, and download past exam questions from every faculty and department.</p>
+      <div class="hero-buttons">
+        <a href="past-questions.html" class="btn btn-primary">📚 Browse Past Questions</a>
+        <a href="signup.html" class="btn btn-outline">🎓 Create Free Account</a>
+      </div>
+    </div>
+    <!-- Right: Moyole photo card -->
+    <div class="hero-photo-card">
+      <div class="hero-photo-frame">
+        <img src="images/Moyole1.jpg" alt="Omar Sulley Bin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="hero-photo-placeholder">📷 Omar Sulley Bin<br><small>Add Moyole1.jpg</small></div>
+      </div>
+      <div class="hero-photo-badge">
+        <div><div class="hero-stat-num">500+</div><div class="hero-stat-label">Past Questions</div></div>
+        <div><div class="hero-stat-num">16</div><div class="hero-stat-label">Departments</div></div>
+        <div><div class="hero-stat-num">5K+</div><div class="hero-stat-label">Students</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Caption -->
+  <div class="hero-caption"><span id="heroCaption">ATU Main Entrance</span></div>
+  <!-- Dot nav -->
+  <div class="hero-nav" id="heroNav">
+    <button class="hero-dot active" onclick="heroGoTo(0)"></button>
+    <button class="hero-dot" onclick="heroGoTo(1)"></button>
+    <button class="hero-dot" onclick="heroGoTo(2)"></button>
+    <button class="hero-dot" onclick="heroGoTo(3)"></button>
+    <button class="hero-dot" onclick="heroGoTo(4)"></button>
+  </div>
+</section>
+
+<!-- ===== CAMPUS GALLERY ===== -->
+<section id="campus-gallery">
+  <div class="gallery-wrap">
+    <div class="reveal" style="margin-bottom:36px">
+      <span class="section-label">Our Campus</span>
+      <h2 class="section-title" style="color:var(--white)">ATU Campus <span style="color:var(--gold)">Life</span></h2>
+      <p class="section-desc">A glimpse into the vibrant Accra Technical University campus — where learning, creativity, and community come together.</p>
+    </div>
+
+    <!-- Main large grid -->
+    <div class="gallery-grid reveal">
+      <div class="gallery-item feature">
+        <img src="images/auditorium1.jpeg" alt="ATU Auditorium" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="gallery-img-placeholder">🏛️<span>Auditorium</span></div>
+        <div class="gallery-item-overlay"><span class="gallery-caption">Main Auditorium</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/administration1.jpeg" alt="Administration" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="gallery-img-placeholder">🏢<span>Admin</span></div>
+        <div class="gallery-item-overlay"><span class="gallery-caption">Administration Block</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/entrance1.jpeg" alt="ATU Entrance" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="gallery-img-placeholder">🚪<span>Entrance</span></div>
+        <div class="gallery-item-overlay"><span class="gallery-caption">Main Entrance</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/Btech1.jpeg" alt="BTech Block" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="gallery-img-placeholder">🔬<span>BTech</span></div>
+        <div class="gallery-item-overlay"><span class="gallery-caption">BTech Block</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/fashion1.jpeg" alt="Fashion Dept" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="gallery-img-placeholder">👗<span>Fashion</span></div>
+        <div class="gallery-item-overlay"><span class="gallery-caption">Fashion Department</span></div>
+      </div>
+    </div>
+
+    <!-- Thumbnail strip -->
+    <div class="gallery-thumbs reveal" style="margin-top:10px">
+      <div class="gallery-thumb">
+        <img src="images/learningcenter1.jpeg" alt="Learning Center" onerror="this.style.display='none'">
+        <div class="gallery-thumb-overlay"><span>Learning Center</span></div>
+      </div>
+      <div class="gallery-thumb">
+        <img src="images/mediahouse1.jpeg" alt="Media House" onerror="this.style.display='none'">
+        <div class="gallery-thumb-overlay"><span>Media House</span></div>
+      </div>
+      <div class="gallery-thumb">
+        <img src="images/Btech2.jpeg" alt="BTech 2" onerror="this.style.display='none'">
+        <div class="gallery-thumb-overlay"><span>BTech Block 2</span></div>
+      </div>
+      <div class="gallery-thumb">
+        <img src="images/fashion2.jpeg" alt="Fashion 2" onerror="this.style.display='none'">
+        <div class="gallery-thumb-overlay"><span>Fashion Dept 2</span></div>
+      </div>
+      <div class="gallery-thumb">
+        <img src="images/Moyole2.jpg" alt="Omar Sulley Bin" onerror="this.style.display='none'">
+        <div class="gallery-thumb-overlay"><span>Omar Sulley Bin</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FACULTIES ===== -->
+<section id="faculties-section" class="section">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-label">Academics</span>
+      <h2 class="section-title">Featured <span>Faculties</span></h2>
+      <p class="section-desc">Explore past questions organised by faculty. Find exactly what you need for your department.</p>
+    </div>
+    <div class="faculties-grid">
+      <a href="faculties.html" class="faculty-card reveal">
+        <div class="fc-img-wrap"><img src="images/Btech1.jpeg" alt="Faculty of Engineering" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fc-img-placeholder">🏗️</div></div>
+        <div class="fc-body"><div class="fc-title">🏗️ Faculty of Engineering</div><div class="fc-desc">Mechanical, Electrical/Electronic & Civil Engineering.</div><div class="fc-bottom"><span class="fc-count">3 Departments</span><span class="fc-arrow">→</span></div></div>
+      </a>
+      <a href="faculties.html" class="faculty-card reveal" style="transition-delay:0.08s">
+        <div class="fc-img-wrap"><img src="images/administration1.jpeg" alt="Faculty of Built Environment" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fc-img-placeholder">🏢</div></div>
+        <div class="fc-body"><div class="fc-title">🏢 Faculty of Built Environment</div><div class="fc-desc">Building Technology & Interior Design and Upholstery Technology.</div><div class="fc-bottom"><span class="fc-count">2 Departments</span><span class="fc-arrow">→</span></div></div>
+      </a>
+      <a href="faculties.html" class="faculty-card reveal" style="transition-delay:0.16s">
+        <div class="fc-img-wrap"><img src="images/learningcenter1.jpeg" alt="Faculty of Applied Sciences" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fc-img-placeholder">🔬</div></div>
+        <div class="fc-body"><div class="fc-title">🔬 Faculty of Applied Sciences</div><div class="fc-desc">Applied Mathematics, Science Lab Tech, Computer Science & Medical Lab Tech.</div><div class="fc-bottom"><span class="fc-count">4 Departments</span><span class="fc-arrow">→</span></div></div>
+      </a>
+      <a href="faculties.html" class="faculty-card reveal" style="transition-delay:0.24s">
+        <div class="fc-img-wrap"><img src="images/fashion1.jpeg" alt="Faculty of Applied Arts" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fc-img-placeholder">🎨</div></div>
+        <div class="fc-body"><div class="fc-title">🎨 Faculty of Applied Arts</div><div class="fc-desc">HCIM, Fashion Design & Textiles, Liberal Studies & Communications Tech.</div><div class="fc-bottom"><span class="fc-count">3 Departments</span><span class="fc-arrow">→</span></div></div>
+      </a>
+      <a href="faculties.html" class="faculty-card reveal" style="transition-delay:0.32s">
+        <div class="fc-img-wrap"><img src="images/mediahouse1.jpeg" alt="Faculty of Business" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fc-img-placeholder">💼</div></div>
+        <div class="fc-body"><div class="fc-title">💼 Faculty of Business</div><div class="fc-desc">Accountancy & Finance, Management & Public Admin, Procurement & Supply Chain, Marketing.</div><div class="fc-bottom"><span class="fc-count">4 Departments</span><span class="fc-arrow">→</span></div></div>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:40px"><a href="faculties.html" class="btn btn-primary">View All Faculties →</a></div>
+  </div>
+</section>
+
+<!-- ===== TRENDING ===== -->
+<section id="trending" class="section">
+  <div class="section-inner">
+    <div class="section-head-center reveal">
+      <span class="section-label">Trending</span>
+      <h2 class="section-title">Most <span>Downloaded</span></h2>
+      <p class="section-desc">The most accessed past questions this week across all departments.</p>
+    </div>
+    <div class="trending-grid">
+      <div class="pq-card reveal"><div class="pq-card-header"><span class="pq-badge">Engineering</span><span class="pq-year">2023</span></div><div class="pq-title">Engineering Mathematics I – Final Exam</div><div class="pq-meta"><span class="pq-meta-tag">📂 Level 100</span><span class="pq-meta-tag">🏫 HND</span></div><div class="pq-footer"><span class="pq-downloads">↓ 234 downloads</span><a href="pdfs/example.pdf" download class="btn-download">Download</a></div></div>
+      <div class="pq-card reveal" style="transition-delay:0.1s"><div class="pq-card-header"><span class="pq-badge">Computing</span><span class="pq-year">2023</span></div><div class="pq-title">Introduction to Programming – Midterm</div><div class="pq-meta"><span class="pq-meta-tag">📂 Level 100</span><span class="pq-meta-tag">🏫 BTech</span></div><div class="pq-footer"><span class="pq-downloads">↓ 189 downloads</span><a href="pdfs/example.pdf" download class="btn-download">Download</a></div></div>
+      <div class="pq-card reveal" style="transition-delay:0.2s"><div class="pq-card-header"><span class="pq-badge">Business</span><span class="pq-year">2022</span></div><div class="pq-title">Principles of Accounting – Final</div><div class="pq-meta"><span class="pq-meta-tag">📂 Level 200</span><span class="pq-meta-tag">🏫 HND</span></div><div class="pq-footer"><span class="pq-downloads">↓ 176 downloads</span><a href="pdfs/example.pdf" download class="btn-download">Download</a></div></div>
+    </div>
+    <div style="text-align:center;margin-top:36px"><a href="past-questions.html" class="btn btn-primary">Browse All Past Questions →</a></div>
+  </div>
+</section>
+
+<!-- ===== ABOUT MOYOLE ===== -->
+<section id="about-section" class="section">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-images reveal">
+        <div class="about-img-main">
+          <img src="images/Moyole1.jpg" alt="Omar Sulley Bin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="about-img-placeholder">📷 Omar Sulley Bin</div>
+        </div>
+        <div class="about-img-sec">
+          <img src="images/Moyole2.jpg" alt="Omar Sulley Bin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="about-img-placeholder">📷 Moyole2</div>
+        </div>
+        <div class="about-img-sec">
+          <img src="images/auditorium1.jpeg" alt="ATU Auditorium" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="about-img-placeholder">🏛️ Auditorium</div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.2s">
+        <span class="section-label">Backed By</span>
+        <h2 class="section-title">Who is <span>Moyole</span>?</h2>
+        <p style="color:var(--gray);line-height:1.8;margin-bottom:24px;font-size:0.9rem">Omar Sulley Bin serves as a Part-Time Representative with the ATU SRC, with a track record of advocating for student welfare and academic access. This platform is part of that work — making sure every ATU student can find the past questions they need, free of charge.</p>
+        <div class="about-features">
+          <div class="about-feature"><div class="about-feature-icon">🎓</div><div class="about-feature-text"><strong>Academic Access</strong><span>Making past questions and study materials easy to find for every ATU student.</span></div></div>
+          <div class="about-feature"><div class="about-feature-icon">📢</div><div class="about-feature-text"><strong>Students' Voice</strong><span>Advocating for student needs within the SRC.</span></div></div>
+          <div class="about-feature"><div class="about-feature-icon">🔗</div><div class="about-feature-text"><strong>Community Builder</strong><span>Building bridges between students, faculty, and administration.</span></div></div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="about.html" class="btn btn-primary">Read More</a>
+          <a href="https://wa.me/233245607110" target="_blank" class="btn" style="background:transparent;color:var(--dark);border:2px solid rgba(0,0,0,0.15)">📲 Contact Moyole</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials" class="section">
+  <div class="section-inner">
+    <div class="section-head-center reveal">
+      <span class="section-label">Student Voices</span>
+      <h2 class="section-title">What <span>Students</span> Say</h2>
+    </div>
+    <div class="testimonials-slider reveal">
+      <div class="testimonials-track" id="testimonialsTrack">
+        <div class="testimonial-card"><div class="testimonial-inner"><div class="testimonial-stars">★★★★★</div><p class="testimonial-quote">"ATU PQ Hub has completely changed how I prepare for exams. I found past questions for 5 years in just minutes. This is what we needed all along!"</p><div class="testimonial-author"><div class="testimonial-avatar">AK</div><div class="testimonial-author-info"><strong>Ama Korantemaa</strong><span>Computer Science, Level 200</span></div></div></div></div>
+        <div class="testimonial-card"><div class="testimonial-inner"><div class="testimonial-stars">★★★★★</div><p class="testimonial-quote">"Moyole genuinely cares about students. Building a free resource like this before even being asked shows real leadership."</p><div class="testimonial-author"><div class="testimonial-avatar">KO</div><div class="testimonial-author-info"><strong>Kwame Osei</strong><span>Electrical Engineering, Level 300</span></div></div></div></div>
+        <div class="testimonial-card"><div class="testimonial-inner"><div class="testimonial-stars">★★★★★</div><p class="testimonial-quote">"I passed my resit because I found exactly the right past questions here. This platform saved my academic year."</p><div class="testimonial-author"><div class="testimonial-avatar">EA</div><div class="testimonial-author-info"><strong>Efua Agyeman</strong><span>Accounting, HND Level 1</span></div></div></div></div>
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" onclick="prevSlide()">←</button>
+      <div class="slider-dots"><div class="slider-dot active" onclick="goSlide(0)"></div><div class="slider-dot" onclick="goSlide(1)"></div><div class="slider-dot" onclick="goSlide(2)"></div></div>
+      <button class="slider-btn" onclick="nextSlide()">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="cta-banner">
+  <div class="cta-inner reveal">
+    <span class="section-label" style="background:rgba(37,99,235,0.15);color:var(--gold)">Get Started</span>
+    <h2 class="cta-title">Never Search <span>Blindly</span> for a Past Question <span>Again</span>.</h2>
+    <p class="cta-desc">Create your free account and get instant access to every past question ATU PQ Hub has — organised by faculty, department, level and year.</p>
+    <div class="cta-buttons">
+      <a href="signup.html" class="btn btn-gold">🎓 Create Free Account</a>
+      <a href="past-questions.html" class="btn btn-white">📚 Browse Past Questions</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="pqhub-carousel reveal">
+      <div class="pqhub-carousel-track">
+      <div class="pqhub-carousel-slide">
+        <img src="images/auditorium1.jpeg" alt="ATU Auditorium" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="pqhub-carousel-caption">ATU Auditorium</div>
+      </div>
+      <div class="pqhub-carousel-slide">
+        <img src="images/entrance1.jpeg" alt="ATU Main Entrance" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="pqhub-carousel-caption">ATU Main Entrance</div>
+      </div>
+      <div class="pqhub-carousel-slide">
+        <img src="images/Btech1.jpeg" alt="BTech Block" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="pqhub-carousel-caption">BTech Block</div>
+      </div>
+      <div class="pqhub-carousel-slide">
+        <img src="images/administration1.jpeg" alt="Administration Block" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="pqhub-carousel-caption">Administration Block</div>
+      </div>
+      </div>
+      <button class="pqhub-carousel-arrow prev" aria-label="Previous">‹</button>
+      <button class="pqhub-carousel-arrow next" aria-label="Next">›</button>
+      <div class="pqhub-carousel-dots"></div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand footer-col">
+        <div class="footer-logo">ATU <span>PQ Hub</span></div>
+        <p>Your premier academic resource platform for Accra Technical University students. Access thousands of past questions and study materials — all free.</p>
+        <div class="footer-campaign-badge">🎓 Brought to you by Omar Sulley Bin, SRC Part-Time Representative</div>
+        <div class="footer-social" style="margin-top:16px">
+          
+          
+          <a href="https://wa.me/233245607110" target="_blank" class="social-btn">💬</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li><li><a href="faculties.html">Faculties</a></li>
+          <li><a href="departments.html">Departments</a></li><li><a href="past-questions.html">Past Questions</a></li>
+          <li><a href="about.html">About Moyole</a></li><li><a href="help.html">Help</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="mission.html">Our Mission</a></li><li><a href="vision.html">Our Vision</a></li>
+          <li><a href="contact.html">Contact Us</a></li><li><a href="login.html">Login</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li>
+          <li><a href="signup.html">Sign Up</a></li><li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><div class="footer-contact-icon">📞</div><div><a href="tel:+233245607110">024 560 7110</a><br><a href="tel:+233245607110">024 560 7110</a></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon">💬</div><div><a href="https://wa.me/233245607110" target="_blank">WhatsApp Moyole</a></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon">📸</div><div></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon">🎵</div><div></div></div>
+      </div>
+      <div class="footer-col">
+        <h4>Developer</h4>
+        <div class="footer-dev">
+          <div class="dev-img-wrap">
+            <img src="images/developer.jpeg" alt="Ibrahim Mohammed Lotsu" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="dev-img-placeholder">IL</div>
+          </div>
+          <div class="dev-info"><strong>Ibrahim M. Lotsu</strong><span>Ibratech 🛠️</span></div>
+        </div>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin-top:12px;line-height:1.6">Designed and developed by Ibratech — digital solutions for Ghana's future leaders.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 ATU PQ Hub. All rights reserved.</p>
+      <p>Built with ❤️ for ATU Students by <strong style="color:var(--gold)">Ibratech</strong></p>
+      <div class="footer-bottom-links"><a href="help.html">Help</a><a href="contact.html">Contact</a><a href="about.html">About</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<div id="chatbot">
+  <div class="chatbot-bubble" id="chatbotBubble">
+    <div class="chatbot-head"><strong>👋 Hi! How can I help?</strong><span>ATU PQ Hub Assistant</span></div>
+    <div class="chatbot-options">
+      <button class="chatbot-option" onclick="window.location='past-questions.html'"><div class="chatbot-option-icon">📚</div>Find Past Questions</button>
+      <button class="chatbot-option" onclick="window.open('https://wa.me/233245607110','_blank')"><div class="chatbot-option-icon">💬</div>Contact Moyole</button>
+      
+    </div>
+    <div class="chatbot-footer">Powered by ATU PQ Hub</div>
+  </div>
+  <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">💬</button>
+</div>
+
+<script>
+// PAGE LOADER — exactly 3 seconds
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    const l = document.getElementById('page-loader');
+    l.classList.add('fade-out');
+    setTimeout(() => { l.style.display = 'none'; showMoyolePopupOnce(); }, 800);
+  }, 1800);
+});
+
+// MOYOLE WELCOME POPUP — shows once per visit (per browser tab session)
+function showMoyolePopupOnce() {
+  if (sessionStorage.getItem('moyolePopupShown')) return;
+  document.getElementById('moyole-popup-overlay').classList.add('show');
+  sessionStorage.setItem('moyolePopupShown', '1');
+}
+function closeMoyolePopup() {
+  document.getElementById('moyole-popup-overlay').classList.remove('show');
+}
+document.getElementById('moyole-popup-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeMoyolePopup();
+});
+
+// NAVBAR SCROLL
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// MOBILE MENU
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+document.addEventListener('click', e => {
+  const m = document.getElementById('mobile-menu'), h = document.getElementById('hamburger');
+  if (!m.contains(e.target) && !h.contains(e.target) && m.classList.contains('open')) {
+    m.classList.remove('open'); h.classList.remove('open');
+  }
+});
+
+// ===== HERO SWIPER =====
+const HERO_DATA = [
+  { img: 'images/entrance1.jpeg',       caption: 'ATU MAIN ENTRANCE' },
+  { img: 'images/auditorium1.jpeg',     caption: 'MAIN AUDITORIUM' },
+  { img: 'images/Btech1.jpeg',          caption: 'BTECH BLOCK' },
+  { img: 'images/administration1.jpeg', caption: 'ADMINISTRATION BLOCK' },
+  { img: 'images/learningcenter1.jpeg', caption: 'LEARNING CENTER' },
+];
+
+const hSlides = document.querySelectorAll('.hero-slide');
+const hDots   = document.querySelectorAll('.hero-dot');
+const hCapEl  = document.getElementById('heroCaption');
+let hIdx = 0, hTimer;
+
+// Assign background images
+hSlides.forEach((s, i) => { s.style.backgroundImage = `url('${HERO_DATA[i].img}')`; });
+
+function heroGoTo(idx) {
+  hSlides[hIdx].classList.remove('active');
+  hDots[hIdx].classList.remove('active');
+  hIdx = ((idx % HERO_DATA.length) + HERO_DATA.length) % HERO_DATA.length;
+  hSlides[hIdx].classList.add('active');
+  hDots[hIdx].classList.add('active');
+  hCapEl.textContent = HERO_DATA[hIdx].caption;
+  clearInterval(hTimer);
+  hTimer = setInterval(() => heroSlide(1), 6000);
+}
+function heroSlide(d) { heroGoTo(hIdx + d); }
+hTimer = setInterval(() => heroSlide(1), 6000);
+
+// Touch swipe on hero
+let tX = 0;
+document.getElementById('hero').addEventListener('touchstart', e => tX = e.touches[0].clientX, { passive: true });
+document.getElementById('hero').addEventListener('touchend', e => {
+  const dx = tX - e.changedTouches[0].clientX;
+  if (Math.abs(dx) > 40) heroSlide(dx > 0 ? 1 : -1);
+}, { passive: true });
+
+// CHATBOT
+function toggleChatbot() {
+  const b = document.getElementById('chatbotBubble'), t = document.getElementById('chatbotToggle');
+  t.textContent = b.classList.toggle('open') ? '✕' : '💬';
+}
+
+// TESTIMONIAL SLIDER
+let tIdx = 0;
+const tSlides = document.querySelectorAll('.testimonial-card');
+const tDots   = document.querySelectorAll('.slider-dot');
+function updateSlider() {
+  document.getElementById('testimonialsTrack').style.transform = `translateX(-${tIdx * 100}%)`;
+  tDots.forEach((d, i) => d.classList.toggle('active', i === tIdx));
+}
+function nextSlide() { tIdx = (tIdx + 1) % tSlides.length; updateSlider(); }
+function prevSlide() { tIdx = (tIdx - 1 + tSlides.length) % tSlides.length; updateSlider(); }
+function goSlide(i) { tIdx = i; updateSlider(); }
+setInterval(nextSlide, 5000);
+
+// SCROLL REVEAL
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+<script src="js/carousel.js"></script>
+</body>
+</html>

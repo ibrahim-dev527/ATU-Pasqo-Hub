@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In | ATU PQ Hub</title>
+<meta name="description" content="Log in to your ATU PQ Hub account with your Student ID.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://atupqhub.netlify.app/login.html">
+<meta name="theme-color" content="#14315D">
+<link rel="icon" type="image/png" href="images/atu-logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sign In | ATU PQ Hub">
+<meta property="og:description" content="Log in to your ATU PQ Hub account with your Student ID.">
+<meta property="og:url" content="https://atupqhub.netlify.app/login.html">
+<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:site_name" content="ATU PQ Hub">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sign In | ATU PQ Hub">
+<meta name="twitter:description" content="Log in to your ATU PQ Hub account with your Student ID.">
+<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Supabase SDK - loaded from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--blue:#14315D;--blue-dark:#0A1B36;--gold:#D8A727;--blue-light:#2F5A96;--white:#FFFFFF;--off-white:#FFF8F8;--dark:#0F0F0F;--gray:#6B7280;--gray-light:#F9F9F9;--shadow:0 4px 24px rgba(23,70,162,0.15);--radius:16px;--radius-sm:8px;--transition:all 0.35s cubic-bezier(0.4,0,0.2,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:'Poppins',sans-serif;color:var(--dark);background:var(--off-white);min-height:100vh;display:grid;grid-template-columns:1fr 1fr}
+img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
+/* LEFT PANEL */
+.auth-left{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 50%,#0D2547 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px;min-height:100vh}
+.auth-left::before{content:'';position:absolute;inset:0;opacity:0.04;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.auth-left-inner{position:relative;z-index:2;text-align:center;width:100%}
+.auth-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--white);letter-spacing:3px;margin-bottom:32px}.auth-logo span{color:var(--gold)}
+.auth-img-wrap{width:160px;height:160px;border-radius:50%;overflow:hidden;border:4px solid rgba(255,255,255,0.2);margin:0 auto 24px;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
+.auth-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:top}
+.auth-img-placeholder{width:100%;height:100%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);font-size:0.8rem;text-align:center}
+.auth-left h2{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--white);letter-spacing:2px;margin-bottom:8px}.auth-left h2 span{color:var(--gold)}
+.auth-left p{color:rgba(255,255,255,0.75);font-size:0.88rem;line-height:1.7;max-width:320px;margin:0 auto 28px}
+.auth-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.auth-tag{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.9);padding:4px 12px;border-radius:20px;font-size:0.72rem;font-weight:500;border:1px solid rgba(255,255,255,0.15)}
+.auth-circles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.auth-circle{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,0.06)}
+.auth-circle:nth-child(1){width:400px;height:400px;top:-150px;right:-150px}
+.auth-circle:nth-child(2){width:300px;height:300px;bottom:-100px;left:-100px;border-color:rgba(37,99,235,0.1)}
+/* RIGHT PANEL */
+.auth-right{display:flex;align-items:center;justify-content:center;padding:48px;background:var(--white)}
+.auth-form-wrap{width:100%;max-width:440px}
+.auth-form-title{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--dark);letter-spacing:2px;margin-bottom:4px}.auth-form-title span{color:var(--blue)}
+.auth-form-subtitle{color:var(--gray);font-size:0.88rem;margin-bottom:36px}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-size:0.82rem;font-weight:600;color:var(--dark);margin-bottom:8px}
+.form-input{width:100%;padding:13px 16px;border:2px solid rgba(23,70,162,0.12);border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:0.88rem;color:var(--dark);background:var(--off-white);transition:var(--transition);outline:none}
+.form-input:focus{border-color:var(--blue);background:var(--white);box-shadow:0 0 0 4px rgba(23,70,162,0.08)}
+.input-group{position:relative}.input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1rem}.input-group .form-input{padding-left:44px}
+.eye-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;color:var(--gray)}
+.btn-auth{width:100%;padding:14px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:var(--white);border:none;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-auth:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(23,70,162,0.3)}.btn-auth:disabled{opacity:0.7;cursor:not-allowed;transform:none}
+.auth-divider{display:flex;align-items:center;gap:12px;margin:24px 0}.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:rgba(0,0,0,0.08)}.auth-divider span{font-size:0.78rem;color:var(--gray)}
+.auth-switch{text-align:center;font-size:0.85rem;color:var(--gray);margin-top:20px}
+.auth-switch a{color:var(--blue);font-weight:600}.auth-switch a:hover{text-decoration:underline}
+.forgot-link{text-align:right;font-size:0.78rem;color:var(--blue);font-weight:500;display:block;margin-top:-12px;margin-bottom:20px}
+.forgot-link:hover{text-decoration:underline}
+/* ALERTS */
+.alert{padding:12px 16px;border-radius:var(--radius-sm);font-size:0.82rem;font-weight:500;margin-bottom:16px;display:none}
+.alert.error{background:rgba(23,70,162,0.08);color:var(--blue);border:1px solid rgba(23,70,162,0.2)}
+.alert.success{background:rgba(16,185,129,0.08);color:#065f46;border:1px solid rgba(16,185,129,0.2)}
+.alert.visible{display:block}
+/* SPINNER */
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:var(--white);border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.auth-back{display:inline-flex;align-items:center;gap:6px;color:var(--gray);font-size:0.82rem;margin-bottom:28px;transition:var(--transition)}.auth-back:hover{color:var(--blue)}
+@media(max-width:768px){body{grid-template-columns:1fr}.auth-left{min-height:280px;padding:40px 24px}.auth-right{padding:40px 24px}.auth-img-wrap{width:100px;height:100px}}
+</style>
+</head>
+<body>
+
+<!-- LEFT PANEL -->
+<div class="auth-left">
+  <div class="auth-circles"><div class="auth-circle"></div><div class="auth-circle"></div></div>
+  <div class="auth-left-inner">
+    <div class="auth-logo">ATU <span>PQ Hub</span></div>
+    <div class="auth-img-wrap">
+      <img src="images/Moyole1.jpg" alt="Omar Sulley Bin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="auth-img-placeholder">📷 Moyole</div>
+    </div>
+    <h2>Welcome <span>Back!</span></h2>
+    <p>Sign in with your Student ID to access your dashboard, download history, and request past questions — brought to you by Omar Sulley Bin.</p>
+    <div class="auth-tags">
+      <span class="auth-tag">2 Solid</span>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT PANEL: LOGIN FORM -->
+<div class="auth-right">
+  <div class="auth-form-wrap">
+    <a href="index.html" class="auth-back">← Back to Home</a>
+    <h1 class="auth-form-title">Sign <span>In</span></h1>
+    <p class="auth-form-subtitle">Access your ATU PQ Hub account</p>
+
+    <div class="alert error" id="errorAlert"></div>
+    <div class="alert success" id="successAlert"></div>
+
+    <div class="form-group">
+      <label class="form-label">Student ID *</label>
+      <div class="input-group">
+        <span class="input-icon">🎓</span>
+        <input type="text" class="form-input" id="loginStudentId" placeholder="e.g. 01234567B" autocomplete="username">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password *</label>
+      <div class="input-group">
+        <span class="input-icon">🔒</span>
+        <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" autocomplete="current-password">
+        <button class="eye-toggle" onclick="togglePassword('loginPassword', this)" type="button">👁️</button>
+      </div>
+    </div>
+    <a href="https://wa.me/233245607110?text=Hi%2C+I+forgot+my+ATU+PQ+Hub+password.+My+Student+ID+is%3A+" target="_blank" class="forgot-link">Forgot password? Reset via WhatsApp</a>
+
+    <button class="btn-auth" id="loginBtn" onclick="handleLogin()">
+      <span id="loginBtnText">🔑 Sign In</span>
+      <div class="spinner" id="loginSpinner" style="display:none"></div>
+    </button>
+
+    <div class="auth-divider"><span>or</span></div>
+
+    <div class="auth-switch">Don't have an account? <a href="signup.html">Create Account →</a></div>
+    <div class="auth-switch" style="margin-top:8px"><a href="past-questions.html">← Browse Past Questions without account</a></div>
+
+    <!-- Supabase Config Notice -->
+    <div style="margin-top:28px;padding:16px;background:rgba(37,99,235,0.08);border-radius:var(--radius-sm);border:1px solid rgba(37,99,235,0.2)">
+      <p style="font-size:0.75rem;color:var(--gray);line-height:1.6"><strong style="color:#b45309">⚙️ Developer Setup Required:</strong> Replace the Supabase URL/key in <code>js/pq-hub.js</code> with your own project's credentials. See the setup guide.</p>
+    </div>
+  </div>
+</div>
+
+<script src="js/pq-hub.js"></script>
+<script>
+// =============================================
+// LOGIN FUNCTION — Student ID + Password
+// =============================================
+async function handleLogin() {
+  const studentId = document.getElementById('loginStudentId').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const btn = document.getElementById('loginBtn');
+  const btnText = document.getElementById('loginBtnText');
+  const spinner = document.getElementById('loginSpinner');
+
+  if (!studentId || !password) {
+    showAlert('error', '⚠️ Please enter your Student ID and password.');
+    return;
+  }
+
+  if (!sb) {
+    showAlert('error', '⚙️ Supabase is not configured yet. Please add your Supabase URL and key in js/pq-hub.js. See the developer setup notice below the form.');
+    return;
+  }
+
+  btn.disabled = true; btnText.textContent = 'Signing in...'; spinner.style.display = 'block';
+  hideAlert('error'); hideAlert('success');
+
+  try {
+    await pqhubSignIn({ studentId, password });
+    showAlert('success', '✅ Login successful! Taking you to your dashboard...');
+    setTimeout(() => { window.location.href = 'user-dashboard.html'; }, 1200);
+  } catch (err) {
+    showAlert('error', '❌ ' + (err.message || 'Incorrect Student ID or password.'));
+  } finally {
+    btn.disabled = false; btnText.textContent = '🔑 Sign In'; spinner.style.display = 'none';
+  }
+}
+
+// Toggle password visibility
+function togglePassword(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+  else { input.type = 'password'; btn.textContent = '👁️'; }
+}
+
+// Alert helpers
+function showAlert(type, msg) { const el=document.getElementById(type==='error'?'errorAlert':'successAlert'); el.textContent=msg; el.classList.add('visible'); }
+function hideAlert(type) { const el=document.getElementById(type==='error'?'errorAlert':'successAlert'); el.classList.remove('visible'); }
+
+// Allow Enter key to submit
+document.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+</script>
+</body>
+</html>

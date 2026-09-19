@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browse Past Questions | ATU PQ Hub</title>
+<meta name="description" content="Search and download Accra Technical University past examination questions by faculty, department, level and year — completely free.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://atupqhub.netlify.app/past-questions.html">
+<meta name="theme-color" content="#14315D">
+<link rel="icon" type="image/png" href="images/atu-logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Browse Past Questions | ATU PQ Hub">
+<meta property="og:description" content="Search and download Accra Technical University past examination questions by faculty, department, level and year — completely free.">
+<meta property="og:url" content="https://atupqhub.netlify.app/past-questions.html">
+<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:site_name" content="ATU PQ Hub">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Browse Past Questions | ATU PQ Hub">
+<meta name="twitter:description" content="Search and download Accra Technical University past examination questions by faculty, department, level and year — completely free.">
+<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/pq-hub.js"></script>
+<style>
+:root{--blue:#14315D;--blue-dark:#0A1B36;--gold:#D8A727;--blue-light:#2F5A96;--white:#FFFFFF;--off-white:#FFF8F8;--dark:#0F0F0F;--gray:#6B7280;--gray-light:#F9F9F9;--shadow:0 4px 24px rgba(23,70,162,0.15);--radius:16px;--radius-sm:8px;--transition:all 0.35s cubic-bezier(0.4,0,0.2,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:'Poppins',sans-serif;color:var(--dark);background:var(--off-white);overflow-x:hidden}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+
+/* NAVBAR */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;height:70px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(23,70,162,0.12)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--blue);letter-spacing:2px}.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}.nav-links a{color:var(--dark);font-size:0.82rem;font-weight:500;padding:6px 10px;border-radius:6px;transition:var(--transition)}.nav-links a:hover,.nav-links a.active{background:rgba(23,70,162,0.08);color:var(--blue)}
+.nav-cta{background:var(--gold)!important;color:var(--dark)!important;font-weight:700!important;padding:8px 16px!important;border-radius:8px!important}
+.nav-user-btn{background:rgba(23,70,162,0.08);color:var(--blue);font-size:0.82rem;font-weight:600;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;font-family:'Poppins',sans-serif;transition:var(--transition);display:flex;align-items:center;gap:6px}
+.nav-user-btn:hover{background:var(--blue);color:var(--white)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--dark);border-radius:2px;transition:var(--transition)}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+#mobile-menu{position:fixed;top:70px;right:-100%;width:280px;height:calc(100vh - 70px);background:var(--white);z-index:999;padding:24px;transition:right 0.35s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,0.1)}
+#mobile-menu.open{right:0}
+.mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:4px}
+.mobile-nav-links a{display:block;padding:12px 16px;color:var(--dark);font-weight:500;border-radius:var(--radius-sm);transition:var(--transition);font-size:0.9rem}
+.mobile-nav-links a:hover{background:var(--gray-light);color:var(--blue);padding-left:24px}
+.mobile-nav-links .mob-cta{background:var(--blue);color:var(--white)!important;text-align:center;margin-top:12px;border-radius:var(--radius-sm)}
+
+/* PAGE HERO */
+.page-hero{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 60%,#0D2547 100%);padding:120px 24px 60px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;opacity:0.04;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.breadcrumb{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);font-size:0.8rem;margin-bottom:16px}.breadcrumb a{color:rgba(255,255,255,0.6)}.breadcrumb span{color:rgba(255,255,255,0.4)}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);color:var(--white);letter-spacing:2px;line-height:1;margin-bottom:12px}.page-title span{color:var(--gold)}
+.page-desc{color:rgba(255,255,255,0.75);max-width:600px;line-height:1.7}
+
+/* AUTH BANNER — shown when user is not logged in */
+#auth-banner{background:linear-gradient(135deg,#7c2d12,var(--blue));padding:14px 24px;text-align:center;position:sticky;top:70px;z-index:101;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+#auth-banner p{color:var(--white);font-size:0.85rem;font-weight:500}
+#auth-banner p span{color:var(--gold);font-weight:700}
+.btn-banner-login{background:var(--white);color:var(--blue);padding:7px 18px;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:700;border:none;cursor:pointer;transition:var(--transition)}
+.btn-banner-login:hover{background:var(--off-white);transform:translateY(-1px)}
+#auth-banner.hidden{display:none}
+
+/* SEARCH & FILTER */
+.search-section{background:var(--white);padding:28px 24px 20px;box-shadow:0 4px 20px rgba(0,0,0,0.05);position:sticky;top:70px;z-index:100;transition:top 0.3s ease}
+.search-section.with-banner{top:120px}
+.search-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.search-bar-wrap{position:relative}
+.search-bar-wrap input{width:100%;padding:14px 20px 14px 52px;border:2px solid rgba(23,70,162,0.15);border-radius:var(--radius);font-size:0.92rem;font-family:'Poppins',sans-serif;background:var(--off-white);color:var(--dark);transition:var(--transition);outline:none}
+.search-bar-wrap input:focus{border-color:var(--blue);background:var(--white);box-shadow:0 0 0 4px rgba(23,70,162,0.08)}
+.search-bar-wrap input::placeholder{color:var(--gray)}
+.search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:1.1rem;color:var(--gray)}
+.search-clear{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(23,70,162,0.1);border:none;color:var(--blue);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:0.9rem;display:none;align-items:center;justify-content:center;transition:var(--transition)}
+.search-clear.visible{display:flex}.search-clear:hover{background:var(--blue);color:var(--white)}
+
+/* SWIPEABLE FILTER ROW */
+.filters-scroll-wrap{position:relative}
+.filters-scroll-wrap::after{content:'';position:absolute;right:0;top:0;bottom:0;width:40px;background:linear-gradient(to right,transparent,var(--white));pointer-events:none}
+.filters-row{display:flex;flex-wrap:nowrap;gap:10px;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none;-ms-overflow-style:none}
+.filters-row::-webkit-scrollbar{display:none}
+.filter-select{padding:9px 14px;border:2px solid rgba(23,70,162,0.12);border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:0.82rem;color:var(--dark);background:var(--off-white);cursor:pointer;transition:var(--transition);outline:none;min-width:150px;flex-shrink:0;white-space:nowrap}
+.filter-select:focus{border-color:var(--blue)}
+.filter-reset{padding:9px 16px;background:rgba(23,70,162,0.08);color:var(--blue);border:none;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:var(--transition);flex-shrink:0;white-space:nowrap}
+.filter-reset:hover{background:var(--blue);color:var(--white)}
+.results-info{font-size:0.78rem;color:var(--gray);font-weight:500;flex-shrink:0;white-space:nowrap}
+.filter-swipe-hint{display:none;font-size:0.68rem;color:var(--gray);text-align:right;margin-top:4px;font-style:italic}
+@media(max-width:768px){.filter-swipe-hint{display:block}}
+
+/* TABS */
+.tabs-section{max-width:1200px;margin:0 auto;padding:28px 24px 0}
+.tabs{display:flex;gap:8px;border-bottom:2px solid rgba(23,70,162,0.1);margin-bottom:28px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{padding:10px 20px;border:none;background:transparent;font-family:'Poppins',sans-serif;font-size:0.83rem;font-weight:600;color:var(--gray);cursor:pointer;transition:var(--transition);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;flex-shrink:0}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+.tab-btn:hover{color:var(--blue)}
+
+/* CARDS GRID */
+.pq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;padding:0 24px 80px;max-width:1200px;margin:0 auto}
+
+/* Skeleton loader */
+.pq-skeleton{background:var(--white);border-radius:var(--radius);padding:20px;border:1px solid rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:12px}
+.skel-line{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skel-badge{height:22px;width:90px}.skel-title{height:18px;width:100%;margin-top:4px}.skel-title2{height:18px;width:70%}.skel-meta{height:16px;width:60%}.skel-footer{height:32px;width:100%;margin-top:4px}
+
+/* Card */
+.pq-card{background:var(--white);border-radius:var(--radius);padding:20px;border:1px solid rgba(0,0,0,0.06);transition:var(--transition);display:flex;flex-direction:column;gap:12px}
+.pq-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.pq-card.hidden{display:none}
+.pq-card-header{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.pq-badge{background:rgba(23,70,162,0.1);color:var(--blue);font-size:0.65rem;font-weight:700;padding:3px 10px;border-radius:12px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap}
+.pq-badge.new{background:rgba(34,197,94,0.1);color:#16a34a}
+.pq-year{font-size:0.75rem;color:var(--gray);font-weight:500;background:var(--off-white);padding:3px 8px;border-radius:6px}
+.pq-title{font-weight:600;font-size:0.88rem;color:var(--dark);line-height:1.4}
+.pq-meta{display:flex;flex-wrap:wrap;gap:6px}
+.pq-meta-tag{display:flex;align-items:center;gap:4px;font-size:0.7rem;color:var(--gray);background:var(--gray-light);padding:3px 8px;border-radius:8px}
+.pq-footer{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--gray-light)}
+.pq-downloads{font-size:0.7rem;color:var(--gray);font-weight:500}
+
+/* Download button — two states */
+.btn-download{padding:8px 16px;border-radius:var(--radius-sm);font-size:0.78rem;font-weight:700;transition:var(--transition);border:none;cursor:pointer;font-family:'Poppins',sans-serif;display:inline-flex;align-items:center;gap:6px}
+.btn-download.logged-in{background:var(--blue);color:var(--white)}.btn-download.logged-in:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.btn-download.locked{background:rgba(107,114,128,0.1);color:var(--gray);cursor:pointer}.btn-download.locked:hover{background:rgba(23,70,162,0.1);color:var(--blue)}
+
+/* NO RESULTS */
+.no-results{text-align:center;padding:80px 24px;grid-column:1/-1}
+.no-results .icon{font-size:3rem;margin-bottom:16px}
+.no-results h3{font-size:1.2rem;font-weight:600;margin-bottom:8px}
+.no-results p{color:var(--gray);font-size:0.85rem;margin-bottom:20px}
+
+/* REQUEST BOX */
+.request-box{margin:0 24px 60px;max-width:1200px;margin-left:auto;margin-right:auto;background:linear-gradient(135deg,var(--blue-dark),var(--blue));border-radius:20px;padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.request-box h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);letter-spacing:1px;margin-bottom:6px}
+.request-box p{color:rgba(255,255,255,0.8);font-size:0.85rem;line-height:1.6}
+.btn-request{background:var(--gold);color:var(--dark);padding:12px 22px;border-radius:var(--radius-sm);font-weight:700;font-size:0.86rem;white-space:nowrap;transition:var(--transition);display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.btn-request:hover{background:var(--gold-light);transform:translateY(-2px)}
+
+/* ========== LOGIN REQUIRED MODAL ========== */
+#login-modal{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+#login-modal.open{opacity:1;pointer-events:all}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px)}
+.modal-box{position:relative;background:var(--white);border-radius:24px;padding:40px 36px;max-width:440px;width:100%;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,0.25);animation:modalPop 0.3s ease both;border-top:4px solid var(--blue)}
+@keyframes modalPop{from{transform:scale(0.92) translateY(12px)}to{transform:scale(1) translateY(0)}}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--gray-light);border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--gray);transition:var(--transition)}
+.modal-close:hover{background:var(--blue);color:var(--white)}
+.modal-icon{font-size:3rem;margin-bottom:16px}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--dark);letter-spacing:1px;margin-bottom:10px}
+.modal-title span{color:var(--blue)}
+.modal-desc{color:var(--gray);font-size:0.88rem;line-height:1.7;margin-bottom:28px}
+.modal-desc strong{color:var(--dark)}
+.modal-actions{display:flex;flex-direction:column;gap:12px}
+.btn-modal-login{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:var(--white);padding:14px;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:700;border:none;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-modal-login:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(23,70,162,0.3)}
+.btn-modal-signup{background:var(--off-white);color:var(--dark);padding:12px;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:600;border:2px solid rgba(0,0,0,0.08);cursor:pointer;transition:var(--transition)}
+.btn-modal-signup:hover{border-color:var(--blue);color:var(--blue)}
+.modal-note{margin-top:16px;font-size:0.75rem;color:var(--gray);line-height:1.5}
+
+/* FOOTER */
+#footer{background:var(--dark);color:rgba(255,255,255,0.8);padding:60px 24px 0}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr 1.5fr;gap:40px;padding-bottom:40px}
+.footer-brand .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);letter-spacing:2px;margin-bottom:12px}.footer-brand .footer-logo span{color:var(--gold)}
+.footer-brand p{font-size:0.82rem;line-height:1.8;color:rgba(255,255,255,0.6)}
+.footer-col h4{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--white);letter-spacing:2px;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--blue);display:inline-block}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}.footer-col ul a{font-size:0.8rem;color:rgba(255,255,255,0.6);transition:var(--transition)}.footer-col ul a:hover{color:var(--gold)}
+.footer-contact-item{display:flex;gap:8px;margin-bottom:10px;font-size:0.8rem}.footer-contact-item a{color:rgba(255,255,255,0.7)}.footer-contact-item a:hover{color:var(--gold)}
+.footer-dev{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border-radius:8px;padding:10px;margin-top:12px}
+.dev-img-placeholder{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--gold));display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-size:0.9rem;flex-shrink:0}
+.dev-info strong{display:block;font-size:0.8rem;color:var(--white)}.dev-info span{font-size:0.7rem;color:var(--gold)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:20px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer-bottom p{font-size:0.75rem;color:rgba(255,255,255,0.4)}
+
+/* CHATBOT */
+#chatbot{position:fixed;bottom:24px;right:24px;z-index:1001}
+.chatbot-toggle{width:56px;height:56px;border-radius:50%;background:var(--blue);color:var(--white);border:none;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 20px rgba(23,70,162,0.4);transition:var(--transition);display:flex;align-items:center;justify-content:center}.chatbot-toggle:hover{background:var(--blue-dark);transform:scale(1.08)}
+.chatbot-bubble{position:absolute;bottom:68px;right:0;width:300px;background:var(--white);border-radius:20px 20px 4px 20px;box-shadow:0 12px 48px rgba(0,0,0,0.15);overflow:hidden;transform:scale(0.85) translateY(12px);transform-origin:bottom right;opacity:0;pointer-events:none;transition:var(--transition)}.chatbot-bubble.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.chatbot-head{background:linear-gradient(135deg,var(--blue),var(--blue-dark));padding:16px 20px;color:var(--white)}.chatbot-head strong{display:block;font-size:0.9rem}.chatbot-head span{font-size:0.75rem;opacity:0.8}
+.chatbot-options{padding:16px;display:flex;flex-direction:column;gap:8px}
+.chatbot-option{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:var(--gray-light);border:none;cursor:pointer;font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:500;color:var(--dark);transition:var(--transition);text-align:left;width:100%}.chatbot-option:hover{background:rgba(23,70,162,0.08);color:var(--blue)}
+.chatbot-option-icon{width:32px;height:32px;border-radius:8px;background:rgba(23,70,162,0.1);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.chatbot-footer{padding:12px 16px;border-top:1px solid var(--gray-light);text-align:center;font-size:0.72rem;color:var(--gray)}
+
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.footer-grid{grid-template-columns:1fr}.pq-grid{grid-template-columns:1fr}.request-box{grid-template-columns:1fr;text-align:center}}
+</style>
+<link rel="stylesheet" href="css/carousel.css">
+</head>
+<body>
+
+<!-- ===== AUTH: LOGIN REQUIRED MODAL ===== -->
+<div id="login-modal">
+  <div class="modal-backdrop" onclick="closeLoginModal()"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeLoginModal()">✕</button>
+    <div class="modal-icon">🔒</div>
+    <h2 class="modal-title">Login <span>Required</span></h2>
+    <p class="modal-desc">To download past questions you must have a <strong>free ATU PQ Hub account</strong>. Creating one takes less than 1 minute!</p>
+    <div class="modal-actions">
+      <button class="btn-modal-login" onclick="window.location.href='login.html'">🔑 Sign In to My Account</button>
+      <button class="btn-modal-signup" onclick="window.location.href='signup.html'">🎓 Create Free Account</button>
+    </div>
+    <p class="modal-note">It's 100% free. No payment required. Just create an account and all past questions are yours to download.</p>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">ATU <span>PQ Hub</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="faculties.html">Faculties</a></li>
+    <li><a href="past-questions.html" class="active">Past Questions</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="vision.html">Vision</a></li>
+    <li><a href="help.html">Help</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <!-- Shown when logged out -->
+    <li id="nav-auth-out"><a href="login.html" class="nav-cta">Login / Signup</a></li>
+    <!-- Shown when logged in -->
+    <li id="nav-auth-in" style="display:none">
+      <button class="nav-user-btn" onclick="window.location.href='user-dashboard.html'">
+        👤 <span id="nav-user-name">My Account</span>
+      </button>
+    </li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div id="mobile-menu">
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="faculties.html">🏛️ Faculties</a></li>
+    <li><a href="past-questions.html">📚 Past Questions</a></li>
+    <li><a href="about.html">👤 About</a></li>
+    <li><a href="mission.html">🎯 Mission</a></li>
+    <li><a href="vision.html">🔭 Vision</a></li>
+    <li><a href="help.html">🆘 Help</a></li>
+    <li><a href="contact.html">📞 Contact</a></li>
+    <li id="mob-auth-out"><a href="login.html" class="mob-cta">Login / Signup</a></li>
+    <li id="mob-auth-in" style="display:none"><a href="user-dashboard.html" class="mob-cta" style="background:var(--gold);color:var(--dark)">👤 My Account</a></li>
+  </ul>
+</div>
+
+<!-- AUTH BANNER — shown when not logged in -->
+<div id="auth-banner">
+  <p>🔒 <span>Login required</span> to download past questions — it's completely free!</p>
+  <button class="btn-banner-login" onclick="window.location.href='login.html'">Sign In</button>
+  <button class="btn-banner-login" style="background:var(--gold);color:var(--dark)" onclick="window.location.href='signup.html'">Create Free Account</button>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span style="color:var(--white)">Past Questions</span></div>
+    <h1 class="page-title">Past <span>Questions</span></h1>
+    <p class="page-desc">Access hundreds of past exam questions from all ATU faculties and departments. Log in to download — it's free and takes 30 seconds to sign up.</p>
+  </div>
+</div>
+
+<!-- SEARCH & FILTER -->
+<div class="search-section" id="searchSection">
+  <div class="search-inner">
+    <div class="search-bar-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search by course name, department, faculty..." oninput="filterCards()">
+      <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="filters-scroll-wrap">
+      <div class="filters-row">
+        <select class="filter-select" id="filterFaculty" onchange="filterCards()">
+          <option value="">All Faculties</option>
+        </select>
+        <select class="filter-select" id="filterDepartment" onchange="filterCards()">
+          <option value="">All Departments</option>
+        </select>
+        <select class="filter-select" id="filterLevel" onchange="filterCards()">
+          <option value="">All Levels</option>
+        </select>
+        <select class="filter-select" id="filterYear" onchange="filterCards()">
+          <option value="">All Years</option>
+        </select>
+        <button class="filter-reset" onclick="resetFilters()">✕ Reset</button>
+        <span class="results-info" id="resultsInfo">Loading...</span>
+      </div>
+      <div class="filter-swipe-hint">← Swipe to see more filters →</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-section">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(this,'all')">📚 All Questions</button>
+    <button class="tab-btn" onclick="switchTab(this,'recent')">🆕 Recently Added</button>
+    <button class="tab-btn" onclick="switchTab(this,'trending')">🔥 Most Downloaded</button>
+  </div>
+</div>
+
+<!-- CARDS GRID -->
+<div class="pq-grid" id="pqGrid">
+  <!-- Skeleton loaders shown while data loads -->
+  <div class="pq-skeleton" id="skel1">
+    <div class="skel-line skel-badge"></div>
+    <div class="skel-line skel-title"></div>
+    <div class="skel-line skel-title2"></div>
+    <div class="skel-line skel-meta"></div>
+    <div class="skel-line skel-footer"></div>
+  </div>
+  <div class="pq-skeleton" id="skel2">
+    <div class="skel-line skel-badge"></div>
+    <div class="skel-line skel-title"></div>
+    <div class="skel-line skel-title2"></div>
+    <div class="skel-line skel-meta"></div>
+    <div class="skel-line skel-footer"></div>
+  </div>
+  <div class="pq-skeleton" id="skel3">
+    <div class="skel-line skel-badge"></div>
+    <div class="skel-line skel-title"></div>
+    <div class="skel-line skel-title2"></div>
+    <div class="skel-line skel-meta"></div>
+    <div class="skel-line skel-footer"></div>
+  </div>
+  <!-- Dynamic cards injected by JS -->
+  <div class="no-results hidden" id="noResults">
+    <div class="icon">😕</div>
+    <h3>No past questions found</h3>
+    <p>Try different search terms or filters, or request the specific past question below.</p>
+    <a href="https://wa.me/233245607110?text=Hi%20Moyole%2C%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-request" style="display:inline-flex;margin-top:4px">📲 Request on WhatsApp</a>
+  </div>
+</div>
+
+<!-- REQUEST A PAST QUESTION -->
+<div style="padding:0 24px 60px;max-width:1200px;margin:0 auto">
+  <div class="request-box">
+    <div>
+      <h3>Can't Find Your Past Question?</h3>
+      <p>Message Moyole on WhatsApp with your course, faculty, level and year — we'll upload it within 24 hours!</p>
+    </div>
+    <a href="https://wa.me/233245607110?text=Hi%20Moyole%2C%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-request">📲 Request on WhatsApp</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="pqhub-carousel reveal">
+      <div class="pqhub-carousel-track">
+      <div class="pqhub-carousel-slide">
+        <img src="images/learningcenter1.jpeg" alt="Learning Center" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="pqhub-carousel-caption">Learning Center</div>
+      </div>
+      <div class="pqhub-carousel-slide">
+        <img src="images/Btech1.jpeg" alt="BTech Block" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="pqhub-carousel-caption">BTech Block</div>
+      </div>
+      <div class="pqhub-carousel-slide">
+        <img src="images/administration1.jpeg" alt="Administration Block" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="pqhub-carousel-caption">Administration Block</div>
+      </div>
+      <div class="pqhub-carousel-slide">
+        <img src="images/fashion1.jpeg" alt="Fashion Department" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="pqhub-carousel-caption">Fashion Department</div>
+      </div>
+      </div>
+      <button class="pqhub-carousel-arrow prev" aria-label="Previous">‹</button>
+      <button class="pqhub-carousel-arrow next" aria-label="Next">›</button>
+      <div class="pqhub-carousel-dots"></div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand footer-col">
+        <div class="footer-logo">ATU <span>PQ Hub</span></div>
+        <p>Your premier academic resource platform for Accra Technical University students.</p>
+      </div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="faculties.html">Faculties</a></li><li><a href="past-questions.html">Past Questions</a></li><li><a href="about.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="mission.html">Mission</a></li><li><a href="vision.html">Vision</a></li><li><a href="contact.html">Contact</a></li><li><a href="login.html">Login</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item">📞 <a href="tel:+233245607110">024 560 7110</a></div>
+        <div class="footer-contact-item">💬 <a href="https://wa.me/233245607110" target="_blank">WhatsApp</a></div>
+        
+      </div>
+      <div class="footer-col"><h4>Developer</h4>
+        <div class="footer-dev">
+          <div class="dev-img-placeholder">IL</div>
+          <div class="dev-info"><strong>Ibrahim M. Lotsu</strong><span>Ibratech 🛠️</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 ATU PQ Hub. All rights reserved.</p><p>Built with ❤️ for ATU Students by <strong style="color:var(--gold)">Ibratech</strong></p></div>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<div id="chatbot">
+  <div class="chatbot-bubble" id="chatbotBubble">
+    <div class="chatbot-head"><strong>👋 Hi! How can I help?</strong><span>ATU PQ Hub</span></div>
+    <div class="chatbot-options">
+      <button class="chatbot-option" onclick="document.getElementById('searchInput').focus()"><div class="chatbot-option-icon">🔍</div>Search Past Questions</button>
+      <button class="chatbot-option" onclick="window.open('https://wa.me/233245607110','_blank')"><div class="chatbot-option-icon">💬</div>Contact Moyole</button>
+      
+    </div>
+    <div class="chatbot-footer">Powered by ATU PQ Hub</div>
+  </div>
+  <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">💬</button>
+</div>
+
+<script>
+// ============================================================
+//  Supabase client (sb) + auth helpers come from js/pq-hub.js
+// ============================================================
+let currentUser = null;  // Logged-in user object (null = not logged in)
+let allQuestions = [];   // All questions loaded from DB
+let filtered = [];       // Currently visible questions
+let currentTab = 'all';
+
+// ============================================================
+//  INIT — runs on page load
+// ============================================================
+window.addEventListener('DOMContentLoaded', async function() {
+  await checkAuth();   // 1. Check if user is logged in
+  await loadPQs();     // 2. Load past questions from Supabase
+});
+
+// ============================================================
+//  AUTH CHECK
+// ============================================================
+async function checkAuth() {
+  if (!sb) {
+    // Supabase not yet configured — show demo mode
+    showDemoMode();
+    return;
+  }
+  try {
+    const { data: { user } } = await sb.auth.getUser();
+    if (user) {
+      currentUser = user;
+      const name = user.user_metadata?.full_name || user.email.split('@')[0];
+      // Update navbar
+      document.getElementById('nav-auth-out').style.display = 'none';
+      document.getElementById('nav-auth-in').style.display = 'flex';
+      document.getElementById('nav-user-name').textContent = name;
+      document.getElementById('mob-auth-out').style.display = 'none';
+      document.getElementById('mob-auth-in').style.display = 'block';
+      // Hide login banner
+      document.getElementById('auth-banner').classList.add('hidden');
+      // Search section doesn't need top adjustment
+      document.getElementById('searchSection').classList.remove('with-banner');
+    } else {
+      // Not logged in — show banner, adjust sticky positions
+      document.getElementById('searchSection').classList.add('with-banner');
+    }
+  } catch(e) {}
+}
+
+// ============================================================
+//  LOAD PAST QUESTIONS FROM SUPABASE
+// ============================================================
+async function loadPQs() {
+  if (!sb) {
+    // Supabase not configured — show demo/sample cards
+    loadDemoCards();
+    return;
+  }
+
+  try {
+    const { data, error } = await sb
+      .from('past_questions')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    // Remove skeleton loaders
+    removeSkeletons();
+
+    if (error) { console.error(error); loadDemoCards(); return; }
+
+    if (!data || data.length === 0) {
+      // No questions in DB yet — show demo cards as placeholder
+      loadDemoCards();
+      return;
+    }
+
+    allQuestions = data;
+    filtered = [...allQuestions];
+    renderCards(filtered);
+
+  } catch(e) {
+    removeSkeletons();
+    loadDemoCards();
+  }
+}
+
+// ============================================================
+//  RENDER CARDS
+// ============================================================
+function renderCards(questions) {
+  const grid = document.getElementById('pqGrid');
+  // Remove any existing cards (not skeleton, not noResults)
+  grid.querySelectorAll('.pq-card').forEach(c => c.remove());
+
+  const noRes = document.getElementById('noResults');
+
+  if (questions.length === 0) {
+    noRes.classList.remove('hidden');
+    document.getElementById('resultsInfo').textContent = '0 results';
+    return;
+  }
+  noRes.classList.add('hidden');
+
+  // Is the question "new"? (uploaded within last 7 days)
+  const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+
+  questions.forEach(pq => {
+    const isNew = pq.created_at && new Date(pq.created_at).getTime() > weekAgo;
+    const card = document.createElement('div');
+    card.className = 'pq-card';
+    card.dataset.title    = (pq.title || '').toLowerCase();
+    card.dataset.faculty  = (pq.faculty || '').toLowerCase();
+    card.dataset.level    = (pq.level || '').toLowerCase();
+    card.dataset.year     = (pq.year || '');
+    card.dataset.fileUrl  = pq.file_url || '';
+
+    card.innerHTML = `
+      <div class="pq-card-header">
+        <span class="pq-badge">${escHtml(pq.faculty || 'General')}</span>
+        ${isNew ? '<span class="pq-badge new">🆕 New</span>' : ''}
+        <span class="pq-year">${pq.year || '—'}</span>
+      </div>
+      <div class="pq-title">${escHtml(pq.title || 'Untitled')}</div>
+      <div class="pq-meta">
+        ${pq.level ? `<span class="pq-meta-tag">📂 ${escHtml(pq.level)}</span>` : ''}
+        ${pq.department ? `<span class="pq-meta-tag">🏛️ ${escHtml(pq.department)}</span>` : ''}
+      </div>
+      <div class="pq-footer">
+        <span class="pq-downloads">↓ ${pq.downloads || 0} downloads</span>
+        ${buildDownloadBtn(pq)}
+      </div>`;
+
+    grid.insertBefore(card, document.getElementById('noResults'));
+  });
+
+  document.getElementById('resultsInfo').textContent =
+    `Showing ${questions.length} result${questions.length !== 1 ? 's' : ''}`;
+}
+
+// Keep a lookup of every rendered PQ so the download button can find
+// its file URL / title without stuffing them into onclick attributes.
+let pqIndex = {};
+
+// Build the download button based on auth state
+function buildDownloadBtn(pq) {
+  pqIndex[pq.id] = pq;
+  if (currentUser && pq.file_url) {
+    // Logged in — forces a real file download straight to their device
+    return `<button class="btn-download logged-in" onclick="handlePQDownload(${pq.id})" id="dlbtn-${pq.id}">
+               ⬇️ Download
+            </button>`;
+  } else if (!currentUser) {
+    // Not logged in — show lock button that opens modal
+    return `<button class="btn-download locked" onclick="openLoginModal()">
+               🔒 Login to Download
+            </button>`;
+  } else {
+    // Logged in but no file yet
+    return `<span style="font-size:0.75rem;color:var(--gray)">No file yet</span>`;
+  }
+}
+
+// Fetch the PDF as a blob and save it straight to the student's device
+// (not a new tab), then log it to their download history + bump the count.
+async function handlePQDownload(id) {
+  const pq = pqIndex[id];
+  if (!pq || !pq.file_url) return;
+  const btn = document.getElementById('dlbtn-' + id);
+  const original = btn ? btn.innerHTML : null;
+  if (btn) { btn.disabled = true; btn.innerHTML = '⏳ Downloading...'; }
+
+  try {
+    const filename = (pq.title || 'past-question').replace(/[^\w\- ]/g, '') + '.pdf';
+    await pqhubDownloadFile(pq.file_url, filename, {
+      pqId: pq.id, title: pq.title, faculty: pq.faculty
+    });
+    await incrementDownload(pq.id);
+  } catch (e) {
+    alert('❌ Could not download this file. Please try again.');
+    console.error(e);
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = original; }
+  }
+}
+
+// Increment download count in DB
+async function incrementDownload(id) {
+  if (!sb || !id) return;
+  const { data } = await sb.from('past_questions').select('downloads').eq('id', id).single();
+  const current = data?.downloads || 0;
+  await sb.from('past_questions').update({ downloads: current + 1 }).eq('id', id);
+}
+
+// Escape HTML to prevent XSS
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ============================================================
+//  DEMO CARDS (shown when Supabase not yet configured)
+// ============================================================
+function loadDemoCards() {
+  removeSkeletons();
+  const demo = [
+    { id:1, title:'Engineering Mathematics I – Final Exam', faculty:'Faculty of Engineering', department:'Civil Engineering', level:'Level 100', year:2023, downloads:234, file_url:'pdfs/example.pdf', created_at: new Date().toISOString() },
+    { id:2, title:'Introduction to Programming – Midterm', faculty:'Faculty of Applied Sciences', department:'Computer Science', level:'Level 100', year:2023, downloads:189, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-3*86400000).toISOString() },
+    { id:3, title:'Principles of Accounting – Final Exam', faculty:'Faculty of Business', department:'Accountancy and Finance', level:'HND 100', year:2022, downloads:176, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-10*86400000).toISOString() },
+    { id:4, title:'Building Construction Technology – Midterm', faculty:'Faculty of Built Environment', department:'Building Technology', level:'Level 200', year:2023, downloads:143, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-2*86400000).toISOString() },
+    { id:5, title:'Database Management Systems – Final', faculty:'Faculty of Applied Sciences', department:'Computer Science', level:'Level 200', year:2022, downloads:167, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-1*86400000).toISOString() },
+    { id:6, title:'Fashion Design Principles and Theory – Final', faculty:'Faculty of Applied Arts', department:'Fashion Design & Textiles', level:'Level 100', year:2022, downloads:76, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-5*86400000).toISOString() },
+  ];
+  allQuestions = demo;
+  filtered = [...demo];
+  renderCards(filtered);
+}
+
+function showDemoMode() {
+  // Small notice that Supabase isn't configured
+  const banner = document.getElementById('auth-banner');
+  banner.style.background = 'linear-gradient(135deg,#1a1a2e,#2d1b4e)';
+  banner.innerHTML = `<p>⚙️ <span>Demo Mode</span> — Add Supabase credentials to enable real login & live uploads</p>
+    <button class="btn-banner-login" onclick="window.location.href='SETUP.html'">View Setup Guide</button>`;
+}
+
+// Remove skeleton loading cards
+function removeSkeletons() {
+  ['skel1','skel2','skel3'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  });
+}
+
+// ============================================================
+//  TAB SWITCHING
+// ============================================================
+function switchTab(btn, tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentTab = tab;
+  applyFilters();
+}
+
+// ============================================================
+//  SEARCH & FILTER
+// ============================================================
+function filterCards() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  document.getElementById('searchClear').classList.toggle('visible', q.length > 0);
+  applyFilters();
+}
+
+function applyFilters() {
+  const q       = document.getElementById('searchInput').value.trim().toLowerCase();
+  const faculty = document.getElementById('filterFaculty').value.toLowerCase();
+  const dept    = document.getElementById('filterDepartment').value.toLowerCase();
+  const level   = document.getElementById('filterLevel').value.toLowerCase();
+  const year    = document.getElementById('filterYear').value;
+  const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+
+  filtered = allQuestions.filter(pq => {
+    const matchQ  = !q || (pq.title||'').toLowerCase().includes(q) || (pq.faculty||'').toLowerCase().includes(q) || (pq.department||'').toLowerCase().includes(q);
+    const matchF  = !faculty || (pq.faculty||'').toLowerCase().includes(faculty);
+    const matchD  = !dept    || (pq.department||'').toLowerCase().includes(dept);
+    const matchL  = !level   || (pq.level||'').toLowerCase().includes(level);
+    const matchY  = !year    || String(pq.year) === year;
+    const matchTab = currentTab === 'all'
+      || (currentTab === 'recent'   && pq.created_at && new Date(pq.created_at).getTime() > weekAgo)
+      || (currentTab === 'trending' && (pq.downloads || 0) >= 100);
+    return matchQ && matchF && matchD && matchL && matchY && matchTab;
+  });
+
+  // Sort: recent tab → newest first; trending → most downloads first
+  if (currentTab === 'recent')   filtered.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+  if (currentTab === 'trending') filtered.sort((a,b) => (b.downloads||0) - (a.downloads||0));
+
+  renderCards(filtered);
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  filterCards();
+}
+function resetFilters() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('filterFaculty').value = '';
+  document.getElementById('filterDepartment').value = '';
+  pqhubFillDepartmentSelect(document.getElementById('filterDepartment'), '', 'All Departments');
+  document.getElementById('filterLevel').value = '';
+  document.getElementById('filterYear').value = '';
+  currentTab = 'all';
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===0));
+  applyFilters();
+}
+
+// Populate the faculty/department/level/year dropdowns from the shared list
+document.addEventListener('DOMContentLoaded', function() {
+  pqhubFillFacultySelect(document.getElementById('filterFaculty'), 'All Faculties');
+  pqhubFillDepartmentSelect(document.getElementById('filterDepartment'), '', 'All Departments');
+  pqhubFillLevelSelect(document.getElementById('filterLevel'), 'All Levels');
+  pqhubFillYearSelect(document.getElementById('filterYear'), 'All Years');
+  pqhubLinkFacultyToDepartment(document.getElementById('filterFaculty'), document.getElementById('filterDepartment'), 'All Departments');
+});
+
+// ============================================================
+//  LOGIN MODAL
+// ============================================================
+function openLoginModal() {
+  document.getElementById('login-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLoginModal() {
+  document.getElementById('login-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Close with Escape key
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLoginModal(); });
+
+// ============================================================
+//  NAV / MENU / CHATBOT
+// ============================================================
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+document.addEventListener('click', e => {
+  const m = document.getElementById('mobile-menu'), h = document.getElementById('hamburger');
+  if (!m.contains(e.target) && !h.contains(e.target) && m.classList.contains('open')) {
+    m.classList.remove('open'); h.classList.remove('open');
+  }
+});
+function toggleChatbot() {
+  const b = document.getElementById('chatbotBubble'), t = document.getElementById('chatbotToggle');
+  t.textContent = b.classList.toggle('open') ? '✕' : '💬';
+}
+</script>
+<script src="js/carousel.js"></script>
+</body>
+</html>
+ 
