@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATU PQ Hub — Setup Guide</title>
+<title>ATU PQ Hub: Setup Guide</title>
 <meta name="description" content="Developer setup guide for ATU PQ Hub.">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://atupqhub.netlify.app/setup.html">
+<link rel="canonical" href="https://atu-pasqo-hub.vercel.app/setup.html">
 <meta name="theme-color" content="#14315D">
 <link rel="icon" type="image/png" href="images/atu-logo.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ATU PQ Hub — Setup Guide">
+<meta property="og:title" content="ATU PQ Hub: Setup Guide">
 <meta property="og:description" content="Developer setup guide for ATU PQ Hub.">
-<meta property="og:url" content="https://atupqhub.netlify.app/setup.html">
-<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:url" content="https://atu-pasqo-hub.vercel.app/setup.html">
+<meta property="og:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <meta property="og:site_name" content="ATU PQ Hub">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ATU PQ Hub — Setup Guide">
+<meta name="twitter:title" content="ATU PQ Hub: Setup Guide">
 <meta name="twitter:description" content="Developer setup guide for ATU PQ Hub.">
-<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta name="twitter:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -57,7 +57,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
 /* CONTENT */
 .page-body{max-width:860px;margin:0 auto;padding:56px 24px 80px}
 
-/* HOW IT WORKS — flow diagram */
+/* HOW IT WORKS: flow diagram */
 .flow-section{margin-bottom:56px}
 .flow-title{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--dark);letter-spacing:1px;margin-bottom:8px}
 .flow-title span{color:var(--blue)}
@@ -189,7 +189,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
 <!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">📘 Complete Setup Guide — v2</div>
+    <div class="hero-badge">📘 Complete Setup Guide: v2</div>
     <h1>ATU PQ Hub<br><span>Setup Guide</span></h1>
     <p>Follow every step below exactly as shown. You do not need to know coding. This guide assumes you know nothing and explains everything clearly.</p>
     <div class="hero-badges">
@@ -210,7 +210,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     <div class="flow-grid">
       <div class="flow-card red"><div class="flow-num">1</div><div class="flow-icon">🏛️</div><h4>Your Website (HTML)</h4><p>14 pages plus a shared <code>js/pq-hub.js</code> file, stored in the <code>atu-pq-hub</code> folder on your computer. These display everything students see.</p></div>
       <div class="flow-card gold"><div class="flow-num">2</div><div class="flow-icon">🗃️</div><h4>Supabase (Database)</h4><p>A free online service that stores student accounts, past question data, and the actual PDF files.</p></div>
-      <div class="flow-card green"><div class="flow-num">3</div><div class="flow-icon">🌐</div><h4>Netlify (Hosting)</h4><p>Makes your website accessible online so anyone in the world can visit it with a link.</p></div>
+      <div class="flow-card green"><div class="flow-num">3</div><div class="flow-icon">🌐</div><h4>Vercel (Hosting)</h4><p>Makes your website accessible online so anyone in the world can visit it with a link.</p></div>
     </div>
     <div class="callout info" style="margin-top:20px">
       <div class="callout-icon">💡</div>
@@ -264,10 +264,10 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
       <div class="card-title">🌐 Create account + project</div>
       <ol class="steps-ol">
         <li><div class="s-num">1</div><div class="s-text">Go to <a href="https://supabase.com" target="_blank"><strong>supabase.com</strong></a> and click <strong>"Start your project"</strong></div></li>
-        <li><div class="s-num">2</div><div class="s-text">Click <strong>"Sign Up"</strong> and sign up with GitHub (free) or email<span class="s-sub">If you don't have GitHub, go to github.com first and create a free account — it takes 2 minutes.</span></div></li>
+        <li><div class="s-num">2</div><div class="s-text">Click <strong>"Sign Up"</strong> and sign up with GitHub (free) or email<span class="s-sub">If you don't have GitHub, go to github.com first and create a free account: it takes 2 minutes.</span></div></li>
         <li><div class="s-num">3</div><div class="s-text">Once logged in, click <strong>"New Project"</strong></div></li>
-        <li><div class="s-num">4</div><div class="s-text">Fill the form:<span class="s-sub"><strong>Project name:</strong> atu-pq-hub<br><strong>Database Password:</strong> Create a strong password and WRITE IT DOWN<br><strong>Region:</strong> West EU (Ireland) — closest to Ghana</span></div></li>
-        <li><div class="s-num">5</div><div class="s-text">Click <strong>"Create new project"</strong> and wait 1–2 minutes for it to set up</div></li>
+        <li><div class="s-num">4</div><div class="s-text">Fill the form:<span class="s-sub"><strong>Project name:</strong> atu-pq-hub<br><strong>Database Password:</strong> Create a strong password and WRITE IT DOWN<br><strong>Region:</strong> West EU (Ireland): closest to Ghana</span></div></li>
+        <li><div class="s-num">5</div><div class="s-text">Click <strong>"Create new project"</strong> and wait 1: 2 minutes for it to set up</div></li>
       </ol>
     </div>
     <div class="card">
@@ -275,7 +275,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
       <ol class="steps-ol">
         <li><div class="s-num">1</div><div class="s-text">In Supabase, look at the left sidebar and click the <strong>⚙️ gear icon</strong> at the very bottom</div></li>
         <li><div class="s-num">2</div><div class="s-text">Click <strong>"API"</strong> in the settings menu that opens</div></li>
-        <li><div class="s-num">3</div><div class="s-text">Copy BOTH these values and paste them into a Notepad or Word document:<span class="s-sub">📋 <strong>Project URL</strong> — looks like: <code>https://abcdefgh.supabase.co</code><br>📋 <strong>anon / public key</strong> — a very long code starting with <code>eyJ...</code></span></div></li>
+        <li><div class="s-num">3</div><div class="s-text">Copy BOTH these values and paste them into a Notepad or Word document:<span class="s-sub">📋 <strong>Project URL</strong>: looks like: <code>https://abcdefgh.supabase.co</code><br>📋 <strong>anon / public key</strong>: a very long code starting with <code>eyJ...</code></span></div></li>
       </ol>
       <div class="callout danger">
         <div class="callout-icon">🚨</div>
@@ -284,7 +284,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     </div>
     <div class="card">
       <div class="card-title">✉️ Turn OFF email confirmation (REQUIRED)</div>
-      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Students log in with a <strong>Student ID</strong>, not a real email. Behind the scenes, the site invents a fake email for each student — which means Supabase can never actually deliver a confirmation link to it. If this setting is left on, every signup will get stuck waiting for an email that will never arrive.</p>
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Students log in with a <strong>Student ID</strong>, not a real email. Behind the scenes, the site invents a fake email for each student: which means Supabase can never actually deliver a confirmation link to it. If this setting is left on, every signup will get stuck waiting for an email that will never arrive.</p>
       <ol class="steps-ol">
         <li><div class="s-num">1</div><div class="s-text">In Supabase, click <strong>"Authentication"</strong> in the left sidebar</div></li>
         <li><div class="s-num">2</div><div class="s-text">Click <strong>"Providers"</strong> → <strong>"Email"</strong></div></li>
@@ -304,12 +304,12 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     </div>
     <div class="card">
       <div class="card-title">📝 You only need to update ONE file</div>
-      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Every page shares the same connection settings through a single file: <code>js/pq-hub.js</code>. Update it once, and every page — login, signup, dashboards, past questions — picks it up automatically.</p>
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Every page shares the same connection settings through a single file: <code>js/pq-hub.js</code>. Update it once, and every page: login, signup, dashboards, past questions: picks it up automatically.</p>
     </div>
     <div class="card">
       <div class="card-title">📋 How to edit the file (step by step)</div>
       <ol class="steps-ol">
-        <li><div class="s-num">1</div><div class="s-text">Open the <code>js</code> folder inside your website folder, and open <strong>pq-hub.js</strong> with Notepad (Windows) or TextEdit (Mac)<span class="s-sub">Even better: download VS Code free at code.visualstudio.com — it's much easier</span></div></li>
+        <li><div class="s-num">1</div><div class="s-text">Open the <code>js</code> folder inside your website folder, and open <strong>pq-hub.js</strong> with Notepad (Windows) or TextEdit (Mac)<span class="s-sub">Even better: download VS Code free at code.visualstudio.com: it's much easier</span></div></li>
         <li><div class="s-num">2</div><div class="s-text">Find these two lines near the top of the file:</div></li>
       </ol>
       <div class="code-label">BEFORE (what's already in the file):</div>
@@ -318,17 +318,17 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
         <code><span class="ck">const</span> SUPABASE_URL      = <span class="cs">'https://psrbdvhszemudyckkbag.supabase.co'</span>;
 <span class="ck">const</span> SUPABASE_ANON_KEY = <span class="cs">'eyJhbGciOiJIUzI1Ni...'</span>;</code>
       </div>
-      <div class="code-label">AFTER (replace with YOUR new project's values — keep the quotes!):</div>
+      <div class="code-label">AFTER (replace with YOUR new project's values: keep the quotes!):</div>
       <div class="code-wrap">
         <code><span class="ck">const</span> SUPABASE_URL      = <span class="cs">'https://abcxyz.supabase.co'</span>; <span class="cm">// ← your actual URL</span>
 <span class="ck">const</span> SUPABASE_ANON_KEY = <span class="cs">'eyJhbGciOiJIUzI1Ni...'</span>;    <span class="cm">// ← your actual key</span></code>
       </div>
       <ol class="steps-ol" style="margin-top:12px">
-        <li><div class="s-num">3</div><div class="s-text">Press <strong>Ctrl+S</strong> to save — that's it, every page is now connected</div></li>
+        <li><div class="s-num">3</div><div class="s-text">Press <strong>Ctrl+S</strong> to save: that's it, every page is now connected</div></li>
       </ol>
       <div class="callout success" style="margin-top:12px">
         <div class="callout-icon">✅</div>
-        <div class="callout-body"><strong>That's the only code editing you'll ever do!</strong> Everything else after this is done through the Supabase website and your admin dashboard — no code.</div>
+        <div class="callout-body"><strong>That's the only code editing you'll ever do!</strong> Everything else after this is done through the Supabase website and your admin dashboard: no code.</div>
       </div>
     </div>
   </div>
@@ -339,42 +339,42 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
   <div class="step-section" id="step-tables">
     <div class="step-header">
       <div class="step-circle">4</div>
-      <div class="step-head-text"><h2>Create the Database Tables</h2><p>One script sets up everything — no manual clicking needed.</p></div>
+      <div class="step-head-text"><h2>Create the Database Tables</h2><p>One script sets up everything: no manual clicking needed.</p></div>
     </div>
     <div class="card">
       <div class="card-title">📋 Run the setup script</div>
-      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Instead of building each table by hand, you'll run one ready-made script that creates all 4 tables, all the security rules, and the file storage bucket — in one click.</p>
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Instead of building each table by hand, you'll run one ready-made script that creates all 4 tables, all the security rules, and the file storage bucket: in one click.</p>
       <ol class="steps-ol">
         <li><div class="s-num">1</div><div class="s-text">Open <code>supabase-schema.sql</code> (included in your project files) in Notepad or VS Code, and select all + copy</div></li>
         <li><div class="s-num">2</div><div class="s-text">In Supabase, click <strong>"SQL Editor"</strong> in the left sidebar</div></li>
         <li><div class="s-num">3</div><div class="s-text">Click <strong>"New query"</strong></div></li>
         <li><div class="s-num">4</div><div class="s-text">Paste the entire script in, then click <strong>"Run"</strong> (or press Ctrl+Enter)</div></li>
-        <li><div class="s-num">5</div><div class="s-text">You should see <strong>"Success. No rows returned"</strong> — that means all 4 tables, their security rules, and the storage bucket were created ✅</div></li>
+        <li><div class="s-num">5</div><div class="s-text">You should see <strong>"Success. No rows returned"</strong>: that means all 4 tables, their security rules, and the storage bucket were created ✅</div></li>
       </ol>
       <div class="callout success" style="margin-top:8px">
         <div class="callout-icon">✅</div>
-        <div class="callout-body">This one script replaces the old "create a table, add each column by hand" process — and also sets up the file storage bucket, so you can skip straight past manual bucket creation.</div>
+        <div class="callout-body">This one script replaces the old "create a table, add each column by hand" process: and also sets up the file storage bucket, so you can skip straight past manual bucket creation.</div>
       </div>
     </div>
     <div class="card">
       <div class="card-title">📖 What got created</div>
       <table class="guide-table">
         <tr><th>Table</th><th>What it's for</th></tr>
-        <tr><td><code>users</code></td><td>Student profiles — name, Student ID, contact, faculty, level, and an <code>is_admin</code> flag</td></tr>
+        <tr><td><code>users</code></td><td>Student profiles: name, Student ID, contact, faculty, level, and an <code>is_admin</code> flag</td></tr>
         <tr><td><code>past_questions</code></td><td>Info about every uploaded PDF (title, faculty, department, level, year, download count)</td></tr>
-        <tr><td><code>downloads</code></td><td>Logs every download a student makes — powers "My Downloads" on their dashboard</td></tr>
-        <tr><td><code>pq_requests</code></td><td>Past questions / questions students send to the admin — powers "My Requests" and the admin's "Student Requests" panel</td></tr>
+        <tr><td><code>downloads</code></td><td>Logs every download a student makes: powers "My Downloads" on their dashboard</td></tr>
+        <tr><td><code>pq_requests</code></td><td>Past questions / questions students send to the admin: powers "My Requests" and the admin's "Student Requests" panel</td></tr>
       </table>
     </div>
     <div class="card">
       <div class="card-title">👑 Make Your Admin Account (VERY IMPORTANT)</div>
-      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Nobody starts out as an admin — you have to promote one account by hand. This is what lets Moyole (and only Moyole) into <code>dashboard.html</code>.</p>
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Nobody starts out as an admin: you have to promote one account by hand. This is what lets Moyole (and only Moyole) into <code>dashboard.html</code>.</p>
       <ol class="steps-ol">
-        <li><div class="s-num">1</div><div class="s-text">Go to your own live website (or open <code>signup.html</code>) and sign up like a normal student would — pick a memorable Student ID like <code>ADMIN001</code></div></li>
+        <li><div class="s-num">1</div><div class="s-text">Go to your own live website (or open <code>signup.html</code>) and sign up like a normal student would: pick a memorable Student ID like <code>ADMIN001</code></div></li>
         <li><div class="s-num">2</div><div class="s-text">In Supabase, click <strong>"Table Editor"</strong> → <strong>users</strong></div></li>
         <li><div class="s-num">3</div><div class="s-text">Find the row with the Student ID you just signed up with</div></li>
         <li><div class="s-num">4</div><div class="s-text">Click the <code>is_admin</code> cell for that row and change it from <code>false</code> to <code>true</code></div></li>
-        <li><div class="s-num">5</div><div class="s-text">Save. Log out and log back in on the site — that account can now open <code>dashboard.html</code> and upload past questions</div></li>
+        <li><div class="s-num">5</div><div class="s-text">Save. Log out and log back in on the site: that account can now open <code>dashboard.html</code> and upload past questions</div></li>
       </ol>
       <div class="callout danger" style="margin-top:8px">
         <div class="callout-icon">🚨</div>
@@ -389,7 +389,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
   <div class="step-section" id="step-storage">
     <div class="step-header">
       <div class="step-circle">5</div>
-      <div class="step-head-text"><h2>Check Your File Storage Bucket</h2><p>Already created by the script in Step 4 — just double-check it.</p></div>
+      <div class="step-head-text"><h2>Check Your File Storage Bucket</h2><p>Already created by the script in Step 4: just double-check it.</p></div>
     </div>
     <div class="card">
       <div class="card-title">🗂️ Confirm the <code>past-questions</code> bucket exists</div>
@@ -397,7 +397,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
       <ol class="steps-ol">
         <li><div class="s-num">1</div><div class="s-text">In Supabase, click <strong>"Storage"</strong> in the left sidebar</div></li>
         <li><div class="s-num">2</div><div class="s-text">You should see a bucket called <strong>past-questions</strong> with a green <strong>"Public"</strong> tag next to it</div></li>
-        <li><div class="s-num">3</div><div class="s-text">If it's missing, re-run <code>supabase-schema.sql</code> from Step 4 — it's safe to run more than once</div></li>
+        <li><div class="s-num">3</div><div class="s-text">If it's missing, re-run <code>supabase-schema.sql</code> from Step 4: it's safe to run more than once</div></li>
       </ol>
     </div>
   </div>
@@ -417,12 +417,12 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     <div class="card">
       <div class="card-title">📤 How to upload through the Admin Dashboard</div>
       <ol class="steps-ol">
-        <li><div class="s-num">1</div><div class="s-text">Open your browser and go to: <strong>yourwebsite.netlify.app/dashboard.html</strong></div></li>
+        <li><div class="s-num">1</div><div class="s-text">Open your browser and go to: <strong>yourwebsite.vercel.app/dashboard.html</strong></div></li>
         <li><div class="s-num">2</div><div class="s-text">Log in with your <strong>admin Student ID</strong> and password</div></li>
-        <li><div class="s-num">3</div><div class="s-text">On the left side you'll see the <strong>Upload Past Question</strong> form. Fill it in:<span class="s-sub">📝 <strong>Title:</strong> e.g. "Engineering Mathematics I – Final Exam"<br>🏛️ <strong>Faculty:</strong> Select from dropdown<br>🏫 <strong>Department:</strong> e.g. Civil Engineering (optional)<br>📂 <strong>Level:</strong> Level 100, HND 1, etc.<br>📅 <strong>Year:</strong> 2023, 2024, etc.</span></div></li>
+        <li><div class="s-num">3</div><div class="s-text">On the left side you'll see the <strong>Upload Past Question</strong> form. Fill it in:<span class="s-sub">📝 <strong>Title:</strong> e.g. "Engineering Mathematics I: Final Exam"<br>🏛️ <strong>Faculty:</strong> Select from dropdown<br>🏫 <strong>Department:</strong> e.g. Civil Engineering (optional)<br>📂 <strong>Level:</strong> Level 100, HND 1, etc.<br>📅 <strong>Year:</strong> 2023, 2024, etc.</span></div></li>
         <li><div class="s-num">4</div><div class="s-text">Click the dashed box to choose your PDF from your computer (or drag & drop it)</div></li>
         <li><div class="s-num">5</div><div class="s-text">Click <strong>"⬆️ Upload Past Question"</strong> and watch the progress bar</div></li>
-        <li><div class="s-num">6</div><div class="s-text">When you see ✅ success — the past question is <strong>LIVE on the website immediately!</strong></div></li>
+        <li><div class="s-num">6</div><div class="s-text">When you see ✅ success: the past question is <strong>LIVE on the website immediately!</strong></div></li>
         <li><div class="s-num">7</div><div class="s-text">Go to <strong>past-questions.html</strong> → click <strong>"🆕 Recently Added"</strong> tab to see it appear at the top</div></li>
       </ol>
     </div>
@@ -438,12 +438,12 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
   <div class="step-section" id="step-dashboards">
     <div class="step-header">
       <div class="step-circle">7</div>
-      <div class="step-head-text"><h2>Two Dashboards Explained</h2><p>There are now two separate dashboards — one for Moyole (admin) and one for students.</p></div>
+      <div class="step-head-text"><h2>Two Dashboards Explained</h2><p>There are now two separate dashboards: one for Moyole (admin) and one for students.</p></div>
     </div>
     <div class="dash-explainer">
       <div class="dash-box">
         <h4>🔴 Admin Dashboard (<code>dashboard.html</code>)</h4>
-        <p style="font-size:0.78rem;color:var(--gray);margin-bottom:12px">For <strong>Moyole only</strong>. Access is enforced by an <code>is_admin</code> flag on the account in the database — not just by knowing the URL. Anyone else who signs in gets redirected straight to the student dashboard.</p>
+        <p style="font-size:0.78rem;color:var(--gray);margin-bottom:12px">For <strong>Moyole only</strong>. Access is enforced by an <code>is_admin</code> flag on the account in the database: not just by knowing the URL. Anyone else who signs in gets redirected straight to the student dashboard.</p>
         <ul>
           <li>Upload new past question PDFs</li>
           <li>Set faculty, department, level, year for each PDF</li>
@@ -452,7 +452,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
           <li>Link to WhatsApp for contact</li>
         </ul>
         <div style="margin-top:12px;padding:10px;background:rgba(23,70,162,0.06);border-radius:8px;font-size:0.75rem;color:var(--blue)">
-          🔐 URL: <code>yoursite.netlify.app/dashboard.html</code>
+          🔐 URL: <code>yoursite.vercel.app/dashboard.html</code>
         </div>
       </div>
       <div class="dash-box user-box">
@@ -461,23 +461,23 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
         <ul>
           <li>Welcome message with their name</li>
           <li>Quick access to past questions</li>
-          <li>"My Downloads" — history of everything they've downloaded</li>
-          <li>"My Requests" — past questions they've asked the admin for, with status</li>
+          <li>"My Downloads": history of everything they've downloaded</li>
+          <li>"My Requests": past questions they've asked the admin for, with status</li>
           <li>Edit their profile (name, contact, faculty, level)</li>
           <li>Change their password</li>
           <li>Contact Moyole directly</li>
         </ul>
         <div style="margin-top:12px;padding:10px;background:rgba(37,99,235,0.08);border-radius:8px;font-size:0.75rem;color:#b45309">
-          🔗 URL: <code>yoursite.netlify.app/user-dashboard.html</code>
+          🔗 URL: <code>yoursite.vercel.app/user-dashboard.html</code>
         </div>
       </div>
     </div>
     <div class="card" style="margin-top:16px">
-      <div class="card-title">🔒 Login Required to Download — How It Works</div>
+      <div class="card-title">🔒 Login Required to Download: How It Works</div>
       <ol class="steps-ol">
         <li><div class="s-num">✦</div><div class="s-text">A student visits the past-questions page and sees all the cards</div></li>
         <li><div class="s-num">✦</div><div class="s-text">If they are <strong>not logged in</strong>, they see a 🔒 lock icon on every download button</div></li>
-        <li><div class="s-num">✦</div><div class="s-text">When they click a locked button, a <strong>popup modal</strong> appears: "Login Required — create a free account to download"</div></li>
+        <li><div class="s-num">✦</div><div class="s-text">When they click a locked button, a <strong>popup modal</strong> appears: "Login Required: create a free account to download"</div></li>
         <li><div class="s-num">✦</div><div class="s-text">They click "Create Free Account" → fills in the signup form → redirected to their student dashboard</div></li>
         <li><div class="s-num">✦</div><div class="s-text">Now when they visit the past-questions page, all buttons show <strong>"⬇️ Download"</strong> and work properly</div></li>
       </ol>
@@ -490,23 +490,42 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
   <div class="step-section" id="step-deploy">
     <div class="step-header">
       <div class="step-circle">8</div>
-      <div class="step-head-text"><h2>Put Your Website Online</h2><p>Free hosting with Netlify. Your site gets a public URL students can visit.</p></div>
+      <div class="step-head-text"><h2>Put Your Website Online</h2><p>Free hosting with Vercel. Your site gets a public URL students can visit.</p></div>
     </div>
     <div class="card">
-      <div class="card-title">🚀 Deploy to Netlify (Free)</div>
+      <div class="card-title">🚀 Deploy to Vercel (Free): CLI method</div>
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Vercel doesn't have a plain drag-and-drop upload like some other hosts: the fastest way for a folder of HTML files with no Git repo is the Vercel CLI, run once from your terminal.</p>
       <ol class="steps-ol">
-        <li><div class="s-num">1</div><div class="s-text">Go to <a href="https://netlify.com" target="_blank"><strong>netlify.com</strong></a> and create a free account</div></li>
-        <li><div class="s-num">2</div><div class="s-text">After signing in, look for the drag-and-drop area that says <strong>"Drop your site folder here"</strong></div></li>
-        <li><div class="s-num">3</div><div class="s-text">Open your File Manager on your computer, find the <strong>atu-pq-hub</strong> folder</div></li>
-        <li><div class="s-num">4</div><div class="s-text"><strong>Drag the entire atu-pq-hub folder</strong> and drop it on the Netlify page<span class="s-sub">⚠️ Drag the whole folder, not individual files inside it</span></div></li>
-        <li><div class="s-num">5</div><div class="s-text">Wait 30–60 seconds → Netlify gives you a URL like: <code>https://random-name.netlify.app</code></div></li>
-        <li><div class="s-num">6</div><div class="s-text">To get a nicer URL: Netlify → your site → Site Configuration → Change site name → type <code>atu-pq-hub</code></div></li>
-        <li><div class="s-num">7</div><div class="s-text">Share the link! Done ✅</div></li>
+        <li><div class="s-num">1</div><div class="s-text">Install Node.js if you don't have it already: <a href="https://nodejs.org" target="_blank">nodejs.org</a></div></li>
+        <li><div class="s-num">2</div><div class="s-text">Open a terminal (Command Prompt / PowerShell / Terminal) and install the Vercel CLI:</div></li>
+      </ol>
+      <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>npm i -g vercel</code></div>
+      <ol class="steps-ol" style="margin-top:12px">
+        <li><div class="s-num">3</div><div class="s-text">In the terminal, navigate into your <strong>atu-pq-hub</strong> folder:</div></li>
+      </ol>
+      <div class="code-wrap"><code>cd path/to/atu-pq-hub</code></div>
+      <ol class="steps-ol" style="margin-top:12px">
+        <li><div class="s-num">4</div><div class="s-text">Run:</div></li>
+      </ol>
+      <div class="code-wrap"><code>vercel</code></div>
+      <ol class="steps-ol" style="margin-top:12px">
+        <li><div class="s-num">5</div><div class="s-text">Log in / sign up when prompted (free, via GitHub, GitLab, or email), then accept the defaults for each question it asks</div></li>
+        <li><div class="s-num">6</div><div class="s-text">It gives you a preview URL like: <code>https://atu-pq-hub-xxxx.vercel.app</code></div></li>
+        <li><div class="s-num">7</div><div class="s-text">When you're happy with it, make it the live production URL:</div></li>
+      </ol>
+      <div class="code-wrap"><code>vercel --prod</code></div>
+      <ol class="steps-ol" style="margin-top:12px">
+        <li><div class="s-num">8</div><div class="s-text">To get a nicer URL: on <a href="https://vercel.com/dashboard" target="_blank">vercel.com/dashboard</a> → your project → Settings → Domains → add/edit the project name (e.g. <code>atu-pq-hub</code>)</div></li>
+        <li><div class="s-num">9</div><div class="s-text">Share the link! Done ✅</div></li>
       </ol>
       <div class="callout info" style="margin-top:12px">
         <div class="callout-icon">🔄</div>
-        <div class="callout-body"><strong>To update the site later:</strong> Just drag the atu-pq-hub folder onto Netlify again. It replaces the old version automatically. Changes appear within 30 seconds.</div>
+        <div class="callout-body"><strong>To update the site later:</strong> Just run <code>vercel --prod</code> again from inside the folder. It redeploys the latest version in under a minute.</div>
       </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🌱 Alternative: deploy via GitHub (no CLI)</div>
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">If you'd rather not use a terminal, push the <strong>atu-pq-hub</strong> folder to a new GitHub repository, then on <a href="https://vercel.com/new" target="_blank">vercel.com/new</a> click "Import Project" and select that repo. Vercel auto-deploys it as a static site: no build settings needed: and redeploys automatically every time you push a change to GitHub.</p>
     </div>
   </div>
 
@@ -520,13 +539,13 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     </div>
     <div class="callout warn">
       <div class="callout-icon">⚠️</div>
-      <div class="callout-body"><strong>Why large PDFs are a problem:</strong> Students on mobile data in Ghana often have slow connections. A 15MB PDF could take 2+ minutes to download. Compressing it to 1MB makes it download in seconds. Also, Supabase's free plan has a 1GB storage limit — compressed PDFs let you store 10x more.</div>
+      <div class="callout-body"><strong>Why large PDFs are a problem:</strong> Students on mobile data in Ghana often have slow connections. A 15MB PDF could take 2+ minutes to download. Compressing it to 1MB makes it download in seconds. Also, Supabase's free plan has a 1GB storage limit: compressed PDFs let you store 10x more.</div>
     </div>
     <div class="pdf-tips">
       <div class="pdf-tip">
         <div class="pt-icon">🗜️</div>
         <h4>Compress It (Best Option)</h4>
-        <p>Go to <a href="https://ilovepdf.com/compress_pdf" target="_blank">ilovepdf.com/compress_pdf</a> — free, no sign-up. Upload your PDF, compress it, download. A 15MB PDF often becomes 1–2MB with no visible quality loss.</p>
+        <p>Go to <a href="https://ilovepdf.com/compress_pdf" target="_blank">ilovepdf.com/compress_pdf</a>: free, no sign-up. Upload your PDF, compress it, download. A 15MB PDF often becomes 1: 2MB with no visible quality loss.</p>
       </div>
       <div class="pdf-tip">
         <div class="pt-icon">📐</div>
@@ -578,7 +597,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
 
     <div class="check-group-title">📊 Database Tables</div>
     <div class="checklist">
-      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Ran <code>supabase-schema.sql</code> in the SQL Editor — saw "Success. No rows returned"</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Ran <code>supabase-schema.sql</code> in the SQL Editor: saw "Success. No rows returned"</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Confirmed all 4 tables exist: <code>users</code>, <code>past_questions</code>, <code>downloads</code>, <code>pq_requests</code></div></div>
     </div>
 
@@ -595,12 +614,12 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
 
     <div class="check-group-title">🧪 Testing</div>
     <div class="checklist">
-      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Created a student account via signup.html — redirected to student dashboard ✅</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Created a student account via signup.html: redirected to student dashboard ✅</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Logged in as the admin account → opened dashboard.html successfully</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Logged in as a normal student → tried dashboard.html → got redirected to user-dashboard.html ✅</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Uploaded 1 test PDF through dashboard.html</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Visited past-questions.html → new PDF appears on the page ✅</div></div>
-      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Checked "Recently Added" tab — uploaded PDF appears at the top ✅</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Checked "Recently Added" tab: uploaded PDF appears at the top ✅</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Logged out → visited past-questions.html → download buttons show 🔒 lock icon ✅</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">As a signed-in student, downloaded a PDF → it saved straight to Downloads, and showed up under "My Downloads" ✅</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Sent a test request from "My Requests" → it appeared in the admin's "Student Requests" panel ✅</div></div>
@@ -609,9 +628,9 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     <div class="check-group-title">🌐 Deployment</div>
     <div class="checklist">
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Added your 4 images to the <code>images/</code> folder (atu-logo.jpg, moyole-logo.jpg, Moyole1.jpg, Moyole2.jpg)</div></div>
-      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Dragged the atu-pq-hub folder onto Netlify</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Ran `vercel --prod` (or connected GitHub repo) to deploy</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Website is accessible at a live URL</div></div>
-      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Tested on mobile phone — looks good and works correctly</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Tested on mobile phone: looks good and works correctly</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Shared live link on WhatsApp</div></div>
     </div>
 
@@ -625,7 +644,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
 
   <!-- QUICK REFERENCE -->
   <div class="card">
-    <div class="card-title">⚡ Quick Reference — Day-to-Day Tasks</div>
+    <div class="card-title">⚡ Quick Reference: Day-to-Day Tasks</div>
     <table class="guide-table">
       <tr><th>What you want to do</th><th>How to do it</th></tr>
       <tr><td>📤 Upload a new past question PDF</td><td>Login as admin → <code>dashboard.html</code> → Fill form → Upload</td></tr>
@@ -635,9 +654,9 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
       <tr><td>👑 Promote another admin</td><td>Supabase → Table Editor → <code>users</code> → set their <code>is_admin</code> to <code>true</code></td></tr>
       <tr><td>📄 See all past question records</td><td>Supabase → Table Editor → <code>past_questions</code></td></tr>
       <tr><td>🗂️ See all uploaded PDF files</td><td>Supabase → Storage → <code>past-questions</code> bucket</td></tr>
-      <tr><td>✏️ Change any text on the website</td><td>Open HTML file → edit text → save → re-upload to Netlify</td></tr>
-      <tr><td>📷 Replace a photo</td><td>Put new image in <code>images/</code> folder with same filename → re-upload to Netlify</td></tr>
-      <tr><td>🔄 Update the live website</td><td>Drag atu-pq-hub folder onto Netlify again</td></tr>
+      <tr><td>✏️ Change any text on the website</td><td>Open HTML file → edit text → save → redeploy with `vercel --prod`</td></tr>
+      <tr><td>📷 Replace a photo</td><td>Put new image in <code>images/</code> folder with same filename → redeploy with `vercel --prod`</td></tr>
+      <tr><td>🔄 Update the live website</td><td>Run `vercel --prod` again from inside the folder</td></tr>
       <tr><td>😴 Supabase project paused?</td><td>Go to supabase.com → click your project → click "Restore project" (free)</td></tr>
       <tr><td>📦 Compress a large PDF</td><td>Go to <a href="https://ilovepdf.com/compress_pdf" target="_blank">ilovepdf.com/compress_pdf</a> → compress → re-upload</td></tr>
     </table>
@@ -647,9 +666,9 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
 
 <!-- FOOTER -->
 <div class="page-footer">
-  <p>📚 <strong>ATU PQ Hub</strong> — Powered by Omar Sulley Bin | ATU SRC Part-Time Representative 2026/2027</p>
+  <p>📚 <strong>ATU PQ Hub</strong>: Powered by Omar Sulley Bin | ATU SRC Part Time Representative 2026/2027</p>
   <p>Built with ❤️ for ATU Students by <strong>Ibrahim Mohammed Lotsu (Ibratech)</strong></p>
-  <p>Contact: 024 560 7110 (WhatsApp)</p>
+  <p>Contact: 055 419 6068 (WhatsApp)</p>
 </div>
 
 <script>

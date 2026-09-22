@@ -6,19 +6,19 @@
 <title>Admin Dashboard | ATU PQ Hub</title>
 <meta name="description" content="ATU PQ Hub admin dashboard.">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://atupqhub.netlify.app/dashboard.html">
+<link rel="canonical" href="https://atu-pasqo-hub.vercel.app/dashboard.html">
 <meta name="theme-color" content="#14315D">
 <link rel="icon" type="image/png" href="images/atu-logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Admin Dashboard | ATU PQ Hub">
 <meta property="og:description" content="ATU PQ Hub admin dashboard.">
-<meta property="og:url" content="https://atupqhub.netlify.app/dashboard.html">
-<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:url" content="https://atu-pasqo-hub.vercel.app/dashboard.html">
+<meta property="og:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <meta property="og:site_name" content="ATU PQ Hub">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Admin Dashboard | ATU PQ Hub">
 <meta name="twitter:description" content="ATU PQ Hub admin dashboard.">
-<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta name="twitter:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -210,7 +210,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
     <input type="hidden" id="editId">
     <div class="form-group">
       <label class="form-label">Course / Paper Title *</label>
-      <input type="text" class="form-input" id="editTitle" placeholder="e.g. Engineering Mathematics I – Final Exam">
+      <input type="text" class="form-input" id="editTitle" placeholder="e.g. Engineering Mathematics I: Final Exam">
     </div>
     <div class="form-row">
       <div class="form-group">
@@ -252,7 +252,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
   <div class="delete-box">
     <div class="delete-icon">🗑️</div>
     <h2 class="delete-title">Delete This?</h2>
-    <p class="delete-desc">You are about to permanently delete:<br><span class="delete-name" id="deleteTitle">—</span><br><br>This removes it from the website <strong>and</strong> deletes the PDF file from storage. This cannot be undone.</p>
+    <p class="delete-desc">You are about to permanently delete:<br><span class="delete-name" id="deleteTitle">: </span><br><br>This removes it from the website <strong>and</strong> deletes the PDF file from storage. This cannot be undone.</p>
     <div class="delete-actions">
       <button class="btn-cancel" onclick="closeDeleteModal()">Cancel</button>
       <button class="btn-confirm-delete" id="confirmDeleteBtn" onclick="confirmDelete()">🗑️ Yes, Delete</button>
@@ -275,13 +275,13 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
 
     <div class="sidebar-section-label">Past Questions</div>
     <button class="sidebar-link" id="nav-upload" onclick="showSection('upload')"><span class="icon">⬆️</span>Upload New PDF</button>
-    <button class="sidebar-link" id="nav-manage" onclick="showSection('manage')"><span class="icon">📁</span>Manage All <span class="sidebar-badge" id="sidebarCount">—</span></button>
+    <button class="sidebar-link" id="nav-manage" onclick="showSection('manage')"><span class="icon">📁</span>Manage All <span class="sidebar-badge" id="sidebarCount">: </span></button>
 
     <div class="sidebar-section-label">Students</div>
-    <button class="sidebar-link" id="nav-requests" onclick="showSection('requests')"><span class="icon">📨</span>Student Requests <span class="sidebar-badge" id="sidebarRequestCount">—</span></button>
+    <button class="sidebar-link" id="nav-requests" onclick="showSection('requests')"><span class="icon">📨</span>Student Requests <span class="sidebar-badge" id="sidebarRequestCount">: </span></button>
 
     <div class="sidebar-section-label">Contact</div>
-    <a href="https://wa.me/233245607110" target="_blank" class="sidebar-link"><span class="icon">💬</span>WhatsApp</a>
+    <a href="https://wa.me/233554196068" target="_blank" class="sidebar-link"><span class="icon">💬</span>WhatsApp</a>
 
     <div class="sidebar-section-label">Site Pages</div>
     <a href="past-questions.html" target="_blank" class="sidebar-link"><span class="icon">🌐</span>View Live Site</a>
@@ -315,17 +315,17 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
       <div class="stats-row">
         <div class="stat-card">
           <div class="stat-card-top"><div class="stat-icon">📄</div></div>
-          <div class="stat-num" id="statPQ">—</div>
+          <div class="stat-num" id="statPQ">: </div>
           <div class="stat-label">Total Past Questions</div>
         </div>
         <div class="stat-card">
           <div class="stat-card-top"><div class="stat-icon">👤</div></div>
-          <div class="stat-num" id="statUsers">—</div>
+          <div class="stat-num" id="statUsers">: </div>
           <div class="stat-label">Registered Students</div>
         </div>
         <div class="stat-card">
           <div class="stat-card-top"><div class="stat-icon">⬇️</div></div>
-          <div class="stat-num" id="statDownloads">—</div>
+          <div class="stat-num" id="statDownloads">: </div>
           <div class="stat-label">Total Downloads</div>
         </div>
         <div class="stat-card">
@@ -358,7 +358,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
             <div class="quick-actions">
               <button class="quick-action" onclick="showSection('upload')"><div class="qa-icon">⬆️</div><div class="qa-text"><strong>Upload New Past Question</strong><span>Add a new PDF to the site</span></div></button>
               <button class="quick-action" onclick="showSection('manage')"><div class="qa-icon">📁</div><div class="qa-text"><strong>Manage / Edit / Delete</strong><span>View and edit all uploads</span></div></button>
-              <a href="https://wa.me/233245607110?text=New+past+question+just+uploaded+on+ATU+PQ+Hub!" target="_blank" style="text-decoration:none"><button class="quick-action" style="width:100%"><div class="qa-icon">💬</div><div class="qa-text"><strong>Notify Students (WhatsApp)</strong><span>Tell students about new uploads</span></div></button></a>
+              <a href="https://wa.me/233554196068?text=New+past+question+just+uploaded+on+ATU+PQ+Hub!" target="_blank" style="text-decoration:none"><button class="quick-action" style="width:100%"><div class="qa-icon">💬</div><div class="qa-text"><strong>Notify Students (WhatsApp)</strong><span>Tell students about new uploads</span></div></button></a>
               <a href="past-questions.html" target="_blank" style="text-decoration:none"><button class="quick-action" style="width:100%"><div class="qa-icon">🌐</div><div class="qa-text"><strong>View the Live Website</strong><span>See what students see</span></div></button></a>
             </div>
           </div>
@@ -367,11 +367,11 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
           <div class="guide-card">
             <h4>📍 Where to Find Things in Supabase</h4>
             <div class="guide-steps-list">
-              <div class="guide-step-item"><div class="gs-num">1</div><div class="gs-text"><strong>Student List</strong> — Authentication → Users</div></div>
-              <div class="guide-step-item"><div class="gs-num">2</div><div class="gs-text"><strong>Phone / Faculty / Level</strong> — Table Editor → users</div></div>
-              <div class="guide-step-item"><div class="gs-num">3</div><div class="gs-text"><strong>Past Question Records</strong> — Table Editor → past_questions</div></div>
-              <div class="guide-step-item"><div class="gs-num">4</div><div class="gs-text"><strong>PDF Files</strong> — Storage → past-questions bucket</div></div>
-              <div class="guide-step-item"><div class="gs-num">5</div><div class="gs-text"><strong>Project paused?</strong> — Click "Restore project" on your project page</div></div>
+              <div class="guide-step-item"><div class="gs-num">1</div><div class="gs-text"><strong>Student List</strong>: Authentication → Users</div></div>
+              <div class="guide-step-item"><div class="gs-num">2</div><div class="gs-text"><strong>Phone / Faculty / Level</strong>: Table Editor → users</div></div>
+              <div class="guide-step-item"><div class="gs-num">3</div><div class="gs-text"><strong>Past Question Records</strong>: Table Editor → past_questions</div></div>
+              <div class="guide-step-item"><div class="gs-num">4</div><div class="gs-text"><strong>PDF Files</strong>: Storage → past-questions bucket</div></div>
+              <div class="guide-step-item"><div class="gs-num">5</div><div class="gs-text"><strong>Project paused?</strong>: Click "Restore project" on your project page</div></div>
             </div>
           </div>
         </div>
@@ -387,7 +387,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
           <div class="alert success" id="uploadSuccess"></div>
           <div class="form-group">
             <label class="form-label">Course / Paper Title *</label>
-            <input type="text" class="form-input" id="pqTitle" placeholder="e.g. Engineering Mathematics I – Final Exam">
+            <input type="text" class="form-input" id="pqTitle" placeholder="e.g. Engineering Mathematics I: Final Exam">
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -443,11 +443,11 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
             <div style="display:flex;flex-direction:column;gap:12px">
               <div style="padding:12px;background:var(--off-white);border-radius:var(--radius-sm)">
                 <div style="font-weight:700;font-size:0.82rem;margin-bottom:4px">📦 Large PDF?</div>
-                <div style="font-size:0.75rem;color:var(--gray);line-height:1.5">Compress it first at <a href="https://ilovepdf.com/compress_pdf" target="_blank" style="color:var(--blue);font-weight:600">ilovepdf.com</a> — target under 3MB. Most exam papers compress to under 1MB.</div>
+                <div style="font-size:0.75rem;color:var(--gray);line-height:1.5">Compress it first at <a href="https://ilovepdf.com/compress_pdf" target="_blank" style="color:var(--blue);font-weight:600">ilovepdf.com</a>: target under 3MB. Most exam papers compress to under 1MB.</div>
               </div>
               <div style="padding:12px;background:var(--off-white);border-radius:var(--radius-sm)">
                 <div style="font-weight:700;font-size:0.82rem;margin-bottom:4px">📝 Good Title Format</div>
-                <div style="font-size:0.75rem;color:var(--gray);line-height:1.5">Use: <strong>Course Name – Exam Type Year</strong><br>e.g. "Engineering Maths I – Final Exam 2023"</div>
+                <div style="font-size:0.75rem;color:var(--gray);line-height:1.5">Use: <strong>Course Name: Exam Type Year</strong><br>e.g. "Engineering Maths I: Final Exam 2023"</div>
               </div>
               <div style="padding:12px;background:var(--off-white);border-radius:var(--radius-sm)">
                 <div style="font-weight:700;font-size:0.82rem;margin-bottom:4px">⚡ After Uploading</div>
@@ -555,13 +555,13 @@ window.addEventListener('load', async function() {
   pqhubFillYearSelect(document.getElementById('manageFilterYear'), 'All Years');
 
   if (!sb) { showToast('⚙️ Add Supabase credentials to enable all features', 'error'); return; }
-  // Auth guard — only signed-in ADMIN accounts reach this panel
+  // Auth guard: only signed-in ADMIN accounts reach this panel
   const user = await pqhubGetUser();
   if (!user) { window.location.href = 'login.html'; return; }
 
   const { data: profile } = await sb.from('users').select('is_admin, name').eq('id', user.id).single();
   if (!profile || !profile.is_admin) {
-    // Signed in, but not an admin — send them to the student dashboard instead
+    // Signed in, but not an admin: send them to the student dashboard instead
     window.location.href = 'user-dashboard.html';
     return;
   }
@@ -584,21 +584,21 @@ async function loadStats() {
   try {
     // Count past questions
     const { count: pqCount } = await sb.from('past_questions').select('*', { count: 'exact', head: true });
-    document.getElementById('statPQ').textContent = pqCount ?? '—';
-    document.getElementById('sidebarCount').textContent = pqCount ?? '—';
+    document.getElementById('statPQ').textContent = pqCount ?? ': ';
+    document.getElementById('sidebarCount').textContent = pqCount ?? ': ';
 
     // Sum downloads
     const { data: dlData } = await sb.from('past_questions').select('downloads');
     const totalDownloads = dlData ? dlData.reduce((sum, r) => sum + (r.downloads || 0), 0) : 0;
     document.getElementById('statDownloads').textContent = totalDownloads.toLocaleString();
 
-    // Count users (from auth — approximate via users table)
+    // Count users (from auth: approximate via users table)
     const { count: userCount } = await sb.from('users').select('*', { count: 'exact', head: true });
-    document.getElementById('statUsers').textContent = userCount ?? '—';
+    document.getElementById('statUsers').textContent = userCount ?? ': ';
 
     // Count pending requests (for sidebar badge)
     const { count: reqCount } = await sb.from('pq_requests').select('*', { count: 'exact', head: true }).eq('status', 'pending');
-    document.getElementById('sidebarRequestCount').textContent = reqCount ?? '—';
+    document.getElementById('sidebarRequestCount').textContent = reqCount ?? ': ';
   } catch(e) { console.error('Stats error:', e); }
 }
 
@@ -682,8 +682,8 @@ async function loadRecentUploads() {
           ${data.map(pq => `
             <tr>
               <td class="title-cell" title="${esc(pq.title)}">${esc(pq.title)}</td>
-              <td><span class="pq-badge">${esc(pq.faculty||'—')}</span></td>
-              <td>${pq.year || '—'}</td>
+              <td><span class="pq-badge">${esc(pq.faculty||': ')}</span></td>
+              <td>${pq.year || ': '}</td>
               <td>
                 <button class="btn-edit" onclick="openEditModal(${pq.id})">✏️ Edit</button>
               </td>
@@ -727,15 +727,15 @@ function renderTable(rows) {
   document.getElementById('manageCount').textContent = rows.length + ' result' + (rows.length !== 1 ? 's' : '');
 
   tbody.innerHTML = rows.map(pq => {
-    const dateStr = pq.created_at ? new Date(pq.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) : '—';
+    const dateStr = pq.created_at ? new Date(pq.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) : ': ';
     // Extract file path from URL for deletion
     const filePath = pq.file_url ? pq.file_url.split('/past-questions/')[1] || '' : '';
     return `
       <tr>
         <td class="title-cell" title="${esc(pq.title)}">${esc(pq.title)}</td>
-        <td><span class="pq-badge">${esc(pq.faculty||'—')}</span></td>
-        <td style="color:var(--gray);font-size:0.75rem">${esc(pq.level||'—')}</td>
-        <td style="color:var(--gray);font-size:0.75rem">${pq.year||'—'}</td>
+        <td><span class="pq-badge">${esc(pq.faculty||': ')}</span></td>
+        <td style="color:var(--gray);font-size:0.75rem">${esc(pq.level||': ')}</td>
+        <td style="color:var(--gray);font-size:0.75rem">${pq.year||': '}</td>
         <td class="downloads-cell">↓ ${(pq.downloads||0).toLocaleString()}</td>
         <td style="color:var(--gray);font-size:0.72rem;white-space:nowrap">${dateStr}</td>
         <td>
@@ -860,16 +860,16 @@ async function confirmDelete() {
   btn.textContent = 'Deleting...';
 
   try {
-    // Step 1 — Delete the database record
+    // Step 1: Delete the database record
     const { error: dbError } = await sb.from('past_questions').delete().eq('id', pendingDeleteId);
     if (dbError) throw dbError;
 
-    // Step 2 — Delete the PDF file from Storage (if path found)
+    // Step 2: Delete the PDF file from Storage (if path found)
     if (pendingDeletePath) {
       const { error: storageError } = await sb.storage
         .from('past-questions')
         .remove([decodeURIComponent(pendingDeletePath)]);
-      // Storage delete failure is non-fatal — record is already removed
+      // Storage delete failure is non-fatal: record is already removed
       if (storageError) console.warn('Storage delete warning:', storageError.message);
     }
 
@@ -966,14 +966,14 @@ async function handleUpload() {
     progressFill.style.width = '100%'; progressPct.textContent = '100%';
 
     if (dbError) {
-      showUploadAlert('error', '⚠️ PDF uploaded but metadata save failed: ' + dbError.message + ' — Check your past_questions table columns.');
+      showUploadAlert('error', '⚠️ PDF uploaded but metadata save failed: ' + dbError.message + ': Check your past_questions table columns.');
     } else {
       showUploadAlert('success', '🎉 Past question uploaded! It is now live on the website.');
       resetUploadForm();
       await loadAllPQs();
       await loadStats();
       await loadRecentUploads();
-      showToast('✅ ' + title + ' — uploaded successfully!', 'success');
+      showToast('✅ ' + title + ': uploaded successfully!', 'success');
     }
 
   } catch(e) {

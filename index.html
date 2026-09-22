@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ATU PQ Hub | Free Past Questions for Accra Technical University</title>
-<meta name="description" content="Download free ATU past examination questions by faculty, department, level and year. Built for Accra Technical University students, brought to you by Omar Sulley Bin (Officer Moyole), SRC Part-Time Representative.">
+<meta name="description" content="Download free ATU past examination questions by faculty, department, level and year. Built for Accra Technical University students, brought to you by Omar Sulley Bin (Officer Moyole), SRC Part Time Representative.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://atupqhub.netlify.app/">
+<link rel="canonical" href="https://atu-pasqo-hub.vercel.app/">
 <meta name="theme-color" content="#14315D">
 <link rel="icon" type="image/png" href="images/atu-logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ATU PQ Hub | Free Past Questions for Accra Technical University">
-<meta property="og:description" content="Download free ATU past examination questions by faculty, department, level and year. Built for Accra Technical University students, brought to you by Omar Sulley Bin (Officer Moyole), SRC Part-Time Representative.">
-<meta property="og:url" content="https://atupqhub.netlify.app/">
-<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:description" content="Download free ATU past examination questions by faculty, department, level and year. Built for Accra Technical University students, brought to you by Omar Sulley Bin (Officer Moyole), SRC Part Time Representative.">
+<meta property="og:url" content="https://atu-pasqo-hub.vercel.app/">
+<meta property="og:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <meta property="og:site_name" content="ATU PQ Hub">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ATU PQ Hub | Free Past Questions for Accra Technical University">
-<meta name="twitter:description" content="Download free ATU past examination questions by faculty, department, level and year. Built for Accra Technical University students, brought to you by Omar Sulley Bin (Officer Moyole), SRC Part-Time Representative.">
-<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta name="twitter:description" content="Download free ATU past examination questions by faculty, department, level and year. Built for Accra Technical University students, brought to you by Omar Sulley Bin (Officer Moyole), SRC Part Time Representative.">
+<meta name="twitter:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -329,6 +329,9 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 <link rel="preload" as="image" href="images/src-logo.png">
 <link rel="preload" as="image" href="images/moyole-logo.jpg">
 <link rel="stylesheet" href="css/carousel.css">
+<link rel="stylesheet" href="css/chatbot.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/pq-hub.js"></script>
 </head>
 <body>
 
@@ -348,7 +351,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     </div>
   </div>
   <div class="loader-vote">ATU <span>PQ Hub</span></div>
-  <p class="loader-brief">Free past questions for every ATU student — brought to you by Omar Sulley Bin.</p>
+  <p class="loader-brief">Free past questions for every ATU student: brought to you by Omar Sulley Bin.</p>
   <div class="loader-bar"><div class="loader-bar-fill"></div></div>
   <div class="loader-dots"><div class="loader-dot"></div><div class="loader-dot"></div><div class="loader-dot"></div></div>
 </div>
@@ -362,7 +365,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     </div>
     <div class="moyole-popup-body">
       <h3>Welcome to <span>ATU PQ Hub</span></h3>
-      <p>Free past questions for every ATU student — brought to you by Omar Sulley Bin, SRC Part-Time Representative.</p>
+      <p>Free past questions for every ATU student: brought to you by Omar Sulley Bin, SRC Part Time Representative.</p>
       <a href="past-questions.html" class="btn btn-primary">📚 Browse Past Questions</a>
     </div>
   </div>
@@ -396,7 +399,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 
 <!-- ===== HERO SWIPER ===== -->
 <section id="hero">
-  <!-- Background slides — images set via JavaScript below -->
+  <!-- Background slides: images set via JavaScript below -->
   <div class="hero-slides" id="heroSlides">
     <div class="hero-slide active"></div>
     <div class="hero-slide"></div>
@@ -414,13 +417,13 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   <div class="hero-content-layer">
     <!-- Left: Text -->
     <div class="hero-text">
-      <div class="hero-badge"><span class="hero-badge-dot"></span> Brought to you by Omar Sulley Bin, SRC Part-Time Representative</div>
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Brought to you by Omar Sulley Bin, SRC Part Time Representative</div>
       <h1 class="hero-title">ATU <span>PQ Hub</span></h1>
       <p class="hero-subtitle">Every ATU past question, in one place</p>
       <div class="hero-tags">
         <span class="hero-tag">2 Solid</span>
       </div>
-      <p class="hero-desc">Your one-stop academic resource platform for Accra Technical University. Search, filter, and download past exam questions from every faculty and department.</p>
+      <p class="hero-desc">Your one stop academic resource platform for Accra Technical University. Search, filter, and download past exam questions from every faculty and department.</p>
       <div class="hero-buttons">
         <a href="past-questions.html" class="btn btn-primary">📚 Browse Past Questions</a>
         <a href="signup.html" class="btn btn-outline">🎓 Create Free Account</a>
@@ -458,7 +461,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     <div class="reveal" style="margin-bottom:36px">
       <span class="section-label">Our Campus</span>
       <h2 class="section-title" style="color:var(--white)">ATU Campus <span style="color:var(--gold)">Life</span></h2>
-      <p class="section-desc">A glimpse into the vibrant Accra Technical University campus — where learning, creativity, and community come together.</p>
+      <p class="section-desc">A glimpse into the vibrant Accra Technical University campus: where learning, creativity, and community come together.</p>
     </div>
 
     <!-- Main large grid -->
@@ -559,9 +562,9 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <p class="section-desc">The most accessed past questions this week across all departments.</p>
     </div>
     <div class="trending-grid">
-      <div class="pq-card reveal"><div class="pq-card-header"><span class="pq-badge">Engineering</span><span class="pq-year">2023</span></div><div class="pq-title">Engineering Mathematics I – Final Exam</div><div class="pq-meta"><span class="pq-meta-tag">📂 Level 100</span><span class="pq-meta-tag">🏫 HND</span></div><div class="pq-footer"><span class="pq-downloads">↓ 234 downloads</span><a href="pdfs/example.pdf" download class="btn-download">Download</a></div></div>
-      <div class="pq-card reveal" style="transition-delay:0.1s"><div class="pq-card-header"><span class="pq-badge">Computing</span><span class="pq-year">2023</span></div><div class="pq-title">Introduction to Programming – Midterm</div><div class="pq-meta"><span class="pq-meta-tag">📂 Level 100</span><span class="pq-meta-tag">🏫 BTech</span></div><div class="pq-footer"><span class="pq-downloads">↓ 189 downloads</span><a href="pdfs/example.pdf" download class="btn-download">Download</a></div></div>
-      <div class="pq-card reveal" style="transition-delay:0.2s"><div class="pq-card-header"><span class="pq-badge">Business</span><span class="pq-year">2022</span></div><div class="pq-title">Principles of Accounting – Final</div><div class="pq-meta"><span class="pq-meta-tag">📂 Level 200</span><span class="pq-meta-tag">🏫 HND</span></div><div class="pq-footer"><span class="pq-downloads">↓ 176 downloads</span><a href="pdfs/example.pdf" download class="btn-download">Download</a></div></div>
+      <div class="pq-card reveal"><div class="pq-card-header"><span class="pq-badge">Engineering</span><span class="pq-year">2023</span></div><div class="pq-title">Engineering Mathematics I: Final Exam</div><div class="pq-meta"><span class="pq-meta-tag">📂 Level 100</span><span class="pq-meta-tag">🏫 HND</span></div><div class="pq-footer"><span class="pq-downloads">↓ 234 downloads</span><a href="pdfs/example.pdf" download class="btn-download">Download</a></div></div>
+      <div class="pq-card reveal" style="transition-delay:0.1s"><div class="pq-card-header"><span class="pq-badge">Computing</span><span class="pq-year">2023</span></div><div class="pq-title">Introduction to Programming: Midterm</div><div class="pq-meta"><span class="pq-meta-tag">📂 Level 100</span><span class="pq-meta-tag">🏫 BTech</span></div><div class="pq-footer"><span class="pq-downloads">↓ 189 downloads</span><a href="pdfs/example.pdf" download class="btn-download">Download</a></div></div>
+      <div class="pq-card reveal" style="transition-delay:0.2s"><div class="pq-card-header"><span class="pq-badge">Business</span><span class="pq-year">2022</span></div><div class="pq-title">Principles of Accounting: Final</div><div class="pq-meta"><span class="pq-meta-tag">📂 Level 200</span><span class="pq-meta-tag">🏫 HND</span></div><div class="pq-footer"><span class="pq-downloads">↓ 176 downloads</span><a href="pdfs/example.pdf" download class="btn-download">Download</a></div></div>
     </div>
     <div style="text-align:center;margin-top:36px"><a href="past-questions.html" class="btn btn-primary">Browse All Past Questions →</a></div>
   </div>
@@ -588,7 +591,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <div class="reveal" style="transition-delay:0.2s">
         <span class="section-label">Backed By</span>
         <h2 class="section-title">Who is <span>Moyole</span>?</h2>
-        <p style="color:var(--gray);line-height:1.8;margin-bottom:24px;font-size:0.9rem">Omar Sulley Bin serves as a Part-Time Representative with the ATU SRC, with a track record of advocating for student welfare and academic access. This platform is part of that work — making sure every ATU student can find the past questions they need, free of charge.</p>
+        <p style="color:var(--gray);line-height:1.8;margin-bottom:24px;font-size:0.9rem">Omar Sulley Bin serves as a Part Time Representative with the ATU SRC, with a track record of advocating for student welfare and academic access. This platform is part of that work: making sure every ATU student can find the past questions they need, free of charge.</p>
         <div class="about-features">
           <div class="about-feature"><div class="about-feature-icon">🎓</div><div class="about-feature-text"><strong>Academic Access</strong><span>Making past questions and study materials easy to find for every ATU student.</span></div></div>
           <div class="about-feature"><div class="about-feature-icon">📢</div><div class="about-feature-text"><strong>Students' Voice</strong><span>Advocating for student needs within the SRC.</span></div></div>
@@ -596,7 +599,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <a href="about.html" class="btn btn-primary">Read More</a>
-          <a href="https://wa.me/233245607110" target="_blank" class="btn" style="background:transparent;color:var(--dark);border:2px solid rgba(0,0,0,0.15)">📲 Contact Moyole</a>
+          <a href="https://wa.me/233554196068" target="_blank" class="btn" style="background:transparent;color:var(--dark);border:2px solid rgba(0,0,0,0.15)">📲 Contact Moyole</a>
         </div>
       </div>
     </div>
@@ -630,7 +633,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   <div class="cta-inner reveal">
     <span class="section-label" style="background:rgba(37,99,235,0.15);color:var(--gold)">Get Started</span>
     <h2 class="cta-title">Never Search <span>Blindly</span> for a Past Question <span>Again</span>.</h2>
-    <p class="cta-desc">Create your free account and get instant access to every past question ATU PQ Hub has — organised by faculty, department, level and year.</p>
+    <p class="cta-desc">Create your free account and get instant access to every past question ATU PQ Hub has: organised by faculty, department, level and year.</p>
     <div class="cta-buttons">
       <a href="signup.html" class="btn btn-gold">🎓 Create Free Account</a>
       <a href="past-questions.html" class="btn btn-white">📚 Browse Past Questions</a>
@@ -672,12 +675,12 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     <div class="footer-grid">
       <div class="footer-brand footer-col">
         <div class="footer-logo">ATU <span>PQ Hub</span></div>
-        <p>Your premier academic resource platform for Accra Technical University students. Access thousands of past questions and study materials — all free.</p>
-        <div class="footer-campaign-badge">🎓 Brought to you by Omar Sulley Bin, SRC Part-Time Representative</div>
+        <p>Your premier academic resource platform for Accra Technical University students. Access thousands of past questions and study materials: all free.</p>
+        <div class="footer-campaign-badge">🎓 Brought to you by Omar Sulley Bin, SRC Part Time Representative</div>
         <div class="footer-social" style="margin-top:16px">
           
           
-          <a href="https://wa.me/233245607110" target="_blank" class="social-btn">💬</a>
+          <a href="https://wa.me/233554196068" target="_blank" class="social-btn">💬</a>
         </div>
       </div>
       <div class="footer-col">
@@ -698,8 +701,8 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <div class="footer-contact-item"><div class="footer-contact-icon">📞</div><div><a href="tel:+233245607110">024 560 7110</a><br><a href="tel:+233245607110">024 560 7110</a></div></div>
-        <div class="footer-contact-item"><div class="footer-contact-icon">💬</div><div><a href="https://wa.me/233245607110" target="_blank">WhatsApp Moyole</a></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon">📞</div><div><a href="tel:+233554196068">055 419 6068</a><br><a href="tel:+233554196068">055 419 6068</a></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon">💬</div><div><a href="https://wa.me/233554196068" target="_blank">WhatsApp Moyole</a></div></div>
         <div class="footer-contact-item"><div class="footer-contact-icon">📸</div><div></div></div>
         <div class="footer-contact-item"><div class="footer-contact-icon">🎵</div><div></div></div>
       </div>
@@ -712,7 +715,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
           </div>
           <div class="dev-info"><strong>Ibrahim M. Lotsu</strong><span>Ibratech 🛠️</span></div>
         </div>
-        <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin-top:12px;line-height:1.6">Designed and developed by Ibratech — digital solutions for Ghana's future leaders.</p>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin-top:12px;line-height:1.6">Designed and developed by Ibratech: digital solutions for Ghana's future leaders.</p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -727,10 +730,19 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 <div id="chatbot">
   <div class="chatbot-bubble" id="chatbotBubble">
     <div class="chatbot-head"><strong>👋 Hi! How can I help?</strong><span>ATU PQ Hub Assistant</span></div>
-    <div class="chatbot-options">
-      <button class="chatbot-option" onclick="window.location='past-questions.html'"><div class="chatbot-option-icon">📚</div>Find Past Questions</button>
-      <button class="chatbot-option" onclick="window.open('https://wa.me/233245607110','_blank')"><div class="chatbot-option-icon">💬</div>Contact Moyole</button>
-      
+    <div class="chatbot-messages" id="chatbotMessages"></div>
+    <div class="chatbot-options" id="chatbotOptions">
+      <button class="chatbot-option" onclick="pqhubChatOption('past-questions')"><div class="chatbot-option-icon">📚</div>Find Past Questions</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('faculties')"><div class="chatbot-option-icon">🏛️</div>Browse Faculties</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('signup')"><div class="chatbot-option-icon">🎓</div>How to Sign Up</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('download')"><div class="chatbot-option-icon">⬇️</div>How to Download</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('request')"><div class="chatbot-option-icon">📲</div>Request a Past Question</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('about')"><div class="chatbot-option-icon">ℹ️</div>About This Platform</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('contact')"><div class="chatbot-option-icon">💬</div>Get Help</button>
+    </div>
+    <div class="chatbot-input-row">
+      <input type="text" id="chatbotInput" placeholder="Type your question..." onkeydown="pqhubChatKeydown(event)">
+      <button id="chatbotSend" onclick="pqhubChatSend()">➤</button>
     </div>
     <div class="chatbot-footer">Powered by ATU PQ Hub</div>
   </div>
@@ -738,7 +750,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 </div>
 
 <script>
-// PAGE LOADER — exactly 3 seconds
+// PAGE LOADER: exactly 3 seconds
 window.addEventListener('load', function() {
   setTimeout(function() {
     const l = document.getElementById('page-loader');
@@ -747,7 +759,7 @@ window.addEventListener('load', function() {
   }, 1800);
 });
 
-// MOYOLE WELCOME POPUP — shows once per visit (per browser tab session)
+// MOYOLE WELCOME POPUP: shows once per visit (per browser tab session)
 function showMoyolePopupOnce() {
   if (sessionStorage.getItem('moyolePopupShown')) return;
   document.getElementById('moyole-popup-overlay').classList.add('show');
@@ -816,11 +828,6 @@ document.getElementById('hero').addEventListener('touchend', e => {
 }, { passive: true });
 
 // CHATBOT
-function toggleChatbot() {
-  const b = document.getElementById('chatbotBubble'), t = document.getElementById('chatbotToggle');
-  t.textContent = b.classList.toggle('open') ? '✕' : '💬';
-}
-
 // TESTIMONIAL SLIDER
 let tIdx = 0;
 const tSlides = document.querySelectorAll('.testimonial-card');
@@ -841,5 +848,6 @@ const ro = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 </script>
 <script src="js/carousel.js"></script>
+<script src="js/chatbot.js"></script>
 </body>
 </html>

@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Browse Past Questions | ATU PQ Hub</title>
-<meta name="description" content="Search and download Accra Technical University past examination questions by faculty, department, level and year — completely free.">
+<meta name="description" content="Search and download Accra Technical University past examination questions by faculty, department, level and year: completely free.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://atupqhub.netlify.app/past-questions.html">
+<link rel="canonical" href="https://atu-pasqo-hub.vercel.app/past-questions.html">
 <meta name="theme-color" content="#14315D">
 <link rel="icon" type="image/png" href="images/atu-logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Browse Past Questions | ATU PQ Hub">
-<meta property="og:description" content="Search and download Accra Technical University past examination questions by faculty, department, level and year — completely free.">
-<meta property="og:url" content="https://atupqhub.netlify.app/past-questions.html">
-<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:description" content="Search and download Accra Technical University past examination questions by faculty, department, level and year: completely free.">
+<meta property="og:url" content="https://atu-pasqo-hub.vercel.app/past-questions.html">
+<meta property="og:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <meta property="og:site_name" content="ATU PQ Hub">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Browse Past Questions | ATU PQ Hub">
-<meta name="twitter:description" content="Search and download Accra Technical University past examination questions by faculty, department, level and year — completely free.">
-<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta name="twitter:description" content="Search and download Accra Technical University past examination questions by faculty, department, level and year: completely free.">
+<meta name="twitter:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -52,7 +52,7 @@
 .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);color:var(--white);letter-spacing:2px;line-height:1;margin-bottom:12px}.page-title span{color:var(--gold)}
 .page-desc{color:rgba(255,255,255,0.75);max-width:600px;line-height:1.7}
 
-/* AUTH BANNER — shown when user is not logged in */
+/* AUTH BANNER: shown when user is not logged in */
 #auth-banner{background:linear-gradient(135deg,#7c2d12,var(--blue));padding:14px 24px;text-align:center;position:sticky;top:70px;z-index:101;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
 #auth-banner p{color:var(--white);font-size:0.85rem;font-weight:500}
 #auth-banner p span{color:var(--gold);font-weight:700}
@@ -116,7 +116,7 @@
 .pq-footer{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--gray-light)}
 .pq-downloads{font-size:0.7rem;color:var(--gray);font-weight:500}
 
-/* Download button — two states */
+/* Download button: two states */
 .btn-download{padding:8px 16px;border-radius:var(--radius-sm);font-size:0.78rem;font-weight:700;transition:var(--transition);border:none;cursor:pointer;font-family:'Poppins',sans-serif;display:inline-flex;align-items:center;gap:6px}
 .btn-download.logged-in{background:var(--blue);color:var(--white)}.btn-download.logged-in:hover{background:var(--blue-dark);transform:translateY(-1px)}
 .btn-download.locked{background:rgba(107,114,128,0.1);color:var(--gray);cursor:pointer}.btn-download.locked:hover{background:rgba(23,70,162,0.1);color:var(--blue)}
@@ -182,6 +182,7 @@
 @media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.footer-grid{grid-template-columns:1fr}.pq-grid{grid-template-columns:1fr}.request-box{grid-template-columns:1fr;text-align:center}}
 </style>
 <link rel="stylesheet" href="css/carousel.css">
+<link rel="stylesheet" href="css/chatbot.css">
 </head>
 <body>
 
@@ -239,9 +240,9 @@
   </ul>
 </div>
 
-<!-- AUTH BANNER — shown when not logged in -->
+<!-- AUTH BANNER: shown when not logged in -->
 <div id="auth-banner">
-  <p>🔒 <span>Login required</span> to download past questions — it's completely free!</p>
+  <p>🔒 <span>Login required</span> to download past questions: it's completely free!</p>
   <button class="btn-banner-login" onclick="window.location.href='login.html'">Sign In</button>
   <button class="btn-banner-login" style="background:var(--gold);color:var(--dark)" onclick="window.location.href='signup.html'">Create Free Account</button>
 </div>
@@ -250,7 +251,7 @@
   <div class="page-hero-inner">
     <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span style="color:var(--white)">Past Questions</span></div>
     <h1 class="page-title">Past <span>Questions</span></h1>
-    <p class="page-desc">Access hundreds of past exam questions from all ATU faculties and departments. Log in to download — it's free and takes 30 seconds to sign up.</p>
+    <p class="page-desc">Access hundreds of past exam questions from all ATU faculties and departments. Log in to download: it's free and takes 30 seconds to sign up.</p>
   </div>
 </div>
 
@@ -322,7 +323,7 @@
     <div class="icon">😕</div>
     <h3>No past questions found</h3>
     <p>Try different search terms or filters, or request the specific past question below.</p>
-    <a href="https://wa.me/233245607110?text=Hi%20Moyole%2C%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-request" style="display:inline-flex;margin-top:4px">📲 Request on WhatsApp</a>
+    <a href="https://wa.me/233554196068?text=Hi%20Moyole%2C%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-request" style="display:inline-flex;margin-top:4px">📲 Request on WhatsApp</a>
   </div>
 </div>
 
@@ -331,9 +332,9 @@
   <div class="request-box">
     <div>
       <h3>Can't Find Your Past Question?</h3>
-      <p>Message Moyole on WhatsApp with your course, faculty, level and year — we'll upload it within 24 hours!</p>
+      <p>Message Moyole on WhatsApp with your course, faculty, level and year: we'll upload it within 24 hours!</p>
     </div>
-    <a href="https://wa.me/233245607110?text=Hi%20Moyole%2C%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-request">📲 Request on WhatsApp</a>
+    <a href="https://wa.me/233554196068?text=Hi%20Moyole%2C%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-request">📲 Request on WhatsApp</a>
   </div>
 </div>
 
@@ -376,8 +377,8 @@
       <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="faculties.html">Faculties</a></li><li><a href="past-questions.html">Past Questions</a></li><li><a href="about.html">About</a></li></ul></div>
       <div class="footer-col"><h4>Resources</h4><ul><li><a href="mission.html">Mission</a></li><li><a href="vision.html">Vision</a></li><li><a href="contact.html">Contact</a></li><li><a href="login.html">Login</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li></ul></div>
       <div class="footer-col"><h4>Contact</h4>
-        <div class="footer-contact-item">📞 <a href="tel:+233245607110">024 560 7110</a></div>
-        <div class="footer-contact-item">💬 <a href="https://wa.me/233245607110" target="_blank">WhatsApp</a></div>
+        <div class="footer-contact-item">📞 <a href="tel:+233554196068">055 419 6068</a></div>
+        <div class="footer-contact-item">💬 <a href="https://wa.me/233554196068" target="_blank">WhatsApp</a></div>
         
       </div>
       <div class="footer-col"><h4>Developer</h4>
@@ -394,11 +395,20 @@
 <!-- CHATBOT -->
 <div id="chatbot">
   <div class="chatbot-bubble" id="chatbotBubble">
-    <div class="chatbot-head"><strong>👋 Hi! How can I help?</strong><span>ATU PQ Hub</span></div>
-    <div class="chatbot-options">
-      <button class="chatbot-option" onclick="document.getElementById('searchInput').focus()"><div class="chatbot-option-icon">🔍</div>Search Past Questions</button>
-      <button class="chatbot-option" onclick="window.open('https://wa.me/233245607110','_blank')"><div class="chatbot-option-icon">💬</div>Contact Moyole</button>
-      
+    <div class="chatbot-head"><strong>👋 Hi! How can I help?</strong><span>ATU PQ Hub Assistant</span></div>
+    <div class="chatbot-messages" id="chatbotMessages"></div>
+    <div class="chatbot-options" id="chatbotOptions">
+      <button class="chatbot-option" onclick="pqhubChatOption('past-questions')"><div class="chatbot-option-icon">📚</div>Find Past Questions</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('faculties')"><div class="chatbot-option-icon">🏛️</div>Browse Faculties</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('signup')"><div class="chatbot-option-icon">🎓</div>How to Sign Up</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('download')"><div class="chatbot-option-icon">⬇️</div>How to Download</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('request')"><div class="chatbot-option-icon">📲</div>Request a Past Question</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('about')"><div class="chatbot-option-icon">ℹ️</div>About This Platform</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('contact')"><div class="chatbot-option-icon">💬</div>Get Help</button>
+    </div>
+    <div class="chatbot-input-row">
+      <input type="text" id="chatbotInput" placeholder="Type your question..." onkeydown="pqhubChatKeydown(event)">
+      <button id="chatbotSend" onclick="pqhubChatSend()">➤</button>
     </div>
     <div class="chatbot-footer">Powered by ATU PQ Hub</div>
   </div>
@@ -415,7 +425,7 @@ let filtered = [];       // Currently visible questions
 let currentTab = 'all';
 
 // ============================================================
-//  INIT — runs on page load
+//  INIT: runs on page load
 // ============================================================
 window.addEventListener('DOMContentLoaded', async function() {
   await checkAuth();   // 1. Check if user is logged in
@@ -427,7 +437,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 // ============================================================
 async function checkAuth() {
   if (!sb) {
-    // Supabase not yet configured — show demo mode
+    // Supabase not yet configured: show demo mode
     showDemoMode();
     return;
   }
@@ -447,7 +457,7 @@ async function checkAuth() {
       // Search section doesn't need top adjustment
       document.getElementById('searchSection').classList.remove('with-banner');
     } else {
-      // Not logged in — show banner, adjust sticky positions
+      // Not logged in: show banner, adjust sticky positions
       document.getElementById('searchSection').classList.add('with-banner');
     }
   } catch(e) {}
@@ -458,7 +468,7 @@ async function checkAuth() {
 // ============================================================
 async function loadPQs() {
   if (!sb) {
-    // Supabase not configured — show demo/sample cards
+    // Supabase not configured: show demo/sample cards
     loadDemoCards();
     return;
   }
@@ -475,7 +485,7 @@ async function loadPQs() {
     if (error) { console.error(error); loadDemoCards(); return; }
 
     if (!data || data.length === 0) {
-      // No questions in DB yet — show demo cards as placeholder
+      // No questions in DB yet: show demo cards as placeholder
       loadDemoCards();
       return;
     }
@@ -524,7 +534,7 @@ function renderCards(questions) {
       <div class="pq-card-header">
         <span class="pq-badge">${escHtml(pq.faculty || 'General')}</span>
         ${isNew ? '<span class="pq-badge new">🆕 New</span>' : ''}
-        <span class="pq-year">${pq.year || '—'}</span>
+        <span class="pq-year">${pq.year || ': '}</span>
       </div>
       <div class="pq-title">${escHtml(pq.title || 'Untitled')}</div>
       <div class="pq-meta">
@@ -551,12 +561,12 @@ let pqIndex = {};
 function buildDownloadBtn(pq) {
   pqIndex[pq.id] = pq;
   if (currentUser && pq.file_url) {
-    // Logged in — forces a real file download straight to their device
+    // Logged in: forces a real file download straight to their device
     return `<button class="btn-download logged-in" onclick="handlePQDownload(${pq.id})" id="dlbtn-${pq.id}">
                ⬇️ Download
             </button>`;
   } else if (!currentUser) {
-    // Not logged in — show lock button that opens modal
+    // Not logged in: show lock button that opens modal
     return `<button class="btn-download locked" onclick="openLoginModal()">
                🔒 Login to Download
             </button>`;
@@ -608,12 +618,12 @@ function escHtml(str) {
 function loadDemoCards() {
   removeSkeletons();
   const demo = [
-    { id:1, title:'Engineering Mathematics I – Final Exam', faculty:'Faculty of Engineering', department:'Civil Engineering', level:'Level 100', year:2023, downloads:234, file_url:'pdfs/example.pdf', created_at: new Date().toISOString() },
-    { id:2, title:'Introduction to Programming – Midterm', faculty:'Faculty of Applied Sciences', department:'Computer Science', level:'Level 100', year:2023, downloads:189, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-3*86400000).toISOString() },
-    { id:3, title:'Principles of Accounting – Final Exam', faculty:'Faculty of Business', department:'Accountancy and Finance', level:'HND 100', year:2022, downloads:176, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-10*86400000).toISOString() },
-    { id:4, title:'Building Construction Technology – Midterm', faculty:'Faculty of Built Environment', department:'Building Technology', level:'Level 200', year:2023, downloads:143, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-2*86400000).toISOString() },
-    { id:5, title:'Database Management Systems – Final', faculty:'Faculty of Applied Sciences', department:'Computer Science', level:'Level 200', year:2022, downloads:167, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-1*86400000).toISOString() },
-    { id:6, title:'Fashion Design Principles and Theory – Final', faculty:'Faculty of Applied Arts', department:'Fashion Design & Textiles', level:'Level 100', year:2022, downloads:76, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-5*86400000).toISOString() },
+    { id:1, title:'Engineering Mathematics I: Final Exam', faculty:'Faculty of Engineering', department:'Civil Engineering', level:'Level 100', year:2023, downloads:234, file_url:'pdfs/example.pdf', created_at: new Date().toISOString() },
+    { id:2, title:'Introduction to Programming: Midterm', faculty:'Faculty of Applied Sciences', department:'Computer Science', level:'Level 100', year:2023, downloads:189, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-3*86400000).toISOString() },
+    { id:3, title:'Principles of Accounting: Final Exam', faculty:'Faculty of Business', department:'Accountancy and Finance', level:'HND 100', year:2022, downloads:176, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-10*86400000).toISOString() },
+    { id:4, title:'Building Construction Technology: Midterm', faculty:'Faculty of Built Environment', department:'Building Technology', level:'Level 200', year:2023, downloads:143, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-2*86400000).toISOString() },
+    { id:5, title:'Database Management Systems: Final', faculty:'Faculty of Applied Sciences', department:'Computer Science', level:'Level 200', year:2022, downloads:167, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-1*86400000).toISOString() },
+    { id:6, title:'Fashion Design Principles and Theory: Final', faculty:'Faculty of Applied Arts', department:'Fashion Design & Textiles', level:'Level 100', year:2022, downloads:76, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-5*86400000).toISOString() },
   ];
   allQuestions = demo;
   filtered = [...demo];
@@ -624,7 +634,7 @@ function showDemoMode() {
   // Small notice that Supabase isn't configured
   const banner = document.getElementById('auth-banner');
   banner.style.background = 'linear-gradient(135deg,#1a1a2e,#2d1b4e)';
-  banner.innerHTML = `<p>⚙️ <span>Demo Mode</span> — Add Supabase credentials to enable real login & live uploads</p>
+  banner.innerHTML = `<p>⚙️ <span>Demo Mode</span>: Add Supabase credentials to enable real login & live uploads</p>
     <button class="btn-banner-login" onclick="window.location.href='SETUP.html'">View Setup Guide</button>`;
 }
 
@@ -734,12 +744,9 @@ document.addEventListener('click', e => {
     m.classList.remove('open'); h.classList.remove('open');
   }
 });
-function toggleChatbot() {
-  const b = document.getElementById('chatbotBubble'), t = document.getElementById('chatbotToggle');
-  t.textContent = b.classList.toggle('open') ? '✕' : '💬';
-}
 </script>
 <script src="js/carousel.js"></script>
+<script src="js/chatbot.js"></script>
 </body>
 </html>
  

@@ -5,8 +5,8 @@
 //  Supabase project — everything else can stay as-is.
 // ============================================================
 
-const SUPABASE_URL      = 'https://psrbdvhszemudyckkbag.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBzcmJkdmhzemVtdWR5Y2trYmFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2NDk4NzMsImV4cCI6MjA5MjIyNTg3M30.xG0L9n-ZO5goMU0uHf3R41jj_pYFr74cZ41zQHyYuhg';
+const SUPABASE_URL      = 'https://iwroiojwbyieryjhlkuz.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3cm9pb2p3YnlpZXJ5amhsa3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5Njk4OTksImV4cCI6MjEwNTU0NTg5OX0.bcFql2DwhrPd_DlV43MzBKtENL24FkEkP1jPhhvAHaU';
 
 // Domain used to turn a Student ID into a Supabase Auth email.
 // Supabase Auth always needs *an* email under the hood — students

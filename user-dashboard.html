@@ -6,19 +6,19 @@
 <title>My Dashboard | ATU PQ Hub</title>
 <meta name="description" content="Your personal ATU PQ Hub dashboard.">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://atupqhub.netlify.app/user-dashboard.html">
+<link rel="canonical" href="https://atu-pasqo-hub.vercel.app/user-dashboard.html">
 <meta name="theme-color" content="#14315D">
 <link rel="icon" type="image/png" href="images/atu-logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="My Dashboard | ATU PQ Hub">
 <meta property="og:description" content="Your personal ATU PQ Hub dashboard.">
-<meta property="og:url" content="https://atupqhub.netlify.app/user-dashboard.html">
-<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:url" content="https://atu-pasqo-hub.vercel.app/user-dashboard.html">
+<meta property="og:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <meta property="og:site_name" content="ATU PQ Hub">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="My Dashboard | ATU PQ Hub">
 <meta name="twitter:description" content="Your personal ATU PQ Hub dashboard.">
-<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta name="twitter:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/pq-hub.js"></script>
@@ -61,7 +61,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
 .section-header h1{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--dark);letter-spacing:1px}
 .section-header p{color:var(--gray);font-size:0.85rem;margin-top:4px}
 
-/* AUTH GATE — shown when not logged in */
+/* AUTH GATE: shown when not logged in */
 #auth-gate{display:none;min-height:60vh;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:20px;padding:40px}
 #auth-gate.show{display:flex}
 .auth-gate-icon{font-size:4rem}
@@ -72,7 +72,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
 .btn-big.red{background:var(--blue);color:var(--white)}.btn-big.red:hover{background:var(--blue-dark);transform:translateY(-2px)}
 .btn-big.outline{background:transparent;color:var(--dark);border:2px solid rgba(0,0,0,0.15)}.btn-big.outline:hover{border-color:var(--blue);color:var(--blue)}
 
-/* DASHBOARD CONTENT — hidden until logged in */
+/* DASHBOARD CONTENT: hidden until logged in */
 #dash-content{display:none}
 #dash-content.show{display:block}
 
@@ -189,7 +189,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
         <div class="user-avatar" id="sidebarAvatar">?</div>
         <div class="user-name-wrap">
           <strong id="sidebarName">Loading...</strong>
-          <span id="sidebarStudentId">—</span>
+          <span id="sidebarStudentId">: </span>
         </div>
       </div>
       <button class="btn-logout" onclick="handleLogout()">← Sign Out</button>
@@ -228,7 +228,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
           </div>
           <div class="welcome-actions">
             <button class="btn-wh gold" onclick="window.location.href='past-questions.html'">📚 Browse Past Questions</button>
-            <a href="https://wa.me/233245607110?text=Hi+Moyole!" target="_blank"><button class="btn-wh outline">💬 Contact Moyole</button></a>
+            <a href="https://wa.me/233554196068?text=Hi+Moyole!" target="_blank"><button class="btn-wh outline">💬 Contact Moyole</button></a>
           </div>
         </div>
 
@@ -311,7 +311,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
             <div class="profile-form">
               <div class="form-group">
                 <label class="form-label">What do you need?</label>
-                <textarea class="form-textarea" id="requestMessage" placeholder="e.g. Engineering Mathematics I, Level 100, 2023 — I can't find it in the search."></textarea>
+                <textarea class="form-textarea" id="requestMessage" placeholder="e.g. Engineering Mathematics I, Level 100, 2023: I can't find it in the search."></textarea>
               </div>
               <button class="btn-save" onclick="submitNewRequest()">📨 Send Request</button>
               <div class="alert success" id="requestSuccess">✅ Your request has been sent!</div>
@@ -401,7 +401,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
 
 <script>
 // ============================================================
-//  INIT — Supabase client (sb) + auth helpers come from js/pq-hub.js
+//  INIT: Supabase client (sb) + auth helpers come from js/pq-hub.js
 // ============================================================
 window.addEventListener('DOMContentLoaded', async function() {
   pqhubFillFacultySelect(document.getElementById('profileFaculty'));
@@ -409,7 +409,7 @@ window.addEventListener('DOMContentLoaded', async function() {
   pqhubLinkFacultyToDepartment(document.getElementById('profileFaculty'), document.getElementById('profileDepartment'));
 
   if (!sb) {
-    // Demo mode — Supabase not configured yet
+    // Demo mode: Supabase not configured yet
     showDashboard({ id: null, user_metadata: { full_name: 'Demo Student', student_id: '01234567B' } });
     return;
   }
@@ -426,7 +426,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 
 function showDashboard(user) {
   const name = user.user_metadata?.full_name || 'Student';
-  const studentId = user.user_metadata?.student_id || '—';
+  const studentId = user.user_metadata?.student_id || ': ';
   const initial = name.charAt(0).toUpperCase();
 
   document.getElementById('auth-gate').style.display = 'none';

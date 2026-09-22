@@ -6,19 +6,19 @@
 <title>Sign In | ATU PQ Hub</title>
 <meta name="description" content="Log in to your ATU PQ Hub account with your Student ID.">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://atupqhub.netlify.app/login.html">
+<link rel="canonical" href="https://atu-pasqo-hub.vercel.app/login.html">
 <meta name="theme-color" content="#14315D">
 <link rel="icon" type="image/png" href="images/atu-logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Sign In | ATU PQ Hub">
 <meta property="og:description" content="Log in to your ATU PQ Hub account with your Student ID.">
-<meta property="og:url" content="https://atupqhub.netlify.app/login.html">
-<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:url" content="https://atu-pasqo-hub.vercel.app/login.html">
+<meta property="og:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <meta property="og:site_name" content="ATU PQ Hub">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Sign In | ATU PQ Hub">
 <meta name="twitter:description" content="Log in to your ATU PQ Hub account with your Student ID.">
-<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta name="twitter:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <!-- Supabase SDK - loaded from CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -84,7 +84,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <div class="auth-img-placeholder">📷 Moyole</div>
     </div>
     <h2>Welcome <span>Back!</span></h2>
-    <p>Sign in with your Student ID to access your dashboard, download history, and request past questions — brought to you by Omar Sulley Bin.</p>
+    <p>Sign in with your Student ID to access your dashboard, download history, and request past questions: brought to you by Omar Sulley Bin.</p>
     <div class="auth-tags">
       <span class="auth-tag">2 Solid</span>
     </div>
@@ -116,7 +116,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
         <button class="eye-toggle" onclick="togglePassword('loginPassword', this)" type="button">👁️</button>
       </div>
     </div>
-    <a href="https://wa.me/233245607110?text=Hi%2C+I+forgot+my+ATU+PQ+Hub+password.+My+Student+ID+is%3A+" target="_blank" class="forgot-link">Forgot password? Reset via WhatsApp</a>
+    <a href="https://wa.me/233554196068?text=Hi%2C+I+forgot+my+ATU+PQ+Hub+password.+My+Student+ID+is%3A+" target="_blank" class="forgot-link">Forgot password? Reset via WhatsApp</a>
 
     <button class="btn-auth" id="loginBtn" onclick="handleLogin()">
       <span id="loginBtnText">🔑 Sign In</span>
@@ -127,18 +127,13 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 
     <div class="auth-switch">Don't have an account? <a href="signup.html">Create Account →</a></div>
     <div class="auth-switch" style="margin-top:8px"><a href="past-questions.html">← Browse Past Questions without account</a></div>
-
-    <!-- Supabase Config Notice -->
-    <div style="margin-top:28px;padding:16px;background:rgba(37,99,235,0.08);border-radius:var(--radius-sm);border:1px solid rgba(37,99,235,0.2)">
-      <p style="font-size:0.75rem;color:var(--gray);line-height:1.6"><strong style="color:#b45309">⚙️ Developer Setup Required:</strong> Replace the Supabase URL/key in <code>js/pq-hub.js</code> with your own project's credentials. See the setup guide.</p>
-    </div>
   </div>
 </div>
 
 <script src="js/pq-hub.js"></script>
 <script>
 // =============================================
-// LOGIN FUNCTION — Student ID + Password
+// LOGIN FUNCTION: Student ID + Password
 // =============================================
 async function handleLogin() {
   const studentId = document.getElementById('loginStudentId').value.trim();
@@ -153,7 +148,7 @@ async function handleLogin() {
   }
 
   if (!sb) {
-    showAlert('error', '⚙️ Supabase is not configured yet. Please add your Supabase URL and key in js/pq-hub.js. See the developer setup notice below the form.');
+    showAlert('error', '⚙️ Supabase is not configured yet. Please add your Supabase URL and key in js/pq-hub.js.');
     return;
   }
 

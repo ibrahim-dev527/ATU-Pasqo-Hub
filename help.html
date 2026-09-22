@@ -6,19 +6,19 @@
 <title>Help Center | ATU PQ Hub</title>
 <meta name="description" content="Frequently asked questions and support for using ATU PQ Hub, the free past questions platform for Accra Technical University students.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://atupqhub.netlify.app/help.html">
+<link rel="canonical" href="https://atu-pasqo-hub.vercel.app/help.html">
 <meta name="theme-color" content="#14315D">
 <link rel="icon" type="image/png" href="images/atu-logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Help Center | ATU PQ Hub">
 <meta property="og:description" content="Frequently asked questions and support for using ATU PQ Hub, the free past questions platform for Accra Technical University students.">
-<meta property="og:url" content="https://atupqhub.netlify.app/help.html">
-<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:url" content="https://atu-pasqo-hub.vercel.app/help.html">
+<meta property="og:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <meta property="og:site_name" content="ATU PQ Hub">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Help Center | ATU PQ Hub">
 <meta name="twitter:description" content="Frequently asked questions and support for using ATU PQ Hub, the free past questions platform for Accra Technical University students.">
-<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta name="twitter:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--blue:#14315D;--blue-dark:#0A1B36;--gold:#D8A727;--blue-light:#2F5A96;--white:#FFFFFF;--off-white:#FFF8F8;--dark:#0F0F0F;--gray:#6B7280;--gray-light:#F9F9F9;--shadow:0 4px 24px rgba(23,70,162,0.15);--radius:16px;--radius-sm:8px;--transition:all 0.35s cubic-bezier(0.4,0,0.2,1)}
@@ -87,6 +87,9 @@
 @media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.footer-grid{grid-template-columns:1fr}.guides-grid{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="css/carousel.css">
+<link rel="stylesheet" href="css/chatbot.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/pq-hub.js"></script>
 </head>
 <body>
 <nav id="navbar">
@@ -109,8 +112,8 @@
 <section class="section">
   <div class="section-inner">
     <div class="reveal" style="text-align:center;margin-bottom:40px">
-      <span class="section-label">How-To Guides</span>
-      <h2 class="section-title">Step-by-Step <span>Guides</span></h2>
+      <span class="section-label">How To Guides</span>
+      <h2 class="section-title">Step by Step <span>Guides</span></h2>
     </div>
     <div class="guides-grid">
       <div class="guide-card reveal">
@@ -130,7 +133,7 @@
           <li class="guide-step"><span class="step-num">2</span>Type a course name or keyword in the search bar</li>
           <li class="guide-step"><span class="step-num">3</span>Use the Faculty dropdown to narrow by faculty</li>
           <li class="guide-step"><span class="step-num">4</span>Use Level and Year filters to refine further</li>
-          <li class="guide-step"><span class="step-num">5</span>Results update instantly — click Reset to clear filters</li>
+          <li class="guide-step"><span class="step-num">5</span>Results update instantly: click Reset to clear filters</li>
         </ol>
       </div>
       <div class="guide-card reveal" style="transition-delay:0.2s">
@@ -139,7 +142,7 @@
           <li class="guide-step"><span class="step-num">1</span>Click "Login / Signup" in the top navigation</li>
           <li class="guide-step"><span class="step-num">2</span>Click "Create Account" or go to signup.html</li>
           <li class="guide-step"><span class="step-num">3</span>Fill in your full name, ATU email, phone, and password</li>
-          <li class="guide-step"><span class="step-num">4</span>Click "Create Account" — you'll get a confirmation</li>
+          <li class="guide-step"><span class="step-num">4</span>Click "Create Account": you'll get a confirmation</li>
           <li class="guide-step"><span class="step-num">5</span>Log in and access your personalized dashboard</li>
         </ol>
       </div>
@@ -161,7 +164,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFAQ(this)">What if I can't find past questions for my course? <span class="faq-arrow">▼</span></div>
-        <div class="faq-answer"><div class="faq-answer-inner">If you can't find a specific past question, you can request it directly via WhatsApp. Message Moyole on 024 560 7110 or 024 560 7110 with your course name, faculty, department, level, and year — and we'll upload it within 24 hours!</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">If you can't find a specific past question, you can request it directly via WhatsApp. Message Moyole on 055 419 6068 or 055 419 6068 with your course name, faculty, department, level, and year: and we'll upload it within 24 hours!</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFAQ(this)">Can I contribute a past question I have? <span class="faq-arrow">▼</span></div>
@@ -169,11 +172,11 @@
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFAQ(this)">Are the past questions from all ATU faculties? <span class="faq-arrow">▼</span></div>
-        <div class="faq-answer"><div class="faq-answer-inner">Yes! We cover all 5 faculties at ATU: Engineering, Built Environment, Applied Sciences, Applied Arts, and Business — 16 departments in total, with more past questions added every week.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes! We cover all 5 faculties at ATU: Engineering, Built Environment, Applied Sciences, Applied Arts, and Business: 16 departments in total, with more past questions added every week.</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFAQ(this)">I forgot my password. How do I reset it? <span class="faq-arrow">▼</span></div>
-        <div class="faq-answer"><div class="faq-answer-inner">Go to the Login page and click "Forgot Password?" Enter your registered email address and you'll receive a password reset link. If you're still having trouble, contact us on WhatsApp at 024 560 7110 for direct assistance.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Go to the Login page and click "Forgot Password?" Enter your registered email address and you'll receive a password reset link. If you're still having trouble, contact us on WhatsApp at 055 419 6068 for direct assistance.</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFAQ(this)">Are the past questions authentic ATU exam papers? <span class="faq-arrow">▼</span></div>
@@ -181,7 +184,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFAQ(this)">Who is behind ATU PQ Hub? <span class="faq-arrow">▼</span></div>
-        <div class="faq-answer"><div class="faq-answer-inner">ATU PQ Hub is brought to you by Omar Sulley Bin, ATU SRC Part-Time Representative for 2026/2027, as part of his commitment to making academic resources easier to access for every student. The platform is here to stay for students, regardless of any office.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">ATU PQ Hub is brought to you by Omar Sulley Bin, ATU SRC Part Time Representative for 2026/2027, as part of his commitment to making academic resources easier to access for every student. The platform is here to stay for students, regardless of any office.</div></div>
       </div>
     </div>
 
@@ -191,16 +194,17 @@
       <h2 class="section-title">Contact <span>Support</span></h2>
     </div>
     <div class="support-grid reveal">
-      <div class="support-card"><span class="support-icon">💬</span><div class="support-title">WhatsApp Support</div><div class="support-desc">Get help instantly via WhatsApp. We typically respond within 1 hour during business hours.</div><a href="https://wa.me/233245607110?text=Hi%2C%20I%20need%20help%20with%20ATU%20PQ%20Hub" target="_blank" class="btn-support">Chat on WhatsApp</a></div>
-      <div class="support-card"><span class="support-icon">📲</span><div class="support-title">Request a Past Question</div><div class="support-desc">Can't find your course? Message us with the details and we'll upload it within 24 hours.</div><a href="https://wa.me/233245607110?text=Hi%2C%20please%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-support">Request Now</a></div>
-      <div class="support-card"><span class="support-icon">📞</span><div class="support-title">Call Directly</div><div class="support-desc">For urgent matters, call Moyole directly.</div><a href="tel:+233245607110" class="btn-support">024 560 7110</a></div>
+      <div class="support-card"><span class="support-icon">💬</span><div class="support-title">WhatsApp Support</div><div class="support-desc">Get help instantly via WhatsApp. We typically respond within 1 hour during business hours.</div><a href="https://wa.me/233554196068?text=Hi%2C%20I%20need%20help%20with%20ATU%20PQ%20Hub" target="_blank" class="btn-support">Chat on WhatsApp</a></div>
+      <div class="support-card"><span class="support-icon">📲</span><div class="support-title">Request a Past Question</div><div class="support-desc">Can't find your course? Message us with the details and we'll upload it within 24 hours.</div><a href="https://wa.me/233554196068?text=Hi%2C%20please%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-support">Request Now</a></div>
+      <div class="support-card"><span class="support-icon">📞</span><div class="support-title">Call Directly</div><div class="support-desc">For urgent matters, call the ATU PQ Hub team directly.</div><a href="tel:+233554196068" class="btn-support">055 419 6068</a></div>
+      <div class="support-card"><span class="support-icon">💬</span><div class="support-title">Alternate Contact</div><div class="support-desc">You can also reach Omar Sulley Bin (Officer Moyole) directly.</div><a href="https://wa.me/233245607110" target="_blank" class="btn-support">024 560 7110</a></div>
     </div>
 
     <!-- WA HELP BUTTON -->
     <div class="wa-help reveal">
       <h3>Still Need Help?</h3>
-      <p>Our WhatsApp support is always available. Message Moyole directly for any issue — whether it's a technical problem, a missing past question, or feedback about the platform.</p>
-      <a href="https://wa.me/233245607110?text=Hi%20Moyole%2C%20I%20need%20help%20with%20ATU%20PQ%20Hub.%20Here%27s%20my%20issue%3A%20" target="_blank" class="btn-wa">💬 Message on WhatsApp</a>
+      <p>Our WhatsApp support is always available. Message Moyole directly for any issue: whether it's a technical problem, a missing past question, or feedback about the platform.</p>
+      <a href="https://wa.me/233554196068?text=Hi%20Moyole%2C%20I%20need%20help%20with%20ATU%20PQ%20Hub.%20Here%27s%20my%20issue%3A%20" target="_blank" class="btn-wa">💬 Message on WhatsApp</a>
     </div>
   </div>
 </section>
@@ -229,12 +233,32 @@
   </div>
 </section>
 
-<footer id="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand footer-col"><div class="footer-logo">ATU <span>PQ Hub</span></div><p>Your premier academic resource platform for ATU students.</p></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="faculties.html">Faculties</a></li><li><a href="past-questions.html">Past Questions</a></li><li><a href="about.html">About</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="mission.html">Mission</a></li><li><a href="vision.html">Vision</a></li><li><a href="contact.html">Contact</a></li><li><a href="login.html">Login</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li></ul></div><div class="footer-col"><h4>Contact</h4><div class="footer-contact-item">📞 <a href="tel:+233245607110">024 560 7110</a></div><div class="footer-contact-item">💬 <a href="https://wa.me/233245607110" target="_blank">WhatsApp</a></div></div><div class="footer-col"><h4>Developer</h4><div class="footer-dev"><div class="dev-img-placeholder">IL</div><div class="dev-info"><strong>Ibrahim M. Lotsu</strong><span>Ibratech 🛠️</span></div></div></div></div><div class="footer-bottom"><p>© 2026 ATU PQ Hub. All rights reserved.</p><p>Built with ❤️ for ATU Students by <strong style="color:var(--gold)">Ibratech</strong></p></div></div></footer>
-<div id="chatbot"><div class="chatbot-bubble" id="chatbotBubble"><div class="chatbot-head"><strong>👋 Hi! How can I help?</strong><span>ATU PQ Hub</span></div><div class="chatbot-options"><button class="chatbot-option" onclick="window.location='past-questions.html'"><div class="chatbot-option-icon">📚</div>Find Past Questions</button><button class="chatbot-option" onclick="window.open('https://wa.me/233245607110','_blank')"><div class="chatbot-option-icon">💬</div>Contact Moyole</button></div><div class="chatbot-footer">Powered by ATU PQ Hub</div></div><button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">💬</button></div>
+<footer id="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand footer-col"><div class="footer-logo">ATU <span>PQ Hub</span></div><p>Your premier academic resource platform for ATU students.</p></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="faculties.html">Faculties</a></li><li><a href="past-questions.html">Past Questions</a></li><li><a href="about.html">About</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="mission.html">Mission</a></li><li><a href="vision.html">Vision</a></li><li><a href="contact.html">Contact</a></li><li><a href="login.html">Login</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li></ul></div><div class="footer-col"><h4>Contact</h4><div class="footer-contact-item">📞 <a href="tel:+233554196068">055 419 6068</a></div><div class="footer-contact-item">💬 <a href="https://wa.me/233554196068" target="_blank">WhatsApp</a></div></div><div class="footer-col"><h4>Developer</h4><div class="footer-dev"><div class="dev-img-placeholder">IL</div><div class="dev-info"><strong>Ibrahim M. Lotsu</strong><span>Ibratech 🛠️</span></div></div></div></div><div class="footer-bottom"><p>© 2026 ATU PQ Hub. All rights reserved.</p><p>Built with ❤️ for ATU Students by <strong style="color:var(--gold)">Ibratech</strong></p></div></div></footer>
+<div id="chatbot">
+  <div class="chatbot-bubble" id="chatbotBubble">
+    <div class="chatbot-head"><strong>👋 Hi! How can I help?</strong><span>ATU PQ Hub Assistant</span></div>
+    <div class="chatbot-messages" id="chatbotMessages"></div>
+    <div class="chatbot-options" id="chatbotOptions">
+      <button class="chatbot-option" onclick="pqhubChatOption('past-questions')"><div class="chatbot-option-icon">📚</div>Find Past Questions</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('faculties')"><div class="chatbot-option-icon">🏛️</div>Browse Faculties</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('signup')"><div class="chatbot-option-icon">🎓</div>How to Sign Up</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('download')"><div class="chatbot-option-icon">⬇️</div>How to Download</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('request')"><div class="chatbot-option-icon">📲</div>Request a Past Question</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('about')"><div class="chatbot-option-icon">ℹ️</div>About This Platform</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('contact')"><div class="chatbot-option-icon">💬</div>Get Help</button>
+    </div>
+    <div class="chatbot-input-row">
+      <input type="text" id="chatbotInput" placeholder="Type your question..." onkeydown="pqhubChatKeydown(event)">
+      <button id="chatbotSend" onclick="pqhubChatSend()">➤</button>
+    </div>
+    <div class="chatbot-footer">Powered by ATU PQ Hub</div>
+  </div>
+  <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">💬</button>
+</div>
 <script>
 function toggleMenu(){const m=document.getElementById('mobile-menu'),h=document.getElementById('hamburger');m.classList.toggle('open');h.classList.toggle('open')}
 document.addEventListener('click',function(e){const m=document.getElementById('mobile-menu'),h=document.getElementById('hamburger');if(!m.contains(e.target)&&!h.contains(e.target)&&m.classList.contains('open')){m.classList.remove('open');h.classList.remove('open')}});
-function toggleChatbot(){const b=document.getElementById('chatbotBubble'),t=document.getElementById('chatbotToggle');const o=b.classList.toggle('open');t.textContent=o?'✕':'💬'}
+
 function toggleFAQ(btn){
   const item=btn.parentElement;
   const wasOpen=item.classList.contains('open');
@@ -244,5 +268,6 @@ function toggleFAQ(btn){
 const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.1});document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 </script>
 <script src="js/carousel.js"></script>
+<script src="js/chatbot.js"></script>
 </body>
 </html>

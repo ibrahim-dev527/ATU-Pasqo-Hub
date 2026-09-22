@@ -6,19 +6,19 @@
 <title>Create Account | ATU PQ Hub</title>
 <meta name="description" content="Sign up for a free ATU PQ Hub account with your Student ID to download past questions.">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://atupqhub.netlify.app/signup.html">
+<link rel="canonical" href="https://atu-pasqo-hub.vercel.app/signup.html">
 <meta name="theme-color" content="#14315D">
 <link rel="icon" type="image/png" href="images/atu-logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Create Account | ATU PQ Hub">
 <meta property="og:description" content="Sign up for a free ATU PQ Hub account with your Student ID to download past questions.">
-<meta property="og:url" content="https://atupqhub.netlify.app/signup.html">
-<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:url" content="https://atu-pasqo-hub.vercel.app/signup.html">
+<meta property="og:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <meta property="og:site_name" content="ATU PQ Hub">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Create Account | ATU PQ Hub">
 <meta name="twitter:description" content="Sign up for a free ATU PQ Hub account with your Student ID to download past questions.">
-<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta name="twitter:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -100,7 +100,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
   <div class="auth-form-wrap">
     <a href="index.html" class="auth-back">← Back to Home</a>
     <h1 class="auth-form-title">Create <span>Account</span></h1>
-    <p class="auth-form-subtitle">Join ATU PQ Hub — it's completely free!</p>
+    <p class="auth-form-subtitle">Join ATU PQ Hub: it's completely free!</p>
 
     <div class="alert error" id="errorAlert"></div>
     <div class="alert success" id="successAlert"></div>
@@ -189,10 +189,6 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
     </button>
 
     <div class="auth-switch">Already have an account? <a href="login.html">Sign In →</a></div>
-
-    <div style="margin-top:20px;padding:14px;background:rgba(37,99,235,0.08);border-radius:var(--radius-sm);border:1px solid rgba(37,99,235,0.2)">
-      <p style="font-size:0.72rem;color:var(--gray);line-height:1.6"><strong style="color:#b45309">⚙️ Developer:</strong> Configure Supabase URL + Key in <code>js/pq-hub.js</code>. Create a <code>users</code> table with columns: id, student_id, name, contact, faculty, level, created_at.</p>
-    </div>
   </div>
 </div>
 
@@ -205,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
   pqhubLinkFacultyToDepartment(document.getElementById('signupFaculty'), document.getElementById('signupDepartment'));
 });
 // =============================================
-// SIGNUP FUNCTION — Student ID based account
+// SIGNUP FUNCTION: Student ID based account
 // =============================================
 async function handleSignup() {
   const firstName = document.getElementById('firstName').value.trim();

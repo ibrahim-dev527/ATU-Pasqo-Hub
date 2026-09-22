@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>All Faculties | ATU PQ Hub</title>
-<meta name="description" content="Explore Accra Technical University's five faculties — Engineering, Built Environment, Applied Sciences, Applied Arts and Business — and find past questions by department.">
+<meta name="description" content="Explore Accra Technical University's five faculties: Engineering, Built Environment, Applied Sciences, Applied Arts and Business: and find past questions by department.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://atupqhub.netlify.app/faculties.html">
+<link rel="canonical" href="https://atu-pasqo-hub.vercel.app/faculties.html">
 <meta name="theme-color" content="#14315D">
 <link rel="icon" type="image/png" href="images/atu-logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="All Faculties | ATU PQ Hub">
-<meta property="og:description" content="Explore Accra Technical University's five faculties — Engineering, Built Environment, Applied Sciences, Applied Arts and Business — and find past questions by department.">
-<meta property="og:url" content="https://atupqhub.netlify.app/faculties.html">
-<meta property="og:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta property="og:description" content="Explore Accra Technical University's five faculties: Engineering, Built Environment, Applied Sciences, Applied Arts and Business: and find past questions by department.">
+<meta property="og:url" content="https://atu-pasqo-hub.vercel.app/faculties.html">
+<meta property="og:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <meta property="og:site_name" content="ATU PQ Hub">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="All Faculties | ATU PQ Hub">
-<meta name="twitter:description" content="Explore Accra Technical University's five faculties — Engineering, Built Environment, Applied Sciences, Applied Arts and Business — and find past questions by department.">
-<meta name="twitter:image" content="https://atupqhub.netlify.app/images/atu-logo.png">
+<meta name="twitter:description" content="Explore Accra Technical University's five faculties: Engineering, Built Environment, Applied Sciences, Applied Arts and Business: and find past questions by department.">
+<meta name="twitter:image" content="https://atu-pasqo-hub.vercel.app/images/atu-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -93,6 +93,9 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 @media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.footer-grid{grid-template-columns:1fr}.stats-bar-inner{grid-template-columns:1fr 1fr}.faculty-main-grid{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="css/carousel.css">
+<link rel="stylesheet" href="css/chatbot.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/pq-hub.js"></script>
 </head>
 <body>
 
@@ -146,7 +149,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <div class="faculty-main-card reveal">
         <div class="fmc-header"><div class="fmc-icon">🏗️</div><div class="fmc-name">Faculty of Engineering</div></div>
         <div class="fmc-body">
-          <p class="fmc-desc">Offering practical, industry-focused engineering programs that equip students with technical skills for the modern workforce.</p>
+          <p class="fmc-desc">Offering practical, industry focused engineering programs that equip students with technical skills for the modern workforce.</p>
           <div class="fmc-depts">
             <div class="fmc-dept-item"><span class="fmc-dept-dot"></span>Mechanical Engineering</div>
             <div class="fmc-dept-item"><span class="fmc-dept-dot"></span>Electrical/Electronic Engineering</div>
@@ -162,7 +165,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <div class="faculty-main-card reveal" style="transition-delay:0.1s">
         <div class="fmc-header" style="background:linear-gradient(135deg,#0A1B36,#14315D)"><div class="fmc-icon">🏢</div><div class="fmc-name">Faculty of Built Environment</div></div>
         <div class="fmc-body">
-          <p class="fmc-desc">Training built-environment professionals in construction, design, and interior technology.</p>
+          <p class="fmc-desc">Training built environment professionals in construction, design, and interior technology.</p>
           <div class="fmc-depts">
             <div class="fmc-dept-item"><span class="fmc-dept-dot"></span>Building Technology</div>
             <div class="fmc-dept-item"><span class="fmc-dept-dot"></span>Interior Design and Upholstery Technology</div>
@@ -227,7 +230,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     <div style="text-align:center;margin-top:48px;padding:32px;background:linear-gradient(135deg,rgba(23,70,162,0.04),rgba(37,99,235,0.04));border-radius:20px;border:1px solid rgba(23,70,162,0.08)">
       <p style="font-size:1rem;font-weight:600;color:var(--dark);margin-bottom:8px">Can't find your faculty?</p>
       <p style="color:var(--gray);font-size:0.85rem;margin-bottom:20px">Contact Moyole directly on WhatsApp and we'll add it!</p>
-      <a href="https://wa.me/233245607110?text=Hi%20Moyole%2C%20my%20faculty%20is%20not%20listed%20on%20ATU%20PQ%20Hub" target="_blank" class="btn btn-primary">📲 Request Faculty on WhatsApp</a>
+      <a href="https://wa.me/233554196068?text=Hi%20Moyole%2C%20my%20faculty%20is%20not%20listed%20on%20ATU%20PQ%20Hub" target="_blank" class="btn btn-primary">📲 Request Faculty on WhatsApp</a>
     </div>
   </div>
 </section>
@@ -270,14 +273,14 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
         <div class="footer-social">
           
           
-          <a href="https://wa.me/233245607110" target="_blank" class="social-btn">💬</a>
+          <a href="https://wa.me/233554196068" target="_blank" class="social-btn">💬</a>
         </div>
       </div>
       <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">→ Home</a></li><li><a href="faculties.html">→ Faculties</a></li><li><a href="past-questions.html">→ Past Questions</a></li><li><a href="about.html">→ About</a></li><li><a href="help.html">→ Help</a></li></ul></div>
       <div class="footer-col"><h4>Resources</h4><ul><li><a href="mission.html">→ Mission</a></li><li><a href="vision.html">→ Vision</a></li><li><a href="contact.html">→ Contact</a></li><li><a href="login.html">→ Login</a></li><li><a href="signup.html">→ Sign Up</a></li><li><a href="privacy.html">→ Privacy</a></li><li><a href="terms.html">→ Terms</a></li></ul></div>
       <div class="footer-col"><h4>Contact</h4>
-        <div class="footer-contact-item"><div class="footer-contact-icon">📞</div><div><a href="tel:+233245607110">024 560 7110</a></div></div>
-        <div class="footer-contact-item"><div class="footer-contact-icon">💬</div><div><a href="https://wa.me/233245607110" target="_blank">WhatsApp</a></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon">📞</div><div><a href="tel:+233554196068">055 419 6068</a></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon">💬</div><div><a href="https://wa.me/233554196068" target="_blank">WhatsApp</a></div></div>
         <div class="footer-contact-item"><div class="footer-contact-icon">📸</div><div></div></div>
       </div>
       <div class="footer-col"><h4>Developer</h4>
@@ -294,10 +297,19 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 <div id="chatbot">
   <div class="chatbot-bubble" id="chatbotBubble">
     <div class="chatbot-head"><strong>👋 Hi! How can I help?</strong><span>ATU PQ Hub Assistant</span></div>
-    <div class="chatbot-options">
-      <button class="chatbot-option" onclick="window.location='past-questions.html'"><div class="chatbot-option-icon">📚</div>Find Past Questions</button>
-      <button class="chatbot-option" onclick="window.open('https://wa.me/233245607110','_blank')"><div class="chatbot-option-icon">💬</div>Contact Moyole</button>
-      
+    <div class="chatbot-messages" id="chatbotMessages"></div>
+    <div class="chatbot-options" id="chatbotOptions">
+      <button class="chatbot-option" onclick="pqhubChatOption('past-questions')"><div class="chatbot-option-icon">📚</div>Find Past Questions</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('faculties')"><div class="chatbot-option-icon">🏛️</div>Browse Faculties</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('signup')"><div class="chatbot-option-icon">🎓</div>How to Sign Up</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('download')"><div class="chatbot-option-icon">⬇️</div>How to Download</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('request')"><div class="chatbot-option-icon">📲</div>Request a Past Question</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('about')"><div class="chatbot-option-icon">ℹ️</div>About This Platform</button>
+      <button class="chatbot-option" onclick="pqhubChatOption('contact')"><div class="chatbot-option-icon">💬</div>Get Help</button>
+    </div>
+    <div class="chatbot-input-row">
+      <input type="text" id="chatbotInput" placeholder="Type your question..." onkeydown="pqhubChatKeydown(event)">
+      <button id="chatbotSend" onclick="pqhubChatSend()">➤</button>
     </div>
     <div class="chatbot-footer">Powered by ATU PQ Hub</div>
   </div>
@@ -307,10 +319,11 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 <script>
 function toggleMenu(){const m=document.getElementById('mobile-menu'),h=document.getElementById('hamburger');m.classList.toggle('open');h.classList.toggle('open')}
 document.addEventListener('click',function(e){const m=document.getElementById('mobile-menu'),h=document.getElementById('hamburger');if(!m.contains(e.target)&&!h.contains(e.target)&&m.classList.contains('open')){m.classList.remove('open');h.classList.remove('open')}});
-function toggleChatbot(){const b=document.getElementById('chatbotBubble'),t=document.getElementById('chatbotToggle');const o=b.classList.toggle('open');t.textContent=o?'✕':'💬'}
+
 const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 </script>
 <script src="js/carousel.js"></script>
+<script src="js/chatbot.js"></script>
 </body>
 </html>
