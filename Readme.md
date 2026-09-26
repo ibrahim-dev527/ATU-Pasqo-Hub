@@ -1,7 +1,7 @@
 # 📚 ATU PQ Hub — Read Me First
 
 **Owned by:** Omar Sulley Bin ("Officer Moyole"), SRC Part-Time Representative, ATU 2026/2027
-**Built by:** Ibrahim Mohammed Lotsu — "C4" (Ibratech)
+**Built by:** Ibrahim Mohammed Lotsu — "C4" (Ibratechh)
 
 ---
 

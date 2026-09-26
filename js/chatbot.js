@@ -80,7 +80,11 @@ const PQHUB_CHAT_FAQ = [
 // ------------------------------------------------------------
 function pqhubChatExtractFilters(text) {
   const lower = text.toLowerCase();
-  const found = { faculty: null, department: null, level: null, year: null, remainder: text };
+  const found = { courseCode: null, faculty: null, department: null, level: null, year: null, remainder: text };
+
+  // Course codes typically look like "MATH 151", "CSCD101", "ACCT-101"
+  const codeMatch = text.match(/\b([A-Za-z]{3,5})\s?-?\s?(\d{3})\b/);
+  if (codeMatch) found.courseCode = (codeMatch[1] + ' ' + codeMatch[2]).toUpperCase();
 
   if (typeof PQHUB_FACULTIES !== 'undefined') {
     Object.keys(PQHUB_FACULTIES).forEach(function(faculty) {
@@ -122,7 +126,8 @@ function pqhubChatExtractFilters(text) {
 async function pqhubChatSearchPQ(filters) {
   if (typeof sb === 'undefined' || !sb) return [];
   try {
-    let query = sb.from('past_questions').select('id, title, faculty, department, level, year, file_url').limit(4);
+    let query = sb.from('past_questions').select('id, title, course_code, faculty, department, level, year, file_url').limit(4);
+    if (filters.courseCode) query = query.ilike('course_code', '%' + filters.courseCode + '%');
     if (filters.faculty)    query = query.ilike('faculty', '%' + filters.faculty + '%');
     if (filters.department) query = query.ilike('department', '%' + filters.department + '%');
     if (filters.level)      query = query.ilike('level', '%' + filters.level + '%');
@@ -213,7 +218,7 @@ async function pqhubChatSend() {
 
   // 1. Try to detect a faculty/department/level/year and search live past questions
   const filters = pqhubChatExtractFilters(text);
-  const hasFilter = filters.faculty || filters.department || filters.level || filters.year;
+  const hasFilter = filters.courseCode || filters.faculty || filters.department || filters.level || filters.year;
 
   let handled = false;
 
@@ -223,7 +228,7 @@ async function pqhubChatSend() {
     if (results.length) {
       let html = 'Found ' + results.length + ' matching past question' + (results.length > 1 ? 's' : '') + ':<br>';
       html += results.map(function(pq) {
-        return '<div class="chat-pq-result"><strong>' + pq.title + '</strong><br><span>' + (pq.faculty || '') + (pq.department ? ' · ' + pq.department : '') + (pq.level ? ' · ' + pq.level : '') + (pq.year ? ' · ' + pq.year : '') + '</span></div>';
+        return '<div class="chat-pq-result"><strong>' + (pq.course_code ? '[' + pq.course_code + '] ' : '') + pq.title + '</strong><br><span>' + (pq.faculty || '') + (pq.department ? ' · ' + pq.department : '') + (pq.level ? ' · ' + pq.level : '') + (pq.year ? ' · ' + pq.year : '') + '</span></div>';
       }).join('');
       html += '<a href="past-questions.html" class="chat-link-btn">📚 Open in Past Questions</a>';
       pqhubChatAddMessage(html, 'bot');

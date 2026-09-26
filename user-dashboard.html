@@ -177,7 +177,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
       <div class="sidebar-link active" onclick="showPanel('overview',this)"><span class="icon">📊</span> Overview</div>
       <div class="sidebar-link" onclick="showPanel('downloads',this)"><span class="icon">⬇️</span> My Downloads</div>
       <div class="sidebar-link" onclick="showPanel('requests',this)"><span class="icon">📨</span> My Requests</div>
-      <div class="sidebar-link" onclick="showPanel('profile',this)"><span class="icon">👤</span> My Profile</div>
+      <div class="sidebar-link" onclick="showPanel('profile',this)"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="vertical-align:-0.125em"><path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.97 0-9 2.46-9 5.5V21a1 1 0 001 1h16a1 1 0 001-1v-1.5c0-3.04-4.03-5.5-9-5.5z"/></svg></span> My Profile</div>
       <div class="sidebar-section-label">Links</div>
       <a href="index.html" class="sidebar-link"><span class="icon">🏠</span> Homepage</a>
       <a href="past-questions.html" class="sidebar-link"><span class="icon">📚</span> Browse Past Questions</a>
@@ -189,7 +189,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
         <div class="user-avatar" id="sidebarAvatar">?</div>
         <div class="user-name-wrap">
           <strong id="sidebarName">Loading...</strong>
-          <span id="sidebarStudentId">: </span>
+          <span id="sidebarStudentId">...</span>
         </div>
       </div>
       <button class="btn-logout" onclick="handleLogout()">← Sign Out</button>
@@ -270,7 +270,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
                 <div class="qli-text"><strong>View My Downloads</strong><span>Everything you've downloaded so far</span></div>
               </button>
               <button class="quick-link-item" onclick="showPanel('profile')">
-                <div class="qli-icon">👤</div>
+                <div class="qli-icon"><svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="vertical-align:-0.125em"><path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.97 0-9 2.46-9 5.5V21a1 1 0 001 1h16a1 1 0 001-1v-1.5c0-3.04-4.03-5.5-9-5.5z"/></svg></div>
                 <div class="qli-text"><strong>Edit My Profile</strong><span>Update your name, faculty, level</span></div>
               </button>
             </div>
@@ -334,7 +334,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
           <p>View and update your account information.</p>
         </div>
         <div class="panel">
-          <div class="panel-title">👤 Account Details</div>
+          <div class="panel-title"><svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="vertical-align:-0.125em"><path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.97 0-9 2.46-9 5.5V21a1 1 0 001 1h16a1 1 0 001-1v-1.5c0-3.04-4.03-5.5-9-5.5z"/></svg> Account Details</div>
           <div class="profile-form">
             <div class="form-row-2">
               <div class="form-group">
@@ -426,7 +426,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 
 function showDashboard(user) {
   const name = user.user_metadata?.full_name || 'Student';
-  const studentId = user.user_metadata?.student_id || ': ';
+  const studentId = user.user_metadata?.student_id || 'N/A';
   const initial = name.charAt(0).toUpperCase();
 
   document.getElementById('auth-gate').style.display = 'none';

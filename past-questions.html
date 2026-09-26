@@ -65,6 +65,10 @@
 .search-section.with-banner{top:120px}
 .search-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
 .search-bar-wrap{position:relative}
+.search-hint-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.search-hint-label{font-size:0.72rem;color:var(--gray);font-weight:600}
+.search-hint-chip{background:rgba(23,70,162,0.08);color:var(--blue);font-size:0.7rem;font-weight:600;padding:4px 11px;border-radius:14px}
+.pq-course-code{background:rgba(216,167,39,0.15)!important;color:#8a6a10!important;font-weight:700!important}
 .search-bar-wrap input{width:100%;padding:14px 20px 14px 52px;border:2px solid rgba(23,70,162,0.15);border-radius:var(--radius);font-size:0.92rem;font-family:'Poppins',sans-serif;background:var(--off-white);color:var(--dark);transition:var(--transition);outline:none}
 .search-bar-wrap input:focus{border-color:var(--blue);background:var(--white);box-shadow:0 0 0 4px rgba(23,70,162,0.08)}
 .search-bar-wrap input::placeholder{color:var(--gray)}
@@ -260,8 +264,15 @@
   <div class="search-inner">
     <div class="search-bar-wrap">
       <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="Search by course name, department, faculty..." oninput="filterCards()">
+      <input type="text" id="searchInput" placeholder="Search by course code, course name, department, or faculty..." oninput="filterCards()">
       <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="search-hint-row">
+      <span class="search-hint-label">Search by:</span>
+      <span class="search-hint-chip">Course Code</span>
+      <span class="search-hint-chip">Course Name</span>
+      <span class="search-hint-chip">Department</span>
+      <span class="search-hint-chip">Faculty</span>
     </div>
     <div class="filters-scroll-wrap">
       <div class="filters-row">
@@ -384,11 +395,11 @@
       <div class="footer-col"><h4>Developer</h4>
         <div class="footer-dev">
           <div class="dev-img-placeholder">IL</div>
-          <div class="dev-info"><strong>Ibrahim M. Lotsu</strong><span>Ibratech 🛠️</span></div>
+          <div class="dev-info"><strong>Ibrahim M. Lotsu</strong><span>Ibratechh 🛠️</span></div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom"><p>© 2026 ATU PQ Hub. All rights reserved.</p><p>Built with ❤️ for ATU Students by <strong style="color:var(--gold)">Ibratech</strong></p></div>
+    <div class="footer-bottom"><p>© 2026 ATU PQ Hub. All rights reserved.</p><p>Built with ❤️ for ATU Students by <strong style="color:var(--gold)">Ibratechh</strong></p></div>
   </div>
 </footer>
 
@@ -524,20 +535,23 @@ function renderCards(questions) {
     const isNew = pq.created_at && new Date(pq.created_at).getTime() > weekAgo;
     const card = document.createElement('div');
     card.className = 'pq-card';
-    card.dataset.title    = (pq.title || '').toLowerCase();
-    card.dataset.faculty  = (pq.faculty || '').toLowerCase();
-    card.dataset.level    = (pq.level || '').toLowerCase();
-    card.dataset.year     = (pq.year || '');
-    card.dataset.fileUrl  = pq.file_url || '';
+    card.dataset.title      = (pq.title || '').toLowerCase();
+    card.dataset.courseCode = (pq.course_code || '').toLowerCase();
+    card.dataset.faculty    = (pq.faculty || '').toLowerCase();
+    card.dataset.department = (pq.department || '').toLowerCase();
+    card.dataset.level      = (pq.level || '').toLowerCase();
+    card.dataset.year       = (pq.year || '');
+    card.dataset.fileUrl    = pq.file_url || '';
 
     card.innerHTML = `
       <div class="pq-card-header">
         <span class="pq-badge">${escHtml(pq.faculty || 'General')}</span>
         ${isNew ? '<span class="pq-badge new">🆕 New</span>' : ''}
-        <span class="pq-year">${pq.year || ': '}</span>
+        <span class="pq-year">${pq.year || ''}</span>
       </div>
       <div class="pq-title">${escHtml(pq.title || 'Untitled')}</div>
       <div class="pq-meta">
+        ${pq.course_code ? `<span class="pq-meta-tag pq-course-code">🔖 ${escHtml(pq.course_code)}</span>` : ''}
         ${pq.level ? `<span class="pq-meta-tag">📂 ${escHtml(pq.level)}</span>` : ''}
         ${pq.department ? `<span class="pq-meta-tag">🏛️ ${escHtml(pq.department)}</span>` : ''}
       </div>
@@ -618,12 +632,12 @@ function escHtml(str) {
 function loadDemoCards() {
   removeSkeletons();
   const demo = [
-    { id:1, title:'Engineering Mathematics I: Final Exam', faculty:'Faculty of Engineering', department:'Civil Engineering', level:'Level 100', year:2023, downloads:234, file_url:'pdfs/example.pdf', created_at: new Date().toISOString() },
-    { id:2, title:'Introduction to Programming: Midterm', faculty:'Faculty of Applied Sciences', department:'Computer Science', level:'Level 100', year:2023, downloads:189, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-3*86400000).toISOString() },
-    { id:3, title:'Principles of Accounting: Final Exam', faculty:'Faculty of Business', department:'Accountancy and Finance', level:'HND 100', year:2022, downloads:176, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-10*86400000).toISOString() },
-    { id:4, title:'Building Construction Technology: Midterm', faculty:'Faculty of Built Environment', department:'Building Technology', level:'Level 200', year:2023, downloads:143, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-2*86400000).toISOString() },
-    { id:5, title:'Database Management Systems: Final', faculty:'Faculty of Applied Sciences', department:'Computer Science', level:'Level 200', year:2022, downloads:167, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-1*86400000).toISOString() },
-    { id:6, title:'Fashion Design Principles and Theory: Final', faculty:'Faculty of Applied Arts', department:'Fashion Design & Textiles', level:'Level 100', year:2022, downloads:76, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-5*86400000).toISOString() },
+    { id:1, title:'Engineering Mathematics I: Final Exam', course_code:'MATH 151', faculty:'Faculty of Engineering', department:'Civil Engineering', level:'Level 100', year:2023, downloads:234, file_url:'pdfs/example.pdf', created_at: new Date().toISOString() },
+    { id:2, title:'Introduction to Programming: Midterm', course_code:'CSCD 101', faculty:'Faculty of Applied Sciences', department:'Computer Science', level:'Level 100', year:2023, downloads:189, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-3*86400000).toISOString() },
+    { id:3, title:'Principles of Accounting: Final Exam', course_code:'ACCT 101', faculty:'Faculty of Business', department:'Accountancy and Finance', level:'HND 100', year:2022, downloads:176, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-10*86400000).toISOString() },
+    { id:4, title:'Building Construction Technology: Midterm', course_code:'BLDG 201', faculty:'Faculty of Built Environment', department:'Building Technology', level:'Level 200', year:2023, downloads:143, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-2*86400000).toISOString() },
+    { id:5, title:'Database Management Systems: Final', course_code:'CSCD 205', faculty:'Faculty of Applied Sciences', department:'Computer Science', level:'Level 200', year:2022, downloads:167, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-1*86400000).toISOString() },
+    { id:6, title:'Fashion Design Principles and Theory: Final', course_code:'FASH 101', faculty:'Faculty of Applied Arts', department:'Fashion Design & Textiles', level:'Level 100', year:2022, downloads:76, file_url:'pdfs/example.pdf', created_at: new Date(Date.now()-5*86400000).toISOString() },
   ];
   allQuestions = demo;
   filtered = [...demo];
@@ -674,7 +688,7 @@ function applyFilters() {
   const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
 
   filtered = allQuestions.filter(pq => {
-    const matchQ  = !q || (pq.title||'').toLowerCase().includes(q) || (pq.faculty||'').toLowerCase().includes(q) || (pq.department||'').toLowerCase().includes(q);
+    const matchQ  = !q || (pq.title||'').toLowerCase().includes(q) || (pq.course_code||'').toLowerCase().includes(q) || (pq.faculty||'').toLowerCase().includes(q) || (pq.department||'').toLowerCase().includes(q);
     const matchF  = !faculty || (pq.faculty||'').toLowerCase().includes(faculty);
     const matchD  = !dept    || (pq.department||'').toLowerCase().includes(dept);
     const matchL  = !level   || (pq.level||'').toLowerCase().includes(level);

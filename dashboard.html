@@ -212,6 +212,10 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
       <label class="form-label">Course / Paper Title *</label>
       <input type="text" class="form-input" id="editTitle" placeholder="e.g. Engineering Mathematics I: Final Exam">
     </div>
+    <div class="form-group">
+      <label class="form-label">Course Code</label>
+      <input type="text" class="form-input" id="editCourseCode" placeholder="e.g. MATH 151" style="text-transform:uppercase">
+    </div>
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Faculty *</label>
@@ -252,7 +256,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
   <div class="delete-box">
     <div class="delete-icon">🗑️</div>
     <h2 class="delete-title">Delete This?</h2>
-    <p class="delete-desc">You are about to permanently delete:<br><span class="delete-name" id="deleteTitle">: </span><br><br>This removes it from the website <strong>and</strong> deletes the PDF file from storage. This cannot be undone.</p>
+    <p class="delete-desc">You are about to permanently delete:<br><span class="delete-name" id="deleteTitle"></span><br><br>This removes it from the website <strong>and</strong> deletes the PDF file from storage. This cannot be undone.</p>
     <div class="delete-actions">
       <button class="btn-cancel" onclick="closeDeleteModal()">Cancel</button>
       <button class="btn-confirm-delete" id="confirmDeleteBtn" onclick="confirmDelete()">🗑️ Yes, Delete</button>
@@ -275,10 +279,11 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
 
     <div class="sidebar-section-label">Past Questions</div>
     <button class="sidebar-link" id="nav-upload" onclick="showSection('upload')"><span class="icon">⬆️</span>Upload New PDF</button>
-    <button class="sidebar-link" id="nav-manage" onclick="showSection('manage')"><span class="icon">📁</span>Manage All <span class="sidebar-badge" id="sidebarCount">: </span></button>
+    <button class="sidebar-link" id="nav-manage" onclick="showSection('manage')"><span class="icon">📁</span>Manage All <span class="sidebar-badge" id="sidebarCount">...</span></button>
 
     <div class="sidebar-section-label">Students</div>
-    <button class="sidebar-link" id="nav-requests" onclick="showSection('requests')"><span class="icon">📨</span>Student Requests <span class="sidebar-badge" id="sidebarRequestCount">: </span></button>
+    <button class="sidebar-link" id="nav-students" onclick="showSection('students')"><span class="icon">📋</span>All Students <span class="sidebar-badge" id="sidebarStudentCount">...</span></button>
+    <button class="sidebar-link" id="nav-requests" onclick="showSection('requests')"><span class="icon">📨</span>Student Requests <span class="sidebar-badge" id="sidebarRequestCount">...</span></button>
 
     <div class="sidebar-section-label">Contact</div>
     <a href="https://wa.me/233554196068" target="_blank" class="sidebar-link"><span class="icon">💬</span>WhatsApp</a>
@@ -315,17 +320,17 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
       <div class="stats-row">
         <div class="stat-card">
           <div class="stat-card-top"><div class="stat-icon">📄</div></div>
-          <div class="stat-num" id="statPQ">: </div>
+          <div class="stat-num" id="statPQ">...</div>
           <div class="stat-label">Total Past Questions</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-top"><div class="stat-icon">👤</div></div>
-          <div class="stat-num" id="statUsers">: </div>
+          <div class="stat-card-top"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="vertical-align:-0.125em"><path d="M12 2a5 5 0 100 10 5 5 0 000-10zm0 12c-4.97 0-9 2.46-9 5.5V21a1 1 0 001 1h16a1 1 0 001-1v-1.5c0-3.04-4.03-5.5-9-5.5z"/></svg></div></div>
+          <div class="stat-num" id="statUsers">...</div>
           <div class="stat-label">Registered Students</div>
         </div>
         <div class="stat-card">
           <div class="stat-card-top"><div class="stat-icon">⬇️</div></div>
-          <div class="stat-num" id="statDownloads">: </div>
+          <div class="stat-num" id="statDownloads">...</div>
           <div class="stat-label">Total Downloads</div>
         </div>
         <div class="stat-card">
@@ -388,6 +393,10 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
           <div class="form-group">
             <label class="form-label">Course / Paper Title *</label>
             <input type="text" class="form-input" id="pqTitle" placeholder="e.g. Engineering Mathematics I: Final Exam">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Course Code</label>
+            <input type="text" class="form-input" id="pqCourseCode" placeholder="e.g. MATH 151" style="text-transform:uppercase">
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -508,6 +517,22 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
     </div>
 
     <!-- ════ STUDENT REQUESTS ════ -->
+    <div class="section-view" id="section-students">
+      <div class="card">
+        <div class="card-title">
+          📋 All Students
+          <span class="card-title-count" id="studentsCount">Loading...</span>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+          <input type="text" id="studentsSearch" class="form-input" placeholder="🔍 Search by name, Student ID, or contact..." style="flex:1;min-width:220px" oninput="renderStudentsTable()">
+          <button class="btn-view" onclick="exportStudentsCSV()">⬇️ Export as CSV</button>
+        </div>
+        <div id="studentsAdminList">
+          <div class="table-empty"><div class="e-icon">📭</div><p>Loading students...</p></div>
+        </div>
+      </div>
+    </div>
+
     <div class="section-view" id="section-requests">
       <div class="card">
         <div class="card-title">
@@ -584,8 +609,8 @@ async function loadStats() {
   try {
     // Count past questions
     const { count: pqCount } = await sb.from('past_questions').select('*', { count: 'exact', head: true });
-    document.getElementById('statPQ').textContent = pqCount ?? ': ';
-    document.getElementById('sidebarCount').textContent = pqCount ?? ': ';
+    document.getElementById('statPQ').textContent = pqCount ?? 0;
+    document.getElementById('sidebarCount').textContent = pqCount ?? 0;
 
     // Sum downloads
     const { data: dlData } = await sb.from('past_questions').select('downloads');
@@ -594,11 +619,12 @@ async function loadStats() {
 
     // Count users (from auth: approximate via users table)
     const { count: userCount } = await sb.from('users').select('*', { count: 'exact', head: true });
-    document.getElementById('statUsers').textContent = userCount ?? ': ';
+    document.getElementById('statUsers').textContent = userCount ?? 0;
+    document.getElementById('sidebarStudentCount').textContent = userCount ?? 0;
 
     // Count pending requests (for sidebar badge)
     const { count: reqCount } = await sb.from('pq_requests').select('*', { count: 'exact', head: true }).eq('status', 'pending');
-    document.getElementById('sidebarRequestCount').textContent = reqCount ?? ': ';
+    document.getElementById('sidebarRequestCount').textContent = reqCount ?? 0;
   } catch(e) { console.error('Stats error:', e); }
 }
 
@@ -682,8 +708,8 @@ async function loadRecentUploads() {
           ${data.map(pq => `
             <tr>
               <td class="title-cell" title="${esc(pq.title)}">${esc(pq.title)}</td>
-              <td><span class="pq-badge">${esc(pq.faculty||': ')}</span></td>
-              <td>${pq.year || ': '}</td>
+              <td><span class="pq-badge">${esc(pq.faculty||'N/A')}</span></td>
+              <td>${pq.year || 'N/A'}</td>
               <td>
                 <button class="btn-edit" onclick="openEditModal(${pq.id})">✏️ Edit</button>
               </td>
@@ -727,15 +753,15 @@ function renderTable(rows) {
   document.getElementById('manageCount').textContent = rows.length + ' result' + (rows.length !== 1 ? 's' : '');
 
   tbody.innerHTML = rows.map(pq => {
-    const dateStr = pq.created_at ? new Date(pq.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) : ': ';
+    const dateStr = pq.created_at ? new Date(pq.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) : 'N/A';
     // Extract file path from URL for deletion
     const filePath = pq.file_url ? pq.file_url.split('/past-questions/')[1] || '' : '';
     return `
       <tr>
         <td class="title-cell" title="${esc(pq.title)}">${esc(pq.title)}</td>
-        <td><span class="pq-badge">${esc(pq.faculty||': ')}</span></td>
-        <td style="color:var(--gray);font-size:0.75rem">${esc(pq.level||': ')}</td>
-        <td style="color:var(--gray);font-size:0.75rem">${pq.year||': '}</td>
+        <td><span class="pq-badge">${esc(pq.faculty||'N/A')}</span></td>
+        <td style="color:var(--gray);font-size:0.75rem">${esc(pq.level||'N/A')}</td>
+        <td style="color:var(--gray);font-size:0.75rem">${pq.year||'N/A'}</td>
         <td class="downloads-cell">↓ ${(pq.downloads||0).toLocaleString()}</td>
         <td style="color:var(--gray);font-size:0.72rem;white-space:nowrap">${dateStr}</td>
         <td>
@@ -771,6 +797,7 @@ function openEditModal(id) {
   if (!pq) return;
   document.getElementById('editId').value    = pq.id;
   document.getElementById('editTitle').value  = pq.title || '';
+  document.getElementById('editCourseCode').value = pq.course_code || '';
   document.getElementById('editFaculty').value= pq.faculty || '';
   pqhubFillDepartmentSelect(document.getElementById('editDept'), pq.faculty || '');
   document.getElementById('editDept').value   = pq.department || '';
@@ -788,12 +815,13 @@ function closeEditModal() {
 }
 
 async function saveEdit() {
-  const id     = parseInt(document.getElementById('editId').value);
-  const title  = document.getElementById('editTitle').value.trim();
-  const faculty= document.getElementById('editFaculty').value;
-  const dept   = document.getElementById('editDept').value.trim();
-  const level  = document.getElementById('editLevel').value;
-  const year   = document.getElementById('editYear').value;
+  const id         = parseInt(document.getElementById('editId').value);
+  const title      = document.getElementById('editTitle').value.trim();
+  const courseCode = document.getElementById('editCourseCode').value.trim().toUpperCase();
+  const faculty    = document.getElementById('editFaculty').value;
+  const dept       = document.getElementById('editDept').value.trim();
+  const level      = document.getElementById('editLevel').value;
+  const year       = document.getElementById('editYear').value;
 
   if (!title || !faculty || !level || !year) {
     showModalAlert('editError', '⚠️ Please fill in all required fields.');
@@ -808,6 +836,7 @@ async function saveEdit() {
   try {
     const { error } = await sb.from('past_questions').update({
       title,
+      course_code: courseCode || null,
       faculty,
       department: dept || null,
       level,
@@ -914,11 +943,12 @@ function handleDrop(e) {
 }
 
 async function handleUpload() {
-  const title   = document.getElementById('pqTitle').value.trim();
-  const faculty = document.getElementById('pqFaculty').value;
-  const dept    = document.getElementById('pqDept').value.trim();
-  const level   = document.getElementById('pqLevel').value;
-  const year    = document.getElementById('pqYear').value;
+  const title      = document.getElementById('pqTitle').value.trim();
+  const courseCode = document.getElementById('pqCourseCode').value.trim().toUpperCase();
+  const faculty    = document.getElementById('pqFaculty').value;
+  const dept       = document.getElementById('pqDept').value.trim();
+  const level      = document.getElementById('pqLevel').value;
+  const year       = document.getElementById('pqYear').value;
 
   if (!title || !faculty || !level || !year) { showUploadAlert('error', '⚠️ Please fill in all required fields (Title, Faculty, Level, Year).'); return; }
   if (!selectedFile) { showUploadAlert('error', '⚠️ Please select a PDF file.'); return; }
@@ -958,7 +988,7 @@ async function handleUpload() {
     const { data: urlData } = sb.storage.from('past-questions').getPublicUrl(filePath);
 
     const { error: dbError } = await sb.from('past_questions').insert([{
-      title, faculty, department: dept || null, level,
+      title, course_code: courseCode || null, faculty, department: dept || null, level,
       year: parseInt(year), file_url: urlData.publicUrl,
       downloads: 0, created_at: new Date().toISOString()
     }]);
@@ -985,7 +1015,7 @@ async function handleUpload() {
 }
 
 function resetUploadForm() {
-  ['pqTitle','pqDept'].forEach(id => document.getElementById(id).value = '');
+  ['pqTitle','pqCourseCode','pqDept'].forEach(id => document.getElementById(id).value = '');
   ['pqFaculty','pqLevel','pqYear'].forEach(id => document.getElementById(id).value = '');
   selectedFile = null;
   document.getElementById('fileSelected').style.display = 'none';
@@ -996,7 +1026,7 @@ function resetUploadForm() {
 // ══════════════════════════════════════════
 //  SECTION SWITCHING
 // ══════════════════════════════════════════
-const sectionTitles = { overview: '📊 Dashboard', upload: '⬆️ Upload New PDF', manage: '📁 Manage Past Questions', requests: '📨 Student Requests' };
+const sectionTitles = { overview: '📊 Dashboard', upload: '⬆️ Upload New PDF', manage: '📁 Manage Past Questions', students: '📋 All Students', requests: '📨 Student Requests' };
 function showSection(name) {
   document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
@@ -1008,6 +1038,79 @@ function showSection(name) {
   // Load manage data fresh when switching to that section
   if (name === 'manage') loadAllPQs();
   if (name === 'requests') loadAdminRequests();
+  if (name === 'students') loadAdminStudents();
+}
+
+// ══════════════════════════════════════════
+//  ALL STUDENTS (contact list + CSV export)
+// ══════════════════════════════════════════
+let allStudents = [];
+
+async function loadAdminStudents() {
+  if (!sb) return;
+  const container = document.getElementById('studentsAdminList');
+  try {
+    const { data, error } = await sb.from('users')
+      .select('name, student_id, contact, faculty, department, level, is_admin, created_at')
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    allStudents = data || [];
+    document.getElementById('studentsCount').textContent = allStudents.length + ' total';
+    document.getElementById('sidebarStudentCount').textContent = allStudents.length;
+    renderStudentsTable();
+  } catch (e) {
+    console.warn('Could not load students:', e);
+    container.innerHTML = '<div class="table-empty"><div class="e-icon">⚠️</div><p>Could not load students yet.</p></div>';
+  }
+}
+
+function renderStudentsTable() {
+  const container = document.getElementById('studentsAdminList');
+  const q = (document.getElementById('studentsSearch').value || '').toLowerCase();
+  const rows = allStudents.filter(s =>
+    !q ||
+    (s.name || '').toLowerCase().includes(q) ||
+    (s.student_id || '').toLowerCase().includes(q) ||
+    (s.contact || '').toLowerCase().includes(q)
+  );
+
+  if (!rows.length) {
+    container.innerHTML = '<div class="table-empty"><div class="e-icon">📭</div><p>No students found.</p></div>';
+    return;
+  }
+
+  container.innerHTML = `<table class="pq-table" style="width:100%"><thead><tr>
+      <th>Name</th><th>Student ID</th><th>Contact</th><th>Faculty</th><th>Level</th><th></th>
+    </tr></thead><tbody>` +
+    rows.map(s => `
+      <tr>
+        <td>${escHtmlS(s.name) || 'N/A'}${s.is_admin ? ' <span style="font-size:0.65rem;background:rgba(216,167,39,0.2);color:#8a6a10;padding:2px 7px;border-radius:8px;font-weight:700">ADMIN</span>' : ''}</td>
+        <td>${escHtmlS(s.student_id)}</td>
+        <td>${escHtmlS(s.contact) || 'N/A'}</td>
+        <td>${escHtmlS(s.faculty) || 'N/A'}</td>
+        <td>${escHtmlS(s.level) || 'N/A'}</td>
+        <td>${s.contact ? `<a class="btn-view" href="https://wa.me/${String(s.contact).replace(/[^0-9]/g,'')}" target="_blank">💬 WhatsApp</a>` : ''}</td>
+      </tr>`).join('') +
+    `</tbody></table>`;
+}
+
+function exportStudentsCSV() {
+  if (!allStudents.length) { alert('No students to export yet.'); return; }
+  const header = ['Name', 'Student ID', 'Contact', 'Faculty', 'Department', 'Level', 'Admin'];
+  const lines = allStudents.map(s => [
+    s.name || '', s.student_id || '', s.contact || '', s.faculty || '', s.department || '', s.level || '', s.is_admin ? 'Yes' : 'No'
+  ].map(v => `"${String(v).replace(/"/g, '""')}"`).join(','));
+  const csv = [header.join(','), ...lines].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'atu-pq-hub-students.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function escHtmlS(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
 // ══════════════════════════════════════════
