@@ -75,28 +75,39 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .nav-links{display:flex;align-items:center;gap:6px;list-style:none}
 .nav-links a{color:var(--white);font-size:0.82rem;font-weight:500;padding:6px 10px;border-radius:6px;transition:var(--transition)}
 .nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.15);color:var(--gold)}
-.nav-cta{background:var(--gold)!important;color:var(--dark)!important;font-weight:700!important;padding:8px 16px!important;border-radius:8px!important}
+.nav-cta{background:var(--gold)!important;color:var(--dark)!important;font-weight:700!important;padding:8px 16px!important;border-radius:8px!important;border:none;cursor:pointer;font-family:'Poppins',sans-serif;font-size:0.82rem}
 .nav-cta:hover{background:var(--gold-light)!important;transform:translateY(-1px)}
 
-/* NAV LOGIN DROPDOWN */
-.nav-login-wrap{position:relative;list-style:none}
-.nav-login-trigger{border:none;cursor:pointer;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:5px}
-.nav-login-caret{font-size:0.7rem;transition:transform 0.2s ease}
-.nav-login-wrap.open .nav-login-caret{transform:rotate(180deg)}
-.nav-login-dropdown{position:absolute;top:calc(100% + 10px);right:0;width:260px;background:var(--white);border-radius:12px;box-shadow:0 16px 48px rgba(10,27,54,0.25);padding:18px;display:none;flex-direction:column;gap:10px;z-index:500}
-.nav-login-wrap.open .nav-login-dropdown{display:flex}
-.nav-login-field{display:flex;flex-direction:column;gap:4px;text-align:left}
-.nav-login-field label{font-size:0.7rem;font-weight:600;color:var(--gray)}
-.nav-login-field input{padding:9px 12px;border:1px solid rgba(23,70,162,0.18);border-radius:8px;font-family:'Poppins',sans-serif;font-size:0.82rem;color:var(--dark);outline:none}
-.nav-login-field input:focus{border-color:var(--blue)}
-.nav-login-btn{padding:10px;background:var(--blue);color:var(--white);border:none;border-radius:8px;font-family:'Poppins',sans-serif;font-size:0.84rem;font-weight:700;cursor:pointer;transition:var(--transition)}
-.nav-login-btn:hover{background:var(--blue-dark)}
-.nav-login-error{font-size:0.72rem;color:#c0392b;display:none}
-.nav-login-error.show{display:block}
-.nav-login-links{text-align:center;font-size:0.72rem}
-.nav-login-links a{color:var(--blue);font-weight:600}
-.mobile-login-box{margin-top:14px;padding:16px;background:var(--gray-light);border-radius:12px;display:flex;flex-direction:column;gap:10px}
-.mobile-login-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--dark)}
+/* NAV — mobile-visible Log In button beside the hamburger */
+.nav-right-mobile{display:none;align-items:center;gap:10px}
+.nav-cta-mobile{padding:7px 14px!important;font-size:0.78rem!important}
+@media(max-width:768px){.nav-right-mobile{display:flex}}
+
+/* LOGIN MODAL — centered card over a dim backdrop, clean DSpace-style layout */
+#loginModalOverlay{position:fixed;inset:0;background:rgba(10,27,54,0.55);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px}
+#loginModalOverlay.show{display:flex}
+.login-modal-card{background:var(--white);border-radius:20px;max-width:380px;width:100%;padding:36px 32px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.3);animation:loginModalIn 0.3s cubic-bezier(0.4,0,0.2,1);text-align:center}
+@keyframes loginModalIn{from{opacity:0;transform:scale(0.92) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.login-modal-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;background:var(--gray-light);color:var(--gray);border:none;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition)}
+.login-modal-close:hover{background:rgba(23,70,162,0.1);color:var(--blue)}
+.login-modal-logo{width:72px;height:72px;margin:0 auto 16px;border-radius:50%;overflow:hidden;background:var(--gray-light);display:flex;align-items:center;justify-content:center}
+.login-modal-logo img{width:100%;height:100%;object-fit:contain;padding:8px}
+.login-modal-title{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:24px;line-height:1.4}
+.login-modal-title span{color:var(--blue);font-weight:700}
+.login-modal-fieldgroup{border:1px solid rgba(23,70,162,0.18);border-radius:10px;overflow:hidden;margin-bottom:18px}
+.login-modal-field{border-bottom:1px solid rgba(23,70,162,0.12)}
+.login-modal-field:last-child{border-bottom:none}
+.login-modal-field input{width:100%;border:none;padding:14px 16px;font-family:'Poppins',sans-serif;font-size:0.9rem;color:var(--dark);outline:none;background:transparent}
+.login-modal-field input:focus{background:rgba(23,70,162,0.03)}
+.login-modal-btn{width:100%;padding:13px;background:var(--blue);color:var(--white);border:none;border-radius:10px;font-family:'Poppins',sans-serif;font-size:0.92rem;font-weight:700;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:8px}
+.login-modal-btn:hover{background:var(--blue-dark)}
+.login-modal-btn:disabled{opacity:0.7;cursor:not-allowed}
+.login-modal-error{font-size:0.78rem;color:#c0392b;margin-top:10px;display:none}
+.login-modal-error.show{display:block}
+.login-modal-links{margin-top:18px;display:flex;flex-direction:column;gap:10px;font-size:0.8rem}
+.login-modal-links a{color:var(--blue);font-weight:500}
+.login-modal-links a:hover{text-decoration:underline}
+@media(max-width:480px){.login-modal-card{padding:28px 22px}}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
 .hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:var(--transition)}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
@@ -403,26 +414,12 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     <li><a href="vision.html">Vision</a></li>
     <li><a href="help.html">Help</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li class="nav-login-wrap">
-      <button class="nav-cta nav-login-trigger" id="navLoginTrigger" onclick="toggleNavLogin(event)">Log In <span class="nav-login-caret">▾</span></button>
-      <div class="nav-login-dropdown" id="navLoginDropdown">
-        <div class="nav-login-field">
-          <label>Student ID</label>
-          <input type="text" id="navLoginStudentId" placeholder="e.g. 01234567B">
-        </div>
-        <div class="nav-login-field">
-          <label>Password</label>
-          <input type="password" id="navLoginPassword" placeholder="Password" onkeydown="if(event.key==='Enter')navLoginSubmit()">
-        </div>
-        <button class="nav-login-btn" id="navLoginBtn" onclick="navLoginSubmit()">→ Log in</button>
-        <div class="nav-login-error" id="navLoginError"></div>
-        <div class="nav-login-links">
-          <a href="signup.html">New user? Click here to register.</a>
-        </div>
-      </div>
-    </li>
+    <li><button class="nav-cta" onclick="openLoginModal()">Log In</button></li>
   </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  <div class="nav-right-mobile">
+    <button class="nav-cta nav-cta-mobile" onclick="openLoginModal()">Log In</button>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
 </nav>
 <div id="mobile-menu">
   <ul class="mobile-nav-links">
@@ -431,19 +428,30 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     <li><a href="mission.html">🎯 Mission</a></li><li><a href="vision.html">🔭 Vision</a></li>
     <li><a href="help.html">🆘 Help</a></li><li><a href="contact.html">📞 Contact</a></li>
   </ul>
-  <div class="mobile-login-box">
-    <div class="mobile-login-title">Log In</div>
-    <div class="nav-login-field">
-      <label>Student ID</label>
-      <input type="text" id="mobLoginStudentId" placeholder="e.g. 01234567B">
+</div>
+
+<!-- LOGIN MODAL — opens over whichever page the person is on -->
+<div id="loginModalOverlay" onclick="if(event.target===this)closeLoginModal()">
+  <div class="login-modal-card">
+    <button class="login-modal-close" onclick="closeLoginModal()" aria-label="Close">✕</button>
+    <div class="login-modal-logo">
+      <img src="images/atu-logo.png" alt="ATU PQ Hub" onerror="this.style.display='none'">
     </div>
-    <div class="nav-login-field">
-      <label>Password</label>
-      <input type="password" id="mobLoginPassword" placeholder="Password" onkeydown="if(event.key==='Enter')navLoginSubmit(true)">
+    <h3 class="login-modal-title">Please log in to <span>ATU PQ Hub</span></h3>
+    <div class="login-modal-fieldgroup">
+      <div class="login-modal-field">
+        <input type="text" id="loginModalStudentId" placeholder="Student ID" autocomplete="username">
+      </div>
+      <div class="login-modal-field">
+        <input type="password" id="loginModalPassword" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')navLoginSubmit()">
+      </div>
     </div>
-    <button class="nav-login-btn" id="mobLoginBtn" onclick="navLoginSubmit(true)">→ Log in</button>
-    <div class="nav-login-error" id="mobLoginError"></div>
-    <div class="nav-login-links"><a href="signup.html">New user? Click here to register.</a></div>
+    <button class="login-modal-btn" id="loginModalBtn" onclick="navLoginSubmit()">→ Log in</button>
+    <div class="login-modal-error" id="loginModalError"></div>
+    <div class="login-modal-links">
+      <a href="signup.html">New user? Click here to register.</a>
+      <a href="https://wa.me/233554196068?text=Hi%2C+I+forgot+my+ATU+PQ+Hub+password.+My+Student+ID+is%3A+" target="_blank">Have you forgotten your password?</a>
+    </div>
   </div>
 </div>
 
@@ -833,21 +841,26 @@ function toggleMenu() {
   document.getElementById('hamburger').classList.toggle('open');
 }
 
-// NAV LOGIN DROPDOWN
-function toggleNavLogin(e) {
-  e.stopPropagation();
-  document.getElementById('navLoginTrigger').closest('.nav-login-wrap').classList.toggle('open');
+// LOGIN MODAL
+function openLoginModal() {
+  document.getElementById('loginModalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('loginModalError').classList.remove('show');
+  setTimeout(() => document.getElementById('loginModalStudentId').focus(), 50);
 }
-document.addEventListener('click', function(e) {
-  const wrap = document.querySelector('.nav-login-wrap');
-  if (wrap && !wrap.contains(e.target)) wrap.classList.remove('open');
+function closeLoginModal() {
+  document.getElementById('loginModalOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLoginModal();
 });
 
-async function navLoginSubmit(isMobile) {
-  const studentId = document.getElementById(isMobile ? 'mobLoginStudentId' : 'navLoginStudentId').value.trim();
-  const password  = document.getElementById(isMobile ? 'mobLoginPassword'  : 'navLoginPassword').value;
-  const btn       = document.getElementById(isMobile ? 'mobLoginBtn'      : 'navLoginBtn');
-  const errEl     = document.getElementById(isMobile ? 'mobLoginError'    : 'navLoginError');
+async function navLoginSubmit() {
+  const studentId = document.getElementById('loginModalStudentId').value.trim();
+  const password  = document.getElementById('loginModalPassword').value;
+  const btn       = document.getElementById('loginModalBtn');
+  const errEl     = document.getElementById('loginModalError');
 
   errEl.classList.remove('show');
   if (!studentId || !password) {
