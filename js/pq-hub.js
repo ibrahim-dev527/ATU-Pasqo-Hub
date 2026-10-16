@@ -24,6 +24,9 @@ try {
 //  STUDENT ID  <->  INTERNAL AUTH EMAIL
 // ------------------------------------------------------------
 function pqhubStudentIdToEmail(studentId) {
+  // Admins may use any real email address: if it contains "@", use it as typed.
+  const raw = String(studentId || '').trim();
+  if (raw.includes('@')) return raw.toLowerCase();
   const clean = String(studentId || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
   return `${clean}@${PQHUB_AUTH_DOMAIN}`;
 }
@@ -69,6 +72,20 @@ async function pqhubSignIn({ studentId, password }) {
   const { data, error } = await sb.auth.signInWithPassword({ email, password });
   if (error) throw error;
   return data;
+}
+
+// ------------------------------------------------------------
+//  WHERE SHOULD THIS PERSON LAND? Admins go to the admin
+//  dashboard, students go to their own dashboard. The role is
+//  read from public.users.is_admin, which only an admin can set.
+// ------------------------------------------------------------
+async function pqhubLandingPage() {
+  try {
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) return 'login.html';
+    const { data } = await sb.from('users').select('is_admin').eq('id', user.id).maybeSingle();
+    return (data && data.is_admin === true) ? 'dashboard.html' : 'user-dashboard.html';
+  } catch (e) { return 'user-dashboard.html'; }
 }
 
 async function pqhubSignOut() {

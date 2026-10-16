@@ -190,22 +190,6 @@
 </head>
 <body>
 
-<!-- ===== AUTH: LOGIN REQUIRED MODAL ===== -->
-<div id="login-modal">
-  <div class="modal-backdrop" onclick="closeLoginModal()"></div>
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeLoginModal()">✕</button>
-    <div class="modal-icon">🔒</div>
-    <h2 class="modal-title">Login <span>Required</span></h2>
-    <p class="modal-desc">To download past questions you must have a <strong>free ATU PQ Hub account</strong>. Creating one takes less than 1 minute!</p>
-    <div class="modal-actions">
-      <button class="btn-modal-login" onclick="window.location.href='login.html'">🔑 Sign In to My Account</button>
-      <button class="btn-modal-signup" onclick="window.location.href='signup.html'">🎓 Create Free Account</button>
-    </div>
-    <p class="modal-note">It's 100% free. No payment required. Just create an account and all past questions are yours to download.</p>
-  </div>
-</div>
-
 <!-- NAVBAR -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">ATU <span>PQ Hub</span></a>
@@ -247,7 +231,7 @@
 <!-- AUTH BANNER: shown when not logged in -->
 <div id="auth-banner">
   <p>🔒 <span>Login required</span> to download past questions: it's completely free!</p>
-  <button class="btn-banner-login" onclick="window.location.href='login.html'">Sign In</button>
+  <button class="btn-banner-login" onclick="openLoginModal()">Sign In</button>
   <button class="btn-banner-login" style="background:var(--gold);color:var(--dark)" onclick="window.location.href='signup.html'">Create Free Account</button>
 </div>
 
@@ -334,7 +318,7 @@
     <div class="icon">😕</div>
     <h3>No past questions found</h3>
     <p>Try different search terms or filters, or request the specific past question below.</p>
-    <a href="https://wa.me/233554196068?text=Hi%20Moyole%2C%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-request" style="display:inline-flex;margin-top:4px">📲 Request on WhatsApp</a>
+    <a href="https://wa.me/233245607110?text=Hi%20Moyole%2C%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-request" style="display:inline-flex;margin-top:4px">📲 Request on WhatsApp</a>
   </div>
 </div>
 
@@ -345,7 +329,7 @@
       <h3>Can't Find Your Past Question?</h3>
       <p>Message Moyole on WhatsApp with your course, faculty, level and year: we'll upload it within 24 hours!</p>
     </div>
-    <a href="https://wa.me/233554196068?text=Hi%20Moyole%2C%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-request">📲 Request on WhatsApp</a>
+    <a href="https://wa.me/233245607110?text=Hi%20Moyole%2C%20I%20need%20past%20questions%20for%3A%20" target="_blank" class="btn-request">📲 Request on WhatsApp</a>
   </div>
 </div>
 
@@ -732,20 +716,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================
-//  LOGIN MODAL
-// ============================================================
-function openLoginModal() {
-  document.getElementById('login-modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeLoginModal() {
-  document.getElementById('login-modal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-// Close with Escape key
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLoginModal(); });
-
-// ============================================================
 //  NAV / MENU / CHATBOT
 // ============================================================
 function toggleMenu() {
@@ -761,6 +731,7 @@ document.addEventListener('click', e => {
 </script>
 <script src="js/carousel.js"></script>
 <script src="js/chatbot.js"></script>
+<script src="js/login-modal.js"></script>
 </body>
 </html>
  

@@ -158,7 +158,8 @@ async function handleLogin() {
   try {
     await pqhubSignIn({ studentId, password });
     showAlert('success', '✅ Login successful! Taking you to your dashboard...');
-    setTimeout(() => { window.location.href = 'user-dashboard.html'; }, 1200);
+    const dest = await pqhubLandingPage();
+    setTimeout(() => { window.location.href = dest; }, 900);
   } catch (err) {
     showAlert('error', '❌ ' + (err.message || 'Incorrect Student ID or password.'));
   } finally {

@@ -32,47 +32,81 @@ create table if not exists public.users (
 
 alter table public.users enable row level security;
 
+-- ------------------------------------------------------------
+-- ADMIN CHECK (SECURITY DEFINER): lets policies ask "is this
+-- person an admin?" without the policy recursing into itself.
+-- ------------------------------------------------------------
+create or replace function public.pqhub_is_admin()
+returns boolean as $$
+  select coalesce((select is_admin from public.users where id = auth.uid()), false);
+$$ language sql stable security definer set search_path = public;
+
+-- ------------------------------------------------------------
+-- ADMIN-ESCALATION GUARD: nobody can make themselves an admin.
+-- Through the website, is_admin can only be changed by someone who
+-- is ALREADY an admin. Changes made in the Supabase dashboard
+-- (Table Editor) are allowed, because they are not website calls.
+-- ------------------------------------------------------------
+create or replace function public.pqhub_guard_is_admin()
+returns trigger as $$
+begin
+  if auth.uid() is not null and not public.pqhub_is_admin() then
+    if tg_op = 'INSERT' then
+      new.is_admin := false;
+    else
+      new.is_admin := old.is_admin;
+    end if;
+  end if;
+  return new;
+end;
+$$ language plpgsql security definer set search_path = public;
+
+drop trigger if exists pqhub_guard_is_admin_trg on public.users;
+create trigger pqhub_guard_is_admin_trg
+  before insert or update on public.users
+  for each row execute function public.pqhub_guard_is_admin();
+
+drop policy if exists "Users read own profile, admins read all" on public.users;
 create policy "Users read own profile, admins read all"
   on public.users for select
   using (
     auth.uid() = id
-    or exists (select 1 from public.users u where u.id = auth.uid() and u.is_admin = true)
+    or public.pqhub_is_admin()
   );
 
+drop policy if exists "Users update own profile" on public.users;
 create policy "Users update own profile"
   on public.users for update
   using (auth.uid() = id);
 
+drop policy if exists "Users insert own profile on signup" on public.users;
 create policy "Users insert own profile on signup"
   on public.users for insert
   with check (auth.uid() = id);
 
 -- ------------------------------------------------------------
--- AUTO-CREATE PROFILE ROW — fixes the old "signed up but no row
--- in users" problem for good, and lets you create an ADMIN
--- entirely from the Supabase dashboard with no SQL Editor step:
+-- AUTO-CREATE PROFILE ROW: every new login account gets its
+-- matching public.users row automatically, always as a NORMAL
+-- student (is_admin = false). Signup metadata is never trusted
+-- for admin rights, because anyone can send metadata.
 --
---   Authentication → Users → Add user
---     Email:    <studentid>@students.atupqhub.local   (lowercase)
---     Password: whatever you want them to log in with
---     User Metadata (as JSON):
---       {"student_id": "ADMIN001", "full_name": "Admin Name", "is_admin": true}
---     Auto Confirm User: ON
---
--- The trigger below fires the instant that account is created —
--- with or without metadata — and inserts the matching row in
--- public.users automatically. Leave "is_admin" out of the
--- metadata (or set it false) for a normal student account.
+-- HOW TO MAKE AN ADMIN (no SQL needed):
+--   1. Authentication > Users > Add user
+--        Email:    <id>@students.atupqhub.local  (lowercase)
+--        Password: their password
+--        Auto Confirm User: ON
+--      (the row in "users" appears by itself)
+--   2. Table Editor > users > find that row > tick is_admin > Save
+-- Repeat for as many admins as you like. Untick to remove one.
 -- ------------------------------------------------------------
 create or replace function public.pqhub_handle_new_user()
 returns trigger as $$
 begin
-  insert into public.users (id, student_id, name, is_admin)
+  insert into public.users (id, student_id, name)
   values (
     new.id,
     coalesce(new.raw_user_meta_data->>'student_id', split_part(new.email, '@', 1)),
-    coalesce(new.raw_user_meta_data->>'full_name', ''),
-    coalesce((new.raw_user_meta_data->>'is_admin')::boolean, false)
+    coalesce(new.raw_user_meta_data->>'full_name', '')
   )
   on conflict (id) do nothing;
   return new;
@@ -109,15 +143,17 @@ alter table public.past_questions add column if not exists course_code text;
 alter table public.past_questions enable row level security;
 
 -- Anyone can browse past questions, even logged-out visitors
+drop policy if exists "Anyone can view past questions" on public.past_questions;
 create policy "Anyone can view past questions"
   on public.past_questions for select
   using (true);
 
 -- Only admins (Moyole's account) can add, edit, or delete
+drop policy if exists "Admins manage past questions" on public.past_questions;
 create policy "Admins manage past questions"
   on public.past_questions for all
-  using (exists (select 1 from public.users u where u.id = auth.uid() and u.is_admin = true))
-  with check (exists (select 1 from public.users u where u.id = auth.uid() and u.is_admin = true));
+  using (public.pqhub_is_admin())
+  with check (public.pqhub_is_admin());
 
 
 -- ============================================================
@@ -134,13 +170,15 @@ create table if not exists public.downloads (
 
 alter table public.downloads enable row level security;
 
+drop policy if exists "Users see own downloads, admins see all" on public.downloads;
 create policy "Users see own downloads, admins see all"
   on public.downloads for select
   using (
     auth.uid() = user_id
-    or exists (select 1 from public.users u where u.id = auth.uid() and u.is_admin = true)
+    or public.pqhub_is_admin()
   );
 
+drop policy if exists "Users log their own downloads" on public.downloads;
 create policy "Users log their own downloads"
   on public.downloads for insert
   with check (auth.uid() = user_id);
@@ -160,20 +198,23 @@ create table if not exists public.pq_requests (
 
 alter table public.pq_requests enable row level security;
 
+drop policy if exists "Users see own requests, admins see all" on public.pq_requests;
 create policy "Users see own requests, admins see all"
   on public.pq_requests for select
   using (
     auth.uid() = user_id
-    or exists (select 1 from public.users u where u.id = auth.uid() and u.is_admin = true)
+    or public.pqhub_is_admin()
   );
 
+drop policy if exists "Users insert own requests" on public.pq_requests;
 create policy "Users insert own requests"
   on public.pq_requests for insert
   with check (auth.uid() = user_id);
 
+drop policy if exists "Admins update any request" on public.pq_requests;
 create policy "Admins update any request"
   on public.pq_requests for update
-  using (exists (select 1 from public.users u where u.id = auth.uid() and u.is_admin = true));
+  using (public.pqhub_is_admin());
 
 
 -- ============================================================
@@ -185,24 +226,27 @@ on conflict (id) do nothing;
 
 -- Anyone can view/download the files (needed so download links work
 -- for visitors browsing without an account, and for logged-in students)
+drop policy if exists "Public read access to past question files" on storage.objects;
 create policy "Public read access to past question files"
   on storage.objects for select
   using (bucket_id = 'past-questions');
 
 -- Only admins can upload new files
+drop policy if exists "Admins upload past question files" on storage.objects;
 create policy "Admins upload past question files"
   on storage.objects for insert
   with check (
     bucket_id = 'past-questions'
-    and exists (select 1 from public.users u where u.id = auth.uid() and u.is_admin = true)
+    and public.pqhub_is_admin()
   );
 
 -- Only admins can delete files
+drop policy if exists "Admins delete past question files" on storage.objects;
 create policy "Admins delete past question files"
   on storage.objects for delete
   using (
     bucket_id = 'past-questions'
-    and exists (select 1 from public.users u where u.id = auth.uid() and u.is_admin = true)
+    and public.pqhub_is_admin()
   );
 
 -- ============================================================
@@ -212,7 +256,7 @@ create policy "Admins delete past question files"
 --     behind the scenes and can never receive a confirmation link)
 --  2. Settings → API → copy your Project URL + anon key into
 --     js/pq-hub.js
---  3. Create your admin account directly in Authentication → Users
---     → Add user (see the comment above the trigger, a few lines
---     up) — no SQL Editor step needed for this part
+--  3. Create admins: Authentication > Users > Add user, then tick
+--     is_admin on their row in Table Editor > users (see the
+--     comment above the trigger). No SQL needed.
 -- ============================================================

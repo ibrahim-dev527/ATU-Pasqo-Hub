@@ -84,30 +84,6 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 @media(max-width:768px){.nav-right-mobile{display:flex}}
 
 /* LOGIN MODAL — centered card over a dim backdrop, clean DSpace-style layout */
-#loginModalOverlay{position:fixed;inset:0;background:rgba(10,27,54,0.55);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px}
-#loginModalOverlay.show{display:flex}
-.login-modal-card{background:var(--white);border-radius:20px;max-width:380px;width:100%;padding:36px 32px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.3);animation:loginModalIn 0.3s cubic-bezier(0.4,0,0.2,1);text-align:center}
-@keyframes loginModalIn{from{opacity:0;transform:scale(0.92) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.login-modal-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;background:var(--gray-light);color:var(--gray);border:none;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition)}
-.login-modal-close:hover{background:rgba(23,70,162,0.1);color:var(--blue)}
-.login-modal-logo{width:72px;height:72px;margin:0 auto 16px;border-radius:50%;overflow:hidden;background:var(--gray-light);display:flex;align-items:center;justify-content:center}
-.login-modal-logo img{width:100%;height:100%;object-fit:contain;padding:8px}
-.login-modal-title{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:24px;line-height:1.4}
-.login-modal-title span{color:var(--blue);font-weight:700}
-.login-modal-fieldgroup{border:1px solid rgba(23,70,162,0.18);border-radius:10px;overflow:hidden;margin-bottom:18px}
-.login-modal-field{border-bottom:1px solid rgba(23,70,162,0.12)}
-.login-modal-field:last-child{border-bottom:none}
-.login-modal-field input{width:100%;border:none;padding:14px 16px;font-family:'Poppins',sans-serif;font-size:0.9rem;color:var(--dark);outline:none;background:transparent}
-.login-modal-field input:focus{background:rgba(23,70,162,0.03)}
-.login-modal-btn{width:100%;padding:13px;background:var(--blue);color:var(--white);border:none;border-radius:10px;font-family:'Poppins',sans-serif;font-size:0.92rem;font-weight:700;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:8px}
-.login-modal-btn:hover{background:var(--blue-dark)}
-.login-modal-btn:disabled{opacity:0.7;cursor:not-allowed}
-.login-modal-error{font-size:0.78rem;color:#c0392b;margin-top:10px;display:none}
-.login-modal-error.show{display:block}
-.login-modal-links{margin-top:18px;display:flex;flex-direction:column;gap:10px;font-size:0.8rem}
-.login-modal-links a{color:var(--blue);font-weight:500}
-.login-modal-links a:hover{text-decoration:underline}
-@media(max-width:480px){.login-modal-card{padding:28px 22px}}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
 .hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:var(--transition)}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
@@ -414,10 +390,9 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     <li><a href="vision.html">Vision</a></li>
     <li><a href="help.html">Help</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><button class="nav-cta" onclick="openLoginModal()">Log In</button></li>
+    <li><a href="login.html" class="nav-cta">Log In</a></li>
   </ul>
   <div class="nav-right-mobile">
-    <button class="nav-cta nav-cta-mobile" onclick="openLoginModal()">Log In</button>
     <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </div>
 </nav>
@@ -428,31 +403,6 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     <li><a href="mission.html">🎯 Mission</a></li><li><a href="vision.html">🔭 Vision</a></li>
     <li><a href="help.html">🆘 Help</a></li><li><a href="contact.html">📞 Contact</a></li>
   </ul>
-</div>
-
-<!-- LOGIN MODAL — opens over whichever page the person is on -->
-<div id="loginModalOverlay" onclick="if(event.target===this)closeLoginModal()">
-  <div class="login-modal-card">
-    <button class="login-modal-close" onclick="closeLoginModal()" aria-label="Close">✕</button>
-    <div class="login-modal-logo">
-      <img src="images/atu-logo.png" alt="ATU PQ Hub" onerror="this.style.display='none'">
-    </div>
-    <h3 class="login-modal-title">Please log in to <span>ATU PQ Hub</span></h3>
-    <div class="login-modal-fieldgroup">
-      <div class="login-modal-field">
-        <input type="text" id="loginModalStudentId" placeholder="Student ID" autocomplete="username">
-      </div>
-      <div class="login-modal-field">
-        <input type="password" id="loginModalPassword" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')navLoginSubmit()">
-      </div>
-    </div>
-    <button class="login-modal-btn" id="loginModalBtn" onclick="navLoginSubmit()">→ Log in</button>
-    <div class="login-modal-error" id="loginModalError"></div>
-    <div class="login-modal-links">
-      <a href="signup.html">New user? Click here to register.</a>
-      <a href="https://wa.me/233554196068?text=Hi%2C+I+forgot+my+ATU+PQ+Hub+password.+My+Student+ID+is%3A+" target="_blank">Have you forgotten your password?</a>
-    </div>
-  </div>
 </div>
 
 <!-- ===== HERO SWIPER ===== -->
@@ -657,7 +607,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <a href="about.html" class="btn btn-primary">Read More</a>
-          <a href="https://wa.me/233554196068" target="_blank" class="btn" style="background:transparent;color:var(--dark);border:2px solid rgba(0,0,0,0.15)">📲 Contact Moyole</a>
+          <a href="https://wa.me/233245607110" target="_blank" class="btn" style="background:transparent;color:var(--dark);border:2px solid rgba(0,0,0,0.15)">📲 Contact Moyole</a>
         </div>
       </div>
     </div>
@@ -754,13 +704,13 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
         <ul>
           <li><a href="mission.html">Our Mission</a></li><li><a href="vision.html">Our Vision</a></li>
           <li><a href="contact.html">Contact Us</a></li><li><a href="login.html">Login</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li>
-          <li><a href="signup.html">Sign Up</a></li><li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="signup.html">Sign Up</a></li><li><a href="user-dashboard.html">My Account</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <div class="footer-contact-item"><div class="footer-contact-icon">📞</div><div><a href="tel:+233554196068">055 419 6068</a><br><a href="tel:+233554196068">055 419 6068</a></div></div>
-        <div class="footer-contact-item"><div class="footer-contact-icon">💬</div><div><a href="https://wa.me/233554196068" target="_blank">WhatsApp Moyole</a></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon">💬</div><div><a href="https://wa.me/233245607110" target="_blank">WhatsApp Moyole</a></div></div>
         <div class="footer-contact-item"><div class="footer-contact-icon">📸</div><div></div></div>
         <div class="footer-contact-item"><div class="footer-contact-icon">🎵</div><div></div></div>
       </div>
@@ -841,50 +791,6 @@ function toggleMenu() {
   document.getElementById('hamburger').classList.toggle('open');
 }
 
-// LOGIN MODAL
-function openLoginModal() {
-  document.getElementById('loginModalOverlay').classList.add('show');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('loginModalError').classList.remove('show');
-  setTimeout(() => document.getElementById('loginModalStudentId').focus(), 50);
-}
-function closeLoginModal() {
-  document.getElementById('loginModalOverlay').classList.remove('show');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeLoginModal();
-});
-
-async function navLoginSubmit() {
-  const studentId = document.getElementById('loginModalStudentId').value.trim();
-  const password  = document.getElementById('loginModalPassword').value;
-  const btn       = document.getElementById('loginModalBtn');
-  const errEl     = document.getElementById('loginModalError');
-
-  errEl.classList.remove('show');
-  if (!studentId || !password) {
-    errEl.textContent = 'Enter your Student ID and password.';
-    errEl.classList.add('show');
-    return;
-  }
-  if (!sb) {
-    errEl.textContent = 'Not connected yet. Try again shortly.';
-    errEl.classList.add('show');
-    return;
-  }
-
-  btn.disabled = true; btn.textContent = 'Logging in...';
-  try {
-    await pqhubSignIn({ studentId, password });
-    window.location.href = 'user-dashboard.html';
-  } catch (err) {
-    errEl.textContent = err.message || 'Incorrect Student ID or password.';
-    errEl.classList.add('show');
-    btn.disabled = false; btn.textContent = '→ Log in';
-  }
-}
-
 document.addEventListener('click', e => {
   const m = document.getElementById('mobile-menu'), h = document.getElementById('hamburger');
   if (!m.contains(e.target) && !h.contains(e.target) && m.classList.contains('open')) {
@@ -952,5 +858,6 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 </script>
 <script src="js/carousel.js"></script>
 <script src="js/chatbot.js"></script>
+<script src="js/login-modal.js"></script>
 </body>
 </html>

@@ -368,13 +368,13 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     </div>
     <div class="card">
       <div class="card-title">👑 Make Your Admin Account (VERY IMPORTANT)</div>
-      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Nobody starts out as an admin: you have to promote one account by hand. This is what lets Moyole (and only Moyole) into <code>dashboard.html</code>.</p>
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Nobody starts out as an admin, and nobody can promote themselves from the website. Admin rights can only be given inside your Supabase dashboard. This is what lets Moyole (and only Moyole) into <code>dashboard.html</code>.</p>
       <ol class="steps-ol">
-        <li><div class="s-num">1</div><div class="s-text">Go to your own live website (or open <code>signup.html</code>) and sign up like a normal student would: pick a memorable Student ID like <code>ADMIN001</code></div></li>
-        <li><div class="s-num">2</div><div class="s-text">In Supabase, click <strong>"Table Editor"</strong> → <strong>users</strong></div></li>
-        <li><div class="s-num">3</div><div class="s-text">Find the row with the Student ID you just signed up with</div></li>
-        <li><div class="s-num">4</div><div class="s-text">Click the <code>is_admin</code> cell for that row and change it from <code>false</code> to <code>true</code></div></li>
-        <li><div class="s-num">5</div><div class="s-text">Save. Log out and log back in on the site: that account can now open <code>dashboard.html</code> and upload past questions</div></li>
+        <li><div class="s-num">1</div><div class="s-text">In Supabase, open <strong>Authentication</strong> → <strong>Users</strong> → <strong>Add user</strong> → <strong>Create new user</strong></div></li>
+        <li><div class="s-num">2</div><div class="s-text">Email: the admin's ID in lowercase followed by <code>@students.atupqhub.local</code>, for example <code>admin001@students.atupqhub.local</code>. Type a strong password and switch <strong>Auto Confirm User</strong> ON. Create the user.</div></li>
+        <li><div class="s-num">3</div><div class="s-text">Open <strong>Table Editor</strong> → <strong>users</strong>. A row for that account is already there (it is created automatically). Tick <code>is_admin</code> and save.</div></li>
+        <li><div class="s-num">4</div><div class="s-text">On the website click <strong>Log In</strong>, type the ID (for example <code>admin001</code>) and the password. Admins land on the Admin Dashboard automatically; students land on their own dashboard.</div></li>
+        <li><div class="s-num">5</div><div class="s-text">Repeat for as many admins as you want. To remove an admin, untick <code>is_admin</code>.</div></li>
       </ol>
       <div class="callout danger" style="margin-top:8px">
         <div class="callout-icon">🚨</div>
