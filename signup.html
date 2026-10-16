@@ -246,7 +246,7 @@ async function handleSignup() {
     });
 
     showAlert('success', '🎉 Account created successfully! Taking you to your dashboard...');
-    setTimeout(() => { window.location.href = 'user-dashboard.html'; }, 2000);
+    setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
 
   } catch (err) {
     showAlert('error', '❌ ' + (err.message || 'Could not create your account. Please try again.'));

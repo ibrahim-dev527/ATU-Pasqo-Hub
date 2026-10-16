@@ -49,7 +49,7 @@ const PQHUB_CHAT_FAQ = [
   {
     keywords: ['dashboard', 'my downloads', 'my requests', 'my profile', 'my account'],
     reply: 'Your dashboard shows your download history, your requests to the admin, and lets you edit your profile.',
-    link: { href: 'user-dashboard.html', label: 'Go to My Dashboard' }
+    link: { href: 'dashboard.html', label: 'Go to My Dashboard' }
   },
   {
     keywords: ['mission'],

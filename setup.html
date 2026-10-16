@@ -368,12 +368,12 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     </div>
     <div class="card">
       <div class="card-title">👑 Make Your Admin Account (VERY IMPORTANT)</div>
-      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Nobody starts out as an admin, and nobody can promote themselves from the website. Admin rights can only be given inside your Supabase dashboard. This is what lets Moyole (and only Moyole) into <code>dashboard.html</code>.</p>
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:12px">Nobody starts out as an admin, and nobody can promote themselves from the website. Admin rights can only be given inside your Supabase dashboard. This is what lets Moyole (and only Moyole) into <code>admin.html</code>.</p>
       <ol class="steps-ol">
         <li><div class="s-num">1</div><div class="s-text">In Supabase, open <strong>Authentication</strong> → <strong>Users</strong> → <strong>Add user</strong> → <strong>Create new user</strong></div></li>
         <li><div class="s-num">2</div><div class="s-text">Email: the admin's ID in lowercase followed by <code>@students.atupqhub.local</code>, for example <code>admin001@students.atupqhub.local</code>. Type a strong password and switch <strong>Auto Confirm User</strong> ON. Create the user.</div></li>
         <li><div class="s-num">3</div><div class="s-text">Open <strong>Table Editor</strong> → <strong>users</strong>. A row for that account is already there (it is created automatically). Tick <code>is_admin</code> and save.</div></li>
-        <li><div class="s-num">4</div><div class="s-text">On the website click <strong>Log In</strong>, type the ID (for example <code>admin001</code>) and the password. Admins land on the Admin Dashboard automatically; students land on their own dashboard.</div></li>
+        <li><div class="s-num">4</div><div class="s-text">Open <code>yourwebsite/admin.html</code> and sign in with the <strong>email and password you just created</strong>. That page is the Admin Dashboard. Students never use it: they log in with the <strong>Log In</strong> button using their Student ID and land on <code>dashboard.html</code>.</div></li>
         <li><div class="s-num">5</div><div class="s-text">Repeat for as many admins as you want. To remove an admin, untick <code>is_admin</code>.</div></li>
       </ol>
       <div class="callout danger" style="margin-top:8px">
@@ -417,7 +417,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     <div class="card">
       <div class="card-title">📤 How to upload through the Admin Dashboard</div>
       <ol class="steps-ol">
-        <li><div class="s-num">1</div><div class="s-text">Open your browser and go to: <strong>yourwebsite.vercel.app/dashboard.html</strong></div></li>
+        <li><div class="s-num">1</div><div class="s-text">Open your browser and go to: <strong>yourwebsite.vercel.app/admin.html</strong></div></li>
         <li><div class="s-num">2</div><div class="s-text">Log in with your <strong>admin Student ID</strong> and password</div></li>
         <li><div class="s-num">3</div><div class="s-text">On the left side you'll see the <strong>Upload Past Question</strong> form. Fill it in:<span class="s-sub">📝 <strong>Title:</strong> e.g. "Engineering Mathematics I: Final Exam"<br>🏛️ <strong>Faculty:</strong> Select from dropdown<br>🏫 <strong>Department:</strong> e.g. Civil Engineering (optional)<br>📂 <strong>Level:</strong> Level 100, HND 1, etc.<br>📅 <strong>Year:</strong> 2023, 2024, etc.</span></div></li>
         <li><div class="s-num">4</div><div class="s-text">Click the dashed box to choose your PDF from your computer (or drag & drop it)</div></li>
@@ -442,7 +442,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     </div>
     <div class="dash-explainer">
       <div class="dash-box">
-        <h4>🔴 Admin Dashboard (<code>dashboard.html</code>)</h4>
+        <h4>🔴 Admin Dashboard (<code>admin.html</code>)</h4>
         <p style="font-size:0.78rem;color:var(--gray);margin-bottom:12px">For <strong>Moyole only</strong>. Access is enforced by an <code>is_admin</code> flag on the account in the database: not just by knowing the URL. Anyone else who signs in gets redirected straight to the student dashboard.</p>
         <ul>
           <li>Upload new past question PDFs</li>
@@ -452,11 +452,11 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
           <li>Link to WhatsApp for contact</li>
         </ul>
         <div style="margin-top:12px;padding:10px;background:rgba(23,70,162,0.06);border-radius:8px;font-size:0.75rem;color:var(--blue)">
-          🔐 URL: <code>yoursite.vercel.app/dashboard.html</code>
+          🔐 URL: <code>yoursite.vercel.app/admin.html</code>
         </div>
       </div>
       <div class="dash-box user-box">
-        <h4>🟡 Student Dashboard (<code>user-dashboard.html</code>)</h4>
+        <h4>🟡 Student Dashboard (<code>dashboard.html</code>)</h4>
         <p style="font-size:0.78rem;color:var(--gray);margin-bottom:12px">For <strong>all registered students</strong>. Students are redirected here after login/signup.</p>
         <ul>
           <li>Welcome message with their name</li>
@@ -468,7 +468,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
           <li>Contact Moyole directly</li>
         </ul>
         <div style="margin-top:12px;padding:10px;background:rgba(37,99,235,0.08);border-radius:8px;font-size:0.75rem;color:#b45309">
-          🔗 URL: <code>yoursite.vercel.app/user-dashboard.html</code>
+          🔗 URL: <code>yoursite.vercel.app/dashboard.html</code>
         </div>
       </div>
     </div>
@@ -615,9 +615,9 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     <div class="check-group-title">🧪 Testing</div>
     <div class="checklist">
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Created a student account via signup.html: redirected to student dashboard ✅</div></div>
-      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Logged in as the admin account → opened dashboard.html successfully</div></div>
-      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Logged in as a normal student → tried dashboard.html → got redirected to user-dashboard.html ✅</div></div>
-      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Uploaded 1 test PDF through dashboard.html</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Logged in as the admin account → opened admin.html successfully</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Logged in as a normal student → tried admin.html → got redirected to dashboard.html ✅</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Uploaded 1 test PDF through admin.html</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Visited past-questions.html → new PDF appears on the page ✅</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Checked "Recently Added" tab: uploaded PDF appears at the top ✅</div></div>
       <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Logged out → visited past-questions.html → download buttons show 🔒 lock icon ✅</div></div>
@@ -647,10 +647,10 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
     <div class="card-title">⚡ Quick Reference: Day-to-Day Tasks</div>
     <table class="guide-table">
       <tr><th>What you want to do</th><th>How to do it</th></tr>
-      <tr><td>📤 Upload a new past question PDF</td><td>Login as admin → <code>dashboard.html</code> → Fill form → Upload</td></tr>
+      <tr><td>📤 Upload a new past question PDF</td><td>Login as admin → <code>admin.html</code> → Fill form → Upload</td></tr>
       <tr><td>🆕 See newly uploaded PDFs on site</td><td><code>past-questions.html</code> → click "Recently Added" tab</td></tr>
       <tr><td>👥 See all registered students</td><td>Supabase → Table Editor → <code>users</code></td></tr>
-      <tr><td>📨 See what students have requested</td><td>Login as admin → <code>dashboard.html</code> → "Student Requests"</td></tr>
+      <tr><td>📨 See what students have requested</td><td>Login as admin → <code>admin.html</code> → "Student Requests"</td></tr>
       <tr><td>👑 Promote another admin</td><td>Supabase → Table Editor → <code>users</code> → set their <code>is_admin</code> to <code>true</code></td></tr>
       <tr><td>📄 See all past question records</td><td>Supabase → Table Editor → <code>past_questions</code></td></tr>
       <tr><td>🗂️ See all uploaded PDF files</td><td>Supabase → Storage → <code>past-questions</code> bucket</td></tr>

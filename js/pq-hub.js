@@ -84,8 +84,8 @@ async function pqhubLandingPage() {
     const { data: { user } } = await sb.auth.getUser();
     if (!user) return 'login.html';
     const { data } = await sb.from('users').select('is_admin').eq('id', user.id).maybeSingle();
-    return (data && data.is_admin === true) ? 'dashboard.html' : 'user-dashboard.html';
-  } catch (e) { return 'user-dashboard.html'; }
+    return (data && data.is_admin === true) ? 'admin.html' : 'dashboard.html';
+  } catch (e) { return 'dashboard.html'; }
 }
 
 async function pqhubSignOut() {
