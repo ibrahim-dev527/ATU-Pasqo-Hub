@@ -299,6 +299,13 @@ end $$;
 
 
 -- ============================================================
+-- 6. RENAME: "Faculty of Business" is now "School of Business"
+--    (updates any rows you already have; safe to run again)
+-- ============================================================
+update public.past_questions set faculty = 'School of Business' where faculty = 'Faculty of Business';
+update public.users          set faculty = 'School of Business' where faculty = 'Faculty of Business';
+
+-- ============================================================
 --  DONE.
 --  Also check: Authentication > Providers > Email > "Confirm email"
 --  must be OFF.

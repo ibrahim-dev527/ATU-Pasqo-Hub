@@ -198,7 +198,7 @@ const PQHUB_FACULTIES = {
   "Faculty of Built Environment": ["Building Technology", "Interior Design and Upholstery Technology"],
   "Faculty of Applied Sciences": ["Applied Mathematics and Statistics", "Science Laboratory Technology", "Computer Science", "Medical Laboratory Technology"],
   "Faculty of Applied Arts": ["Hotel Catering & Institutional Management (HCIM)", "Fashion Design & Textiles", "Liberal Studies and Communications Technology"],
-  "Faculty of Business": ["Accountancy and Finance", "Management and Public Administration", "Procurement and Supply Chain Management", "Marketing"]
+  "School of Business": ["Accountancy and Finance", "Management and Public Administration", "Procurement and Supply Chain Management", "Marketing"]
 };
 
 const PQHUB_LEVELS = ["Level 100", "Level 200", "Level 300", "Level 400", "HND 100", "HND 200", "HND 300", "Diploma 100", "Diploma 200"];
