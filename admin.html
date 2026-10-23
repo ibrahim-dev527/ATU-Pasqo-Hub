@@ -211,6 +211,28 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
 #gateError{color:#c0392b;font-size:.78rem;margin-top:10px;display:none}
 #gateError.show{display:block}
 .gate-card a{display:inline-block;margin-top:16px;font-size:.78rem;color:#14315D}
+
+/* HAMBURGER + SETTINGS */
+.hamb{width:40px;height:40px;border-radius:10px;border:none;background:rgba(20,49,93,.08);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;margin-right:12px;flex-shrink:0}
+.hamb span{display:block;width:20px;height:2px;background:#14315D;border-radius:2px}
+body.side-collapsed #sidebar{transform:translateX(-100%)}
+body.side-collapsed #main{margin-left:0}
+#sideScrim{display:none;position:fixed;inset:0;background:rgba(10,27,54,.5);z-index:150}
+@media(max-width:768px){#sideScrim.show{display:block}}
+.topbar{display:flex;align-items:center}
+.topbar-title{flex:1}
+.set-card{max-width:760px}
+.set-help{font-size:.78rem;color:#667;margin:-4px 0 18px;line-height:1.6}
+.set-field{margin-bottom:16px}
+.set-field label{display:block;font-weight:600;font-size:.82rem;margin-bottom:6px;color:#0A1B36}
+.set-field small{display:block;font-size:.72rem;color:#778;margin-top:4px}
+.set-img{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.set-img img{max-width:140px;max-height:140px;border-radius:10px;border:1px solid rgba(20,49,93,.15);background:#f4f6fa;object-fit:contain}
+.set-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.set-save{background:#14315D;color:#fff;border:none;padding:12px 22px;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit}
+.set-reset{background:#fff;color:#c0392b;border:1px solid #c0392b;padding:12px 18px;border-radius:10px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn-role{background:#14315D;color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:.74rem;font-weight:600;cursor:pointer;font-family:inherit}
+.btn-role.remove{background:#fff;color:#c0392b;border:1px solid #c0392b}
 </style>
 </head>
 <body>
@@ -297,6 +319,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
 <div id="toast"></div>
 
 <!-- ── SIDEBAR ── -->
+<div id="sideScrim" onclick="toggleSide()"></div>
 <aside id="sidebar">
   <div class="sidebar-logo">
     <div class="sidebar-logo-text">ATU <span>PQ Hub</span></div>
@@ -313,6 +336,13 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
     <div class="sidebar-section-label">Students</div>
     <button class="sidebar-link" id="nav-students" onclick="showSection('students')"><span class="icon">📋</span>All Students <span class="sidebar-badge" id="sidebarStudentCount">...</span></button>
     <button class="sidebar-link" id="nav-requests" onclick="showSection('requests')"><span class="icon">📨</span>Student Requests <span class="sidebar-badge" id="sidebarRequestCount">...</span></button>
+
+    <div class="sidebar-section-label">Site Settings</div>
+    <button class="sidebar-link" id="nav-set-popup" onclick="showSection('set-popup')"><span class="icon">🖼️</span>Welcome Pop-up</button>
+    <button class="sidebar-link" id="nav-set-banner" onclick="showSection('set-banner')"><span class="icon">📢</span>Announcement Banner</button>
+    <button class="sidebar-link" id="nav-set-brand" onclick="showSection('set-brand')"><span class="icon">🏷️</span>Logo and Names</button>
+    <button class="sidebar-link" id="nav-set-contact" onclick="showSection('set-contact')"><span class="icon">📞</span>Contacts and Social</button>
+    <button class="sidebar-link" id="nav-admins" onclick="showSection('admins')"><span class="icon">👑</span>Admins</button>
 
     <div class="sidebar-section-label">Contact</div>
     <a href="https://wa.me/233554196068" target="_blank" class="sidebar-link"><span class="icon">💬</span>WhatsApp</a>
@@ -334,6 +364,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
 <!-- ── MAIN CONTENT ── -->
 <div id="main">
   <div class="topbar">
+    <button class="hamb" type="button" id="hambBtn" aria-label="Open menu" onclick="toggleSide()"><span></span><span></span><span></span></button>
     <div class="topbar-title" id="topbarTitle">📊 Dashboard</div>
     <div class="topbar-right">
       <button class="topbar-btn secondary" onclick="showSection('upload')">⬆️ Upload PDF</button>
@@ -562,6 +593,18 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
       </div>
     </div>
 
+    <div class="section-view" id="section-set-popup"><div class="card set-card" id="form-set-popup"></div></div>
+    <div class="section-view" id="section-set-banner"><div class="card set-card" id="form-set-banner"></div></div>
+    <div class="section-view" id="section-set-brand"><div class="card set-card" id="form-set-brand"></div></div>
+    <div class="section-view" id="section-set-contact"><div class="card set-card" id="form-set-contact"></div></div>
+    <div class="section-view" id="section-admins">
+      <div class="card set-card">
+        <div class="card-title">👑 Admins <span class="card-title-count" id="adminsCount">Loading...</span></div>
+        <p class="set-help"><strong>To add a new admin:</strong> (1) in Supabase go to Authentication, Users, Add user, enter their email and password and switch Auto Confirm ON. (2) Come back here, open <strong>All Students</strong>, find them (search by the part of their email before the @) and click <strong>Make admin</strong>. They can then sign in at admin.html with that email and password. Remove an admin with the same button. You cannot remove yourself or the last admin.</p>
+        <div id="adminsList"></div>
+      </div>
+    </div>
+
     <div class="section-view" id="section-requests">
       <div class="card">
         <div class="card-title">
@@ -619,6 +662,7 @@ window.addEventListener('load', async function() {
     showAdminGate('This account is not an administrator.');
     return;
   }
+  myAdminId = user.id;
   {
     const name = profile.name || user.user_metadata?.full_name || user.email;
     document.getElementById('sidebarName').textContent = name;
@@ -1055,7 +1099,7 @@ function resetUploadForm() {
 // ══════════════════════════════════════════
 //  SECTION SWITCHING
 // ══════════════════════════════════════════
-const sectionTitles = { overview: '📊 Dashboard', upload: '⬆️ Upload New PDF', manage: '📁 Manage Past Questions', students: '📋 All Students', requests: '📨 Student Requests' };
+const sectionTitles = { overview: '📊 Dashboard', upload: '⬆️ Upload New PDF', manage: '📁 Manage Past Questions', students: '📋 All Students', requests: '📨 Student Requests', 'set-popup': '🖼️ Welcome Pop-up', 'set-banner': '📢 Announcement Banner', 'set-brand': '🏷️ Logo and Names', 'set-contact': '📞 Contacts and Social', admins: '👑 Admins' };
 function showSection(name) {
   document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
@@ -1068,6 +1112,9 @@ function showSection(name) {
   if (name === 'manage') loadAllPQs();
   if (name === 'requests') loadAdminRequests();
   if (name === 'students') loadAdminStudents();
+  if (name.indexOf('set-') === 0) renderSettingsForm(name);
+  if (name === 'admins') loadAdminsList();
+  if (window.innerWidth <= 768) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sideScrim').classList.remove('show'); }
 }
 
 // ══════════════════════════════════════════
@@ -1080,7 +1127,7 @@ async function loadAdminStudents() {
   const container = document.getElementById('studentsAdminList');
   try {
     const { data, error } = await sb.from('users')
-      .select('name, student_id, contact, faculty, department, level, is_admin, created_at')
+      .select('id, name, student_id, contact, faculty, department, level, is_admin, created_at')
       .order('created_at', { ascending: false });
     if (error) throw error;
     allStudents = data || [];
@@ -1109,7 +1156,7 @@ function renderStudentsTable() {
   }
 
   container.innerHTML = `<table class="pq-table" style="width:100%"><thead><tr>
-      <th>Name</th><th>Student ID</th><th>Contact</th><th>Faculty</th><th>Level</th><th></th>
+      <th>Name</th><th>Student ID</th><th>Contact</th><th>Faculty</th><th>Level</th><th>Role</th><th></th>
     </tr></thead><tbody>` +
     rows.map(s => `
       <tr>
@@ -1118,6 +1165,7 @@ function renderStudentsTable() {
         <td>${escHtmlS(s.contact) || 'N/A'}</td>
         <td>${escHtmlS(s.faculty) || 'N/A'}</td>
         <td>${escHtmlS(s.level) || 'N/A'}</td>
+        <td>${s.id === myAdminId ? '<em style="font-size:.72rem;color:#778">You</em>' : `<button class="btn-role ${s.is_admin ? 'remove' : ''}" onclick="setAdminRole('${escHtmlS(s.id)}', ${s.is_admin ? 'false' : 'true'})">${s.is_admin ? 'Remove admin' : 'Make admin'}</button>`}</td>
         <td>${s.contact ? `<a class="btn-view" href="https://wa.me/${String(s.contact).replace(/[^0-9]/g,'')}" target="_blank">💬 WhatsApp</a>` : ''}</td>
       </tr>`).join('') +
     `</tbody></table>`;
@@ -1140,6 +1188,174 @@ function exportStudentsCSV() {
 
 function escHtmlS(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ══════════════════════════════════════════
+//  HAMBURGER MENU
+// ══════════════════════════════════════════
+let myAdminId = null;
+function toggleSide() {
+  if (window.innerWidth <= 768) {
+    const open = document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sideScrim').classList.toggle('show', open);
+  } else {
+    document.body.classList.toggle('side-collapsed');
+  }
+}
+
+// ══════════════════════════════════════════
+//  ADMIN ROLES (make / remove admin)
+// ══════════════════════════════════════════
+async function setAdminRole(id, makeAdmin) {
+  if (!sb || !id) return;
+  if (id === myAdminId) { showToast('You cannot change your own role.', 'error'); return; }
+  if (!makeAdmin && allStudents.filter(s => s.is_admin).length <= 1) { showToast('You cannot remove the last admin.', 'error'); return; }
+  if (!confirm(makeAdmin ? 'Give this person full admin access?' : 'Remove this person\'s admin access?')) return;
+  const { error } = await sb.from('users').update({ is_admin: makeAdmin }).eq('id', id);
+  if (error) { showToast('Could not change role: ' + error.message, 'error'); return; }
+  showToast(makeAdmin ? 'Admin added.' : 'Admin removed.', 'success');
+  await loadAdminStudents();
+  if (document.getElementById('section-admins').classList.contains('active')) loadAdminsList();
+}
+async function loadAdminsList() {
+  await loadAdminStudents();
+  const admins = allStudents.filter(s => s.is_admin);
+  document.getElementById('adminsCount').textContent = admins.length + ' total';
+  document.getElementById('adminsList').innerHTML = `<table class="pq-table" style="width:100%"><thead><tr><th>Name</th><th>Login ID or email name</th><th></th></tr></thead><tbody>` +
+    admins.map(s => `<tr><td>${escHtmlS(s.name) || 'N/A'}</td><td>${escHtmlS(s.student_id)}</td><td>${s.id === myAdminId ? '<em style="font-size:.72rem;color:#778">You</em>' : `<button class="btn-role remove" onclick="setAdminRole('${escHtmlS(s.id)}', false)">Remove admin</button>`}</td></tr>`).join('') + `</tbody></table>`;
+}
+
+// ══════════════════════════════════════════
+//  SITE SETTINGS (pop-up, banner, logo, names, contacts, social)
+// ══════════════════════════════════════════
+const SETTINGS_SCHEMA = {
+  'set-popup': { title: '🖼️ Welcome Pop-up', help: 'The pop-up visitors see on the homepage. Change the flyer, the words and the button here. Anything left empty uses the default shown in grey.',
+    fields: [
+      { k: 'popup_enabled', label: 'Show the pop-up?', type: 'select', options: [['yes', 'Yes, show it'], ['no', 'No, hide it']], def: 'yes' },
+      { k: 'popup_image', label: 'Flyer or photo', type: 'image', help: 'PNG, JPG or WebP, up to 3 MB. A portrait picture works best.' },
+      { k: 'popup_title', label: 'Heading', type: 'text', ph: 'Welcome to ATU PQ Hub', max: 80 },
+      { k: 'popup_text', label: 'Message', type: 'textarea', ph: 'Free past questions for every ATU student.', max: 400 },
+      { k: 'popup_btn_text', label: 'Button words', type: 'text', ph: 'Browse Past Questions', max: 30 },
+      { k: 'popup_btn_link', label: 'Button link', type: 'link', ph: 'past-questions.html or https://...', help: 'A page on this site (like past-questions.html) or a full https:// link.' },
+      { k: 'popup_frequency', label: 'How often does it appear?', type: 'select', options: [['session', 'Once per visit'], ['day', 'Once a day'], ['once', 'Only once per person (until you change the pop-up)'], ['always', 'Every time the homepage opens']], def: 'session' }
+    ], stamp: 'popup_version' },
+  'set-banner': { title: '📢 Announcement Banner', help: 'A slim message bar at the bottom of every page, for news like "Level 200 results are out" or "New 2026 questions added". Visitors can close it.',
+    fields: [
+      { k: 'banner_enabled', label: 'Show the banner?', type: 'select', options: [['no', 'No, hide it'], ['yes', 'Yes, show it']], def: 'no' },
+      { k: 'banner_text', label: 'Message', type: 'textarea', ph: 'New past questions have been added!', max: 300 },
+      { k: 'banner_link_text', label: 'Link words (optional)', type: 'text', ph: 'Learn more', max: 30 },
+      { k: 'banner_link', label: 'Link (optional)', type: 'link', ph: 'past-questions.html or https://...' }
+    ] },
+  'set-brand': { title: '🏷️ Logo and Names', help: 'Changes the logo and names across the whole website. Empty fields keep the original.',
+    fields: [
+      { k: 'logo_url', label: 'Logo', type: 'image', help: 'PNG or WebP with a transparent background works best. Up to 3 MB. Replaces the ATU logo everywhere it appears.' },
+      { k: 'site_name', label: 'Website name', type: 'text', ph: 'ATU PQ Hub', max: 40 },
+      { k: 'rep_name', label: 'Representative full name', type: 'text', ph: 'Omar Sulley Bin', max: 60 },
+      { k: 'rep_nickname', label: 'Representative nickname', type: 'text', ph: 'Officer Moyole', max: 40 },
+      { k: 'rep_title', label: 'Representative title', type: 'text', ph: 'SRC Part Time Representative', max: 80 }
+    ] },
+  'set-contact': { title: '📞 Contacts and Social', help: 'Phone numbers and social media links shown on the website. Numbers can be typed like 0245607110. Social links must start with https://. Empty social fields are not shown.',
+    fields: [
+      { k: 'moyole_whatsapp', label: 'Officer Moyole phone / WhatsApp (student messages)', type: 'phone', ph: '024 560 7110' },
+      { k: 'dev_whatsapp', label: 'Technical support phone / WhatsApp (website problems)', type: 'phone', ph: '055 419 6068' },
+      { k: 'instagram', label: 'Instagram link', type: 'https', ph: 'https://instagram.com/yourhandle' },
+      { k: 'twitter', label: 'X (Twitter) link', type: 'https', ph: 'https://x.com/yourhandle' },
+      { k: 'tiktok', label: 'TikTok link', type: 'https', ph: 'https://tiktok.com/@yourhandle' },
+      { k: 'facebook', label: 'Facebook link', type: 'https', ph: 'https://facebook.com/yourpage' },
+      { k: 'youtube', label: 'YouTube link', type: 'https', ph: 'https://youtube.com/@yourchannel' },
+      { k: 'linkedin', label: 'LinkedIn link', type: 'https', ph: 'https://linkedin.com/in/yourname' }
+    ] }
+};
+let siteSettings = {};
+
+async function renderSettingsForm(name) {
+  const sc = SETTINGS_SCHEMA[name], box = document.getElementById('form-' + name);
+  box.innerHTML = '<div class="table-empty"><p>Loading...</p></div>';
+  if (sb) {
+    const { data, error } = await sb.from('site_settings').select('key,value');
+    if (!error && data) { siteSettings = {}; data.forEach(r => siteSettings[r.key] = r.value); }
+    else if (error) { box.innerHTML = '<div class="table-empty"><p>Could not load settings. Did you run the latest supabase-schema.sql? (' + escHtmlS(error.message) + ')</p></div>'; return; }
+  }
+  let h = `<div class="card-title">${sc.title}</div><p class="set-help">${sc.help}</p>`;
+  sc.fields.forEach(f => {
+    const v = siteSettings[f.k] !== undefined ? siteSettings[f.k] : (f.def || '');
+    const id = 'sf_' + f.k;
+    h += `<div class="set-field"><label for="${id}">${f.label}</label>`;
+    if (f.type === 'select') {
+      h += `<select class="form-select" id="${id}">` + f.options.map(o => `<option value="${o[0]}" ${o[0] === v ? 'selected' : ''}>${o[1]}</option>`).join('') + `</select>`;
+    } else if (f.type === 'textarea') {
+      h += `<textarea class="form-input" id="${id}" rows="3" maxlength="${f.max || 400}" placeholder="${escHtmlS(f.ph || '')}">${escHtmlS(v)}</textarea>`;
+    } else if (f.type === 'image') {
+      h += `<div class="set-img"><img id="${id}_prev" alt="" ${v ? `src="${escHtmlS(v)}"` : 'style="display:none"'}>
+        <div><input type="file" id="${id}_file" accept="image/png,image/jpeg,image/webp" onchange="uploadSettingImage('${f.k}')"><br>
+        <button type="button" class="btn-role remove" style="margin-top:8px" onclick="clearSettingImage('${f.k}')">Remove picture</button></div></div>
+        <input type="hidden" id="${id}" value="${escHtmlS(v)}">`;
+    } else {
+      h += `<input class="form-input" id="${id}" type="text" maxlength="${f.max || 300}" placeholder="${escHtmlS(f.ph || '')}" value="${escHtmlS(v)}">`;
+    }
+    if (f.help) h += `<small>${f.help}</small>`;
+    h += `</div>`;
+  });
+  h += `<div class="set-actions"><button class="set-save" id="saveBtn_${name}" onclick="saveSettings('${name}')">💾 Save changes</button><button class="set-reset" onclick="resetSettings('${name}')">Reset to original</button></div>`;
+  box.innerHTML = h;
+}
+
+async function uploadSettingImage(key) {
+  const input = document.getElementById('sf_' + key + '_file'), file = input.files[0];
+  if (!file) return;
+  if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) { showToast('Use a PNG, JPG or WebP picture.', 'error'); input.value = ''; return; }
+  if (file.size > 3 * 1024 * 1024) { showToast('Picture is too big. Keep it under 3 MB.', 'error'); input.value = ''; return; }
+  const ext = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp' }[file.type];
+  const path = 'site/' + key + '-' + Date.now() + '.' + ext;
+  showToast('Uploading picture...', 'success');
+  const { error } = await sb.storage.from('past-questions').upload(path, file, { contentType: file.type, upsert: false });
+  if (error) { showToast('Upload failed: ' + error.message, 'error'); return; }
+  const { data } = sb.storage.from('past-questions').getPublicUrl(path);
+  document.getElementById('sf_' + key).value = data.publicUrl;
+  const prev = document.getElementById('sf_' + key + '_prev'); prev.src = data.publicUrl; prev.style.display = 'block';
+  showToast('Picture uploaded. Click Save changes to apply it.', 'success');
+}
+function clearSettingImage(key) {
+  document.getElementById('sf_' + key).value = '';
+  const prev = document.getElementById('sf_' + key + '_prev'); prev.removeAttribute('src'); prev.style.display = 'none';
+}
+
+function validateSetting(f, v) {
+  v = v.trim();
+  if (!v) return '';
+  if (f.type === 'https' && !/^https:\/\/[^\s"'<>]+$/i.test(v)) throw new Error(f.label + ' must start with https://');
+  if (f.type === 'image' && !/^https:\/\/[^\s"'<>]+$/i.test(v)) throw new Error('Picture link is invalid.');
+  if (f.type === 'link' && !(/^https:\/\/[^\s"'<>]+$/i.test(v) || /^[a-z0-9\-_.\/]+\.html(#[\w-]*)?$/i.test(v))) throw new Error(f.label + ' must be a page like past-questions.html or a full https:// link.');
+  if (f.type === 'phone') {
+    let d = v.replace(/\D/g, ''); if (d.charAt(0) === '0') d = '233' + d.slice(1);
+    if (d.length < 11 || d.length > 15) throw new Error(f.label + ' is not a valid phone number.');
+    return d;
+  }
+  return v;
+}
+
+async function saveSettings(name) {
+  const sc = SETTINGS_SCHEMA[name], btn = document.getElementById('saveBtn_' + name);
+  try {
+    const rows = sc.fields.map(f => ({ key: f.k, value: validateSetting(f, document.getElementById('sf_' + f.k).value), updated_at: new Date().toISOString() }));
+    if (sc.stamp) rows.push({ key: sc.stamp, value: String(Date.now()), updated_at: new Date().toISOString() });
+    btn.disabled = true; btn.textContent = 'Saving...';
+    const { error } = await sb.from('site_settings').upsert(rows, { onConflict: 'key' });
+    if (error) throw error;
+    showToast('Saved. The website now shows your changes.', 'success');
+    renderSettingsForm(name);
+  } catch (e) {
+    showToast(e.message || 'Could not save.', 'error');
+    btn.disabled = false; btn.textContent = '💾 Save changes';
+  }
+}
+async function resetSettings(name) {
+  if (!confirm('Put everything on this page back to the original website values?')) return;
+  const keys = SETTINGS_SCHEMA[name].fields.map(f => f.k).concat(SETTINGS_SCHEMA[name].stamp || []);
+  const { error } = await sb.from('site_settings').delete().in('key', keys);
+  if (error) { showToast('Could not reset: ' + error.message, 'error'); return; }
+  showToast('Reset to the original values.', 'success');
+  renderSettingsForm(name);
 }
 
 // ══════════════════════════════════════════

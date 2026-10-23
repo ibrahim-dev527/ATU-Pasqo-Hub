@@ -374,7 +374,7 @@ code{background:rgba(0,0,0,0.07);padding:1px 7px;border-radius:5px;font-family:'
         <li><div class="s-num">2</div><div class="s-text">Email: the admin's ID in lowercase followed by <code>@students.atupqhub.local</code>, for example <code>admin001@students.atupqhub.local</code>. Type a strong password and switch <strong>Auto Confirm User</strong> ON. Create the user.</div></li>
         <li><div class="s-num">3</div><div class="s-text">Open <strong>Table Editor</strong> → <strong>users</strong>. A row for that account is already there (it is created automatically). Tick <code>is_admin</code> and save.</div></li>
         <li><div class="s-num">4</div><div class="s-text">Open <code>yourwebsite/admin.html</code> and sign in with the <strong>email and password you just created</strong>. That page is the Admin Dashboard. Students never use it: they log in with the <strong>Log In</strong> button using their Student ID and land on <code>dashboard.html</code>.</div></li>
-        <li><div class="s-num">5</div><div class="s-text">Repeat for as many admins as you want. To remove an admin, untick <code>is_admin</code>.</div></li>
+        <li><div class="s-num">5</div><div class="s-text">Only the FIRST admin needs the Table Editor tick. After that, sign in at <code>admin.html</code>, create the next admin in Supabase (Authentication → Users → Add user), then open <strong>All Students</strong> and click <strong>Make admin</strong> next to them. Use the same button to remove an admin. Open the hamburger menu (top left) for the pop-up, banner, logo, names, contacts and social settings.</div></li>
       </ol>
       <div class="callout danger" style="margin-top:8px">
         <div class="callout-icon">🚨</div>

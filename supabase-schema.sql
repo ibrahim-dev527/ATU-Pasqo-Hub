@@ -250,13 +250,50 @@ create policy "Admins delete past question files"
   );
 
 -- ============================================================
+-- 6. SITE_SETTINGS: everything the admin can edit from the
+--    Admin Dashboard hamburger menu (pop-up, banner, logo, names,
+--    contact numbers, social handles). Anyone can READ these (the
+--    website needs them to display). Only admins can CHANGE them.
+-- ============================================================
+create table if not exists public.site_settings (
+  key         text primary key check (char_length(key) <= 60),
+  value       text not null default '' check (char_length(value) <= 2000),
+  updated_at  timestamptz default now()
+);
+
+alter table public.site_settings enable row level security;
+
+drop policy if exists "Anyone can read site settings" on public.site_settings;
+create policy "Anyone can read site settings"
+  on public.site_settings for select
+  using (true);
+
+drop policy if exists "Admins manage site settings" on public.site_settings;
+create policy "Admins manage site settings"
+  on public.site_settings for all
+  using (public.pqhub_is_admin())
+  with check (public.pqhub_is_admin());
+
+-- ------------------------------------------------------------
+-- ADMINS MANAGE ADMINS: an existing admin can promote or remove
+-- another account from the Admin Dashboard (All Students > Make
+-- admin). The guard trigger above still stops non-admins.
+-- ------------------------------------------------------------
+drop policy if exists "Admins update any profile" on public.users;
+create policy "Admins update any profile"
+  on public.users for update
+  using (public.pqhub_is_admin())
+  with check (public.pqhub_is_admin());
+
+-- ============================================================
 --  DONE. Next steps (see setup.html for the full walkthrough):
 --  1. Settings → Authentication → Providers → Email → turn OFF
 --     "Confirm email" (required — student IDs use fake emails
 --     behind the scenes and can never receive a confirmation link)
 --  2. Settings → API → copy your Project URL + anon key into
 --     js/pq-hub.js
---  3. Create admins: Authentication > Users > Add user, then tick
---     is_admin on their row in Table Editor > users (see the
---     comment above the trigger). No SQL needed.
+--  3. FIRST admin only: Authentication > Users > Add user, then
+--     tick is_admin on their row in Table Editor > users.
+--     After that, admins add more admins inside admin.html
+--     (All Students > Make admin). No SQL needed.
 -- ============================================================

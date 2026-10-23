@@ -48,21 +48,6 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .loader-dot:nth-child(3){animation:dotBounce 1.2s 0.4s ease-in-out infinite}
 @keyframes dotBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-10px);background:var(--gold)}}
 
-/* MOYOLE WELCOME POPUP */
-#moyole-popup-overlay{position:fixed;inset:0;background:rgba(10,20,40,0.7);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px}
-#moyole-popup-overlay.show{display:flex}
-.moyole-popup-card{background:var(--white);border-radius:20px;max-width:360px;width:100%;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:popupIn 0.4s cubic-bezier(0.4,0,0.2,1)}
-@keyframes popupIn{from{opacity:0;transform:scale(0.9) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.moyole-popup-close{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.4);color:var(--white);border:none;font-size:1rem;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center}
-.moyole-popup-close:hover{background:rgba(0,0,0,0.6)}
-.moyole-popup-img{width:100%;height:280px;background:linear-gradient(135deg,var(--blue-dark),var(--blue));display:flex;align-items:center;justify-content:center}
-.moyole-popup-img img{width:100%;height:100%;object-fit:cover;object-position:top}
-.moyole-popup-img-fallback{color:rgba(255,255,255,0.6);font-size:0.85rem;text-align:center}
-.moyole-popup-body{padding:20px 24px 24px;text-align:center}
-.moyole-popup-body h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;color:var(--dark);margin-bottom:6px}
-.moyole-popup-body h3 span{color:var(--blue)}
-.moyole-popup-body p{color:var(--gray);font-size:0.85rem;line-height:1.6;margin-bottom:16px}
-.moyole-popup-body .btn{width:100%}
 
 /* NAVBAR */
 #navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;height:70px;display:flex;align-items:center;justify-content:space-between;background:transparent;transition:var(--transition)}
@@ -361,21 +346,6 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   <p class="loader-brief">Free past questions for every ATU student: brought to you by Omar Sulley Bin.</p>
   <div class="loader-bar"><div class="loader-bar-fill"></div></div>
   <div class="loader-dots"><div class="loader-dot"></div><div class="loader-dot"></div><div class="loader-dot"></div></div>
-</div>
-
-<!-- MOYOLE WELCOME POPUP (shows once per visit) -->
-<div id="moyole-popup-overlay">
-  <div class="moyole-popup-card">
-    <button class="moyole-popup-close" onclick="closeMoyolePopup()" aria-label="Close">✕</button>
-    <div class="moyole-popup-img">
-      <img src="images/Moyole1.jpg" alt="Omar Sulley Bin" onerror="this.parentElement.innerHTML='<div class=&quot;moyole-popup-img-fallback&quot;>📷<br>Add Moyole1.jpg</div>'">
-    </div>
-    <div class="moyole-popup-body">
-      <h3>Welcome to <span>ATU PQ Hub</span></h3>
-      <p>Free past questions for every ATU student: brought to you by Omar Sulley Bin, SRC Part Time Representative.</p>
-      <a href="past-questions.html" class="btn btn-primary">📚 Browse Past Questions</a>
-    </div>
-  </div>
 </div>
 
 <!-- NAVBAR -->
@@ -763,21 +733,8 @@ window.addEventListener('load', function() {
   setTimeout(function() {
     const l = document.getElementById('page-loader');
     l.classList.add('fade-out');
-    setTimeout(() => { l.style.display = 'none'; showMoyolePopupOnce(); }, 800);
+    setTimeout(() => { l.style.display = 'none'; }, 800);
   }, 1800);
-});
-
-// MOYOLE WELCOME POPUP: shows once per visit (per browser tab session)
-function showMoyolePopupOnce() {
-  if (sessionStorage.getItem('moyolePopupShown')) return;
-  document.getElementById('moyole-popup-overlay').classList.add('show');
-  sessionStorage.setItem('moyolePopupShown', '1');
-}
-function closeMoyolePopup() {
-  document.getElementById('moyole-popup-overlay').classList.remove('show');
-}
-document.getElementById('moyole-popup-overlay').addEventListener('click', function(e) {
-  if (e.target === this) closeMoyolePopup();
 });
 
 // NAVBAR SCROLL
@@ -859,5 +816,6 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 <script src="js/carousel.js"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/login-modal.js"></script>
+<script src="js/site-settings.js"></script>
 </body>
 </html>
