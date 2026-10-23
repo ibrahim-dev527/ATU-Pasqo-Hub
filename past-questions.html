@@ -53,7 +53,7 @@
 .page-desc{color:rgba(255,255,255,0.75);max-width:600px;line-height:1.7}
 
 /* AUTH BANNER: shown when user is not logged in */
-#auth-banner{background:linear-gradient(135deg,#7c2d12,var(--blue));padding:14px 24px;text-align:center;position:sticky;top:70px;z-index:101;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+#auth-banner{background:linear-gradient(135deg,#7c2d12,var(--blue));padding:14px 24px;text-align:center;position:static;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
 #auth-banner p{color:var(--white);font-size:0.85rem;font-weight:500}
 #auth-banner p span{color:var(--gold);font-weight:700}
 .btn-banner-login{background:var(--white);color:var(--blue);padding:7px 18px;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:700;border:none;cursor:pointer;transition:var(--transition)}
@@ -61,8 +61,21 @@
 #auth-banner.hidden{display:none}
 
 /* SEARCH & FILTER */
-.search-section{background:var(--white);padding:28px 24px 20px;box-shadow:0 4px 20px rgba(0,0,0,0.05);position:sticky;top:70px;z-index:100;transition:top 0.3s ease}
-.search-section.with-banner{top:120px}
+.search-sticky{background:var(--white);padding:14px 24px;box-shadow:0 4px 20px rgba(0,0,0,0.08);position:sticky;top:70px;z-index:100}
+.search-section{background:var(--white);padding:6px 24px 20px;box-shadow:0 4px 20px rgba(0,0,0,0.05);position:static}
+.pq-btn-group{display:flex;gap:8px;align-items:center}
+.btn-preview{padding:8px 14px;border-radius:var(--radius-sm);font-size:0.78rem;font-weight:700;border:1.5px solid var(--blue);background:transparent;color:var(--blue);cursor:pointer;font-family:'Poppins',sans-serif;transition:var(--transition)}
+.btn-preview:hover{background:var(--blue);color:var(--white)}
+#pvOverlay{position:fixed;inset:0;background:rgba(10,27,54,.75);z-index:9500;display:none;align-items:center;justify-content:center;padding:14px}
+#pvOverlay.show{display:flex}
+.pv-card{background:#fff;border-radius:16px;width:100%;max-width:980px;height:92vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.4)}
+.pv-head{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--gray-light);flex-wrap:wrap}
+.pv-title{flex:1;font-weight:700;font-size:.9rem;color:var(--dark);min-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pv-head a,.pv-head button{font-family:'Poppins',sans-serif;font-size:.78rem;font-weight:700;padding:8px 14px;border-radius:8px;border:none;cursor:pointer;text-decoration:none}
+.pv-dl{background:var(--blue);color:#fff}.pv-open{background:var(--gray-light);color:var(--dark)}.pv-x{background:#eee;color:#444}
+.pv-body{flex:1;position:relative;background:#eef1f6}
+.pv-body iframe{width:100%;height:100%;border:0}
+.pv-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--gray);font-size:.9rem}
 .search-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
 .search-bar-wrap{position:relative}
 .search-hint-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
@@ -127,6 +140,7 @@
 
 /* NO RESULTS */
 .no-results{text-align:center;padding:80px 24px;grid-column:1/-1}
+.no-results.hidden{display:none}
 .no-results .icon{font-size:3rem;margin-bottom:16px}
 .no-results h3{font-size:1.2rem;font-weight:600;margin-bottom:8px}
 .no-results p{color:var(--gray);font-size:0.85rem;margin-bottom:20px}
@@ -187,6 +201,7 @@
 </style>
 <link rel="stylesheet" href="css/carousel.css">
 <link rel="stylesheet" href="css/chatbot.css">
+<link rel="stylesheet" href="css/page-hero.css">
 </head>
 <body>
 
@@ -244,13 +259,17 @@
 </div>
 
 <!-- SEARCH & FILTER -->
-<div class="search-section" id="searchSection">
+<div class="search-sticky" id="searchSection">
   <div class="search-inner">
     <div class="search-bar-wrap">
       <span class="search-icon">🔍</span>
       <input type="text" id="searchInput" placeholder="Search by course code, course name, department, or faculty..." oninput="filterCards()">
       <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
     </div>
+  </div>
+</div>
+<div class="search-section">
+  <div class="search-inner">
     <div class="search-hint-row">
       <span class="search-hint-label">Search by:</span>
       <span class="search-hint-chip">Course Code</span>
@@ -558,16 +577,23 @@ let pqIndex = {};
 // Build the download button based on auth state
 function buildDownloadBtn(pq) {
   pqIndex[pq.id] = pq;
-  if (currentUser && pq.file_url) {
-    // Logged in: forces a real file download straight to their device
-    return `<button class="btn-download logged-in" onclick="handlePQDownload(${pq.id})" id="dlbtn-${pq.id}">
-               ⬇️ Download
-            </button>`;
+  const hasFile = !!(pq.file_path || pq.file_url);
+  if (currentUser && hasFile) {
+    // Logged in: preview in the page, or save the file to the device
+    return `<div class="pq-btn-group">
+               <button class="btn-preview" onclick="handlePQPreview(${pq.id})">Preview</button>
+               <button class="btn-download logged-in" onclick="handlePQDownload(${pq.id})" id="dlbtn-${pq.id}">
+                 ⬇️ Download
+               </button>
+            </div>`;
   } else if (!currentUser) {
-    // Not logged in: show lock button that opens modal
-    return `<button class="btn-download locked" onclick="openLoginModal()">
-               🔒 Login to Download
-            </button>`;
+    // Not logged in: both actions ask the person to log in
+    return `<div class="pq-btn-group">
+               <button class="btn-preview" onclick="openLoginModal()">Preview</button>
+               <button class="btn-download locked" onclick="openLoginModal()">
+                 🔒 Login to Download
+               </button>
+            </div>`;
   } else {
     // Logged in but no file yet
     return `<span style="font-size:0.75rem;color:var(--gray)">No file yet</span>`;
@@ -578,14 +604,15 @@ function buildDownloadBtn(pq) {
 // (not a new tab), then log it to their download history + bump the count.
 async function handlePQDownload(id) {
   const pq = pqIndex[id];
-  if (!pq || !pq.file_url) return;
+  if (!pq || !(pq.file_path || pq.file_url)) return;
   const btn = document.getElementById('dlbtn-' + id);
   const original = btn ? btn.innerHTML : null;
   if (btn) { btn.disabled = true; btn.innerHTML = '⏳ Downloading...'; }
 
   try {
     const filename = (pq.title || 'past-question').replace(/[^\w\- ]/g, '') + '.pdf';
-    await pqhubDownloadFile(pq.file_url, filename, {
+    const signed = await pqhubSignedUrl(pq, 120);
+    await pqhubDownloadFile(signed, filename, {
       pqId: pq.id, title: pq.title, faculty: pq.faculty
     });
     await incrementDownload(pq.id);
@@ -597,12 +624,56 @@ async function handlePQDownload(id) {
   }
 }
 
+// ---------- PREVIEW (signed in only) ----------
+let pvBlobUrl = null;
+function ensurePreviewModal() {
+  if (document.getElementById('pvOverlay')) return;
+  const o = document.createElement('div');
+  o.id = 'pvOverlay'; o.setAttribute('role', 'dialog'); o.setAttribute('aria-modal', 'true');
+  o.innerHTML = '<div class="pv-card"><div class="pv-head"><div class="pv-title" id="pvTitle"></div>'
+    + '<a class="pv-open" id="pvOpen" target="_blank" rel="noopener" style="display:none">Open in new tab</a>'
+    + '<button class="pv-dl" id="pvDl" type="button">Download</button>'
+    + '<button class="pv-x" type="button" onclick="closePreview()">Close</button></div>'
+    + '<div class="pv-body"><div class="pv-msg" id="pvMsg">Loading preview...</div><iframe id="pvFrame" title="Past question preview" style="display:none"></iframe></div></div>';
+  o.addEventListener('click', e => { if (e.target === o) closePreview(); });
+  document.body.appendChild(o);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePreview(); });
+}
+function closePreview() {
+  const o = document.getElementById('pvOverlay'); if (!o) return;
+  o.classList.remove('show'); document.body.style.overflow = '';
+  const f = document.getElementById('pvFrame'); f.removeAttribute('src'); f.style.display = 'none';
+  if (pvBlobUrl) { URL.revokeObjectURL(pvBlobUrl); pvBlobUrl = null; }
+}
+async function handlePQPreview(id) {
+  const pq = pqIndex[id];
+  if (!currentUser) { openLoginModal(); return; }
+  if (!pq) return;
+  ensurePreviewModal();
+  const o = document.getElementById('pvOverlay'), msg = document.getElementById('pvMsg'), fr = document.getElementById('pvFrame'), op = document.getElementById('pvOpen');
+  document.getElementById('pvTitle').textContent = (pq.course_code ? pq.course_code + ': ' : '') + (pq.title || 'Past question');
+  document.getElementById('pvDl').onclick = () => handlePQDownload(id);
+  msg.style.display = 'flex'; msg.textContent = 'Loading preview...'; fr.style.display = 'none'; op.style.display = 'none';
+  o.classList.add('show'); document.body.style.overflow = 'hidden';
+  try {
+    const signed = await pqhubSignedUrl(pq, 120);
+    const resp = await fetch(signed);
+    if (!resp.ok) throw new Error('status ' + resp.status);
+    const blob = new Blob([await resp.blob()], { type: 'application/pdf' });
+    if (pvBlobUrl) URL.revokeObjectURL(pvBlobUrl);
+    pvBlobUrl = URL.createObjectURL(blob);
+    fr.src = pvBlobUrl; fr.style.display = 'block'; msg.style.display = 'none';
+    op.href = pvBlobUrl; op.style.display = 'inline-block';
+  } catch (e) {
+    console.error(e);
+    msg.textContent = 'Could not load the preview. You can still download the file.';
+  }
+}
+
 // Increment download count in DB
 async function incrementDownload(id) {
   if (!sb || !id) return;
-  const { data } = await sb.from('past_questions').select('downloads').eq('id', id).single();
-  const current = data?.downloads || 0;
-  await sb.from('past_questions').update({ downloads: current + 1 }).eq('id', id);
+  try { await sb.rpc('pqhub_increment_download', { p_id: id }); } catch (e) { console.warn('Could not count download', e); }
 }
 
 // Escape HTML to prevent XSS
@@ -733,6 +804,7 @@ document.addEventListener('click', e => {
 <script src="js/chatbot.js"></script>
 <script src="js/login-modal.js"></script>
 <script src="js/site-settings.js"></script>
+<script src="js/page-hero.js"></script>
 </body>
 </html>
  

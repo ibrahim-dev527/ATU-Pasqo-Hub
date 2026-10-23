@@ -82,6 +82,22 @@
       if (a.classList.contains('nav-cta')) a.textContent = 'Log In';
       if (a.classList.contains('mob-cta')) a.textContent = 'Log In';
     });
+
+    // Already signed in? The Log In button turns into "My Account"
+    if (typeof sb !== 'undefined' && sb) {
+      sb.auth.getSession().then(function (r) {
+        if (!r || !r.data || !r.data.session) return;
+        pqhubLandingPage().then(function (dest) {
+          document.querySelectorAll('a[href="login.html"].nav-cta, a[href="login.html"].mob-cta, .nav-right-mobile .nav-cta').forEach(function (el) {
+            var c = el.cloneNode(true);           // drops the old click handlers
+            c.textContent = 'My Account';
+            if (c.tagName === 'A') { c.setAttribute('href', dest); }
+            else { c.addEventListener('click', function () { window.location.href = dest; }); }
+            el.parentNode.replaceChild(c, el);
+          });
+        });
+      }).catch(function () {});
+    }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

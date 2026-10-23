@@ -98,6 +98,29 @@ async function pqhubGetUser() {
   return user;
 }
 
+
+// ------------------------------------------------------------
+//  PRIVATE FILE ACCESS: past question PDFs live in a PRIVATE
+//  bucket. Only a signed-in person can ask for a short-lived
+//  link (valid 5 minutes), so a logged-out visitor can never
+//  open or download a PDF, even if they guess the address.
+// ------------------------------------------------------------
+function pqhubFilePath(pq) {
+  if (!pq) return '';
+  if (pq.file_path) return pq.file_path;
+  const parts = String(pq.file_url || '').split('/past-questions/');
+  if (parts.length < 2) return '';
+  try { return decodeURIComponent(parts[1].split('?')[0]); } catch (e) { return parts[1].split('?')[0]; }
+}
+async function pqhubSignedUrl(pq, seconds) {
+  if (!sb) throw new Error('Not connected.');
+  const path = pqhubFilePath(pq);
+  if (!path) throw new Error('This past question has no file yet.');
+  const { data, error } = await sb.storage.from('past-questions').createSignedUrl(path, seconds || 300);
+  if (error) throw error;
+  return data.signedUrl;
+}
+
 // ------------------------------------------------------------
 //  FORCE A REAL FILE DOWNLOAD (not a new tab)
 //  Fetches the PDF as a blob so the browser saves it straight

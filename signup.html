@@ -71,6 +71,7 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
 .auth-back{display:inline-flex;align-items:center;gap:6px;color:var(--gray);font-size:0.82rem;margin-bottom:20px;transition:var(--transition)}.auth-back:hover{color:var(--blue)}
 @media(max-width:768px){body{grid-template-columns:1fr}.auth-left{min-height:auto;padding:40px 24px}.auth-right{padding:32px 24px}.form-row{grid-template-columns:1fr}.auth-img-wrap{width:100px;height:100px}}
 </style>
+<link rel="stylesheet" href="css/page-hero.css">
 </head>
 <body>
 
@@ -283,5 +284,6 @@ function togglePassword(id, btn) {
 function showAlert(type, msg) { const el=document.getElementById(type==='error'?'errorAlert':'successAlert'); el.textContent=msg; el.classList.add('visible'); }
 function hideAlert(type) { const el=document.getElementById(type==='error'?'errorAlert':'successAlert'); el.classList.remove('visible'); }
 </script>
+<script src="js/page-hero.js"></script>
 </body>
 </html>

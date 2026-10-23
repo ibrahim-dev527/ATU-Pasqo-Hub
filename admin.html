@@ -840,7 +840,7 @@ function renderTable(rows) {
         <td>
           <div class="pq-actions">
             <button class="btn-edit" onclick="openEditModal(${pq.id})">✏️ Edit</button>
-            ${pq.file_url ? `<a class="btn-view" href="${esc(pq.file_url)}" target="_blank">👁️ View</a>` : ''}
+            ${pq.file_url ? `<button class="btn-view" onclick="viewAdminFile(${pq.id})">👁️ View</button>` : ''}
             <button class="btn-delete" onclick="openDeleteModal(${pq.id},'${esc(pq.title)}','${esc(filePath)}')">🗑️ Delete</button>
           </div>
         </td>
@@ -1062,7 +1062,7 @@ async function handleUpload() {
 
     const { error: dbError } = await sb.from('past_questions').insert([{
       title, course_code: courseCode || null, faculty, department: dept || null, level,
-      year: parseInt(year), file_url: urlData.publicUrl,
+      year: parseInt(year), file_url: urlData.publicUrl, file_path: filePath,
       downloads: 0, created_at: new Date().toISOString()
     }]);
 
@@ -1190,6 +1190,15 @@ function escHtmlS(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+// View a (private) PDF as admin: asks for a short-lived signed link
+async function viewAdminFile(id) {
+  try {
+    const { data: pq } = await sb.from('past_questions').select('file_url, file_path').eq('id', id).single();
+    const url = await pqhubSignedUrl(pq, 120);
+    window.open(url, '_blank', 'noopener');
+  } catch (e) { showToast('Could not open the file: ' + (e.message || e), 'error'); }
+}
+
 // ══════════════════════════════════════════
 //  HAMBURGER MENU
 // ══════════════════════════════════════════
@@ -1308,9 +1317,9 @@ async function uploadSettingImage(key) {
   const ext = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp' }[file.type];
   const path = 'site/' + key + '-' + Date.now() + '.' + ext;
   showToast('Uploading picture...', 'success');
-  const { error } = await sb.storage.from('past-questions').upload(path, file, { contentType: file.type, upsert: false });
-  if (error) { showToast('Upload failed: ' + error.message, 'error'); return; }
-  const { data } = sb.storage.from('past-questions').getPublicUrl(path);
+  const { error } = await sb.storage.from('site-assets').upload(path, file, { contentType: file.type, upsert: false });
+  if (error) { showToast('Upload failed: ' + error.message + ' (did you run the latest SQL?)', 'error'); return; }
+  const { data } = sb.storage.from('site-assets').getPublicUrl(path);
   document.getElementById('sf_' + key).value = data.publicUrl;
   const prev = document.getElementById('sf_' + key + '_prev'); prev.src = data.publicUrl; prev.style.display = 'block';
   showToast('Picture uploaded. Click Save changes to apply it.', 'success');

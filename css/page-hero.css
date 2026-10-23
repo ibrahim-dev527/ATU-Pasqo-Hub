@@ -1,0 +1,18 @@
+/* ============================================================
+   ATU PQ HUB: image heroes with a slow zoom (every inner page)
+   js/page-hero.js adds the layers; if a picture is missing the
+   page keeps its normal blue gradient, so nothing ever breaks.
+   ============================================================ */
+.page-hero,.auth-left{position:relative;overflow:hidden;isolation:isolate}
+.ph-bg{position:absolute;inset:-4%;z-index:-2;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease;transform:scale(1);will-change:transform}
+.ph-bg.ready{opacity:1;animation:phZoom 22s ease-in-out infinite alternate}
+.ph-overlay{position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,rgba(10,27,54,.9) 0%,rgba(20,49,93,.66) 55%,rgba(10,27,54,.86) 100%)}
+.ph-overlay::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,transparent,#D8A727,transparent)}
+@keyframes phZoom{from{transform:scale(1) translate3d(0,0,0)}to{transform:scale(1.14) translate3d(-1.5%,-1%,0)}}
+/* gentle entrance for the hero text */
+.page-hero .breadcrumb,.page-hero .page-title,.page-hero .page-desc,.page-hero .hero-icon,.page-hero .hero-tags,.page-hero .hero-btns{opacity:0;transform:translateY(18px);animation:phUp .8s cubic-bezier(.2,.7,.2,1) forwards}
+.page-hero .breadcrumb{animation-delay:.05s}.page-hero .hero-icon{animation-delay:.1s}.page-hero .page-title{animation-delay:.18s}.page-hero .page-desc{animation-delay:.3s}.page-hero .hero-tags,.page-hero .hero-btns{animation-delay:.42s}
+@keyframes phUp{to{opacity:1;transform:none}}
+.page-hero .page-title{text-shadow:0 4px 24px rgba(0,0,0,.35)}
+.page-hero .page-desc{text-shadow:0 2px 12px rgba(0,0,0,.3)}
+@media (prefers-reduced-motion:reduce){.ph-bg.ready{animation:none}.page-hero *{animation:none!important;opacity:1!important;transform:none!important}}
