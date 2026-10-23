@@ -656,7 +656,7 @@ window.addEventListener('load', async function() {
   const user = await pqhubGetUser();
   if (!user) { showAdminGate(); return; }
 
-  const { data: profile } = await sb.from('users').select('is_admin, name').eq('id', user.id).single();
+  const { data: profile } = await sb.from('users').select('is_admin, name').eq('id', user.id).maybeSingle();
   if (!profile || !profile.is_admin) {
     // Signed in, but not an admin: sign them out of this page and show the admin gate
     showAdminGate('This account is not an administrator.');
@@ -1376,10 +1376,13 @@ async function adminGateSubmit() {
   try {
     const { data, error } = await sb.auth.signInWithPassword({ email, password: pw });
     if (error) throw error;
-    const { data: prof } = await sb.from('users').select('is_admin').eq('id', data.user.id).maybeSingle();
-    if (!prof || prof.is_admin !== true) {
+    const { data: prof, error: profErr } = await sb.from('users').select('is_admin').eq('id', data.user.id).maybeSingle();
+    if (profErr || !prof || prof.is_admin !== true) {
       await sb.auth.signOut();
-      throw new Error('This account is not an administrator.');
+      throw new Error(profErr
+        ? 'Signed in, but the database refused to read your profile (' + profErr.message + '). Run the latest supabase-schema.sql.'
+        : !prof ? 'Signed in, but there is no row for this account in the users table yet. Run the SQL in the setup steps.'
+        : 'This account is not an administrator. Tick is_admin for it in the users table.');
     }
     window.location.reload();
   } catch (e) {
