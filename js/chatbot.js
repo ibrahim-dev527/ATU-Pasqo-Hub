@@ -43,7 +43,7 @@ const PQHUB_CHAT_FAQ = [
   },
   {
     keywords: ['who', 'about', 'moyole', 'omar', 'sulley', 'backed', 'behind this'],
-    reply: 'ATU PQ Hub is brought to you by Omar Sulley Bin, popularly known as Officer Moyole, SRC Part Time Representative for 2026/2027, and built by Ibrahim Mohammed Lotsu (Ibratech).',
+    reply: 'ATU PQ Hub is brought to you by Omar Sulley Bin, popularly known as Officer Moyole, SRC Part Time Representative for 2026/2027, and built by Ibrahim Mohammed Lotsu (Ibratechh, ibratechh.com).',
     link: { href: 'about.html', label: 'Read More' }
   },
   {
@@ -193,7 +193,7 @@ function pqhubChatOption(action) {
     pqhubChatAddMessage('Can\'t find your course? Send a request and we\'ll upload it, usually within 24 hours.<br><a href="contact.html" class="chat-link-btn">📲 Request a Past Question</a>', 'bot');
   } else if (action === 'about') {
     pqhubChatAddMessage('About this platform', 'user');
-    pqhubChatAddMessage('ATU PQ Hub is brought to you by Omar Sulley Bin (Officer Moyole), SRC Part Time Representative 2026/2027, and built by Ibrahim Mohammed Lotsu (Ibratech).<br><a href="about.html" class="chat-link-btn">ℹ️ Read More</a>', 'bot');
+    pqhubChatAddMessage('ATU PQ Hub is brought to you by Omar Sulley Bin (Officer Moyole), SRC Part Time Representative 2026/2027, and built by Ibrahim Mohammed Lotsu (Ibratechh, ibratechh.com).<br><a href="about.html" class="chat-link-btn">ℹ️ Read More</a>', 'bot');
   } else if (action === 'contact') {
     pqhubChatAddMessage('Get help', 'user');
     pqhubChatDevFallback('Happy to help.');

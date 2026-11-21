@@ -23,7 +23,8 @@ uploading past questions, deploying to Vercel, and a full launch checklist.
 - **Admin access:** Gated by an `is_admin` flag on the account (see setup.html → "Make Your Admin Account")
 - **Database setup:** Run `supabase-schema.sql` once in your Supabase project's SQL Editor — it creates every table, security rule, and the storage bucket in one go
 - **Shared config file:** `js/pq-hub.js` — your Supabase URL/key, plus the faculty/department/level/year lists used by every dropdown on the site
-- **Contact numbers:** 024 560 7110 (Omar Sulley Bin — student-facing) · 054 419 6068 (Ibrahim/C4 — developer)
+- **Contact numbers:** 024 560 7110 (main, Officer Moyole) · 055 419 6068 (alternative, Ibrahim/C4, developer)
+- **Developer website:** https://www.ibratechh.com/
 
 ## Folder contents
 
