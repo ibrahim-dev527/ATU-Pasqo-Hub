@@ -174,6 +174,102 @@
     document.body.appendChild(bar);
   }
 
+
+  // ---------- celebration: confetti + balloons ----------
+  var COLORS = ['#14315D', '#D8A727', '#1746A2', '#F4D26B', '#FFFFFF', '#2A6AD4', '#E8B93A'];
+  function celebrate() {
+    try { if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {}
+    var W = window.innerWidth, H = window.innerHeight;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    // style for balloons
+    var st = document.createElement('style');
+    st.textContent = '.pqb{position:fixed;bottom:-140px;z-index:9995;cursor:pointer;animation:pqbRise linear forwards;will-change:transform;-webkit-tap-highlight-color:transparent}'
+      + '.pqb-in{animation:pqbSway ease-in-out infinite alternate}'
+      + '.pqb-body{position:relative;border-radius:50% 50% 48% 48%/58% 58% 42% 42%;box-shadow:inset -8px -10px 18px rgba(0,0,0,.18),inset 6px 6px 14px rgba(255,255,255,.35)}'
+      + '.pqb-body::before{content:"";position:absolute;left:20%;top:14%;width:20%;height:26%;border-radius:50%;background:rgba(255,255,255,.55);transform:rotate(25deg)}'
+      + '.pqb-knot{position:absolute;left:50%;bottom:-6px;width:10px;height:9px;margin-left:-5px;clip-path:polygon(50% 0,100% 100%,0 100%);background:inherit}'
+      + '.pqb-string{width:1.5px;height:46px;margin:5px auto 0;background:rgba(255,255,255,.7)}'
+      + '@keyframes pqbRise{from{transform:translateY(0)}to{transform:translateY(-' + (H + 320) + 'px)}}'
+      + '@keyframes pqbSway{from{transform:translateX(-14px) rotate(-4deg)}to{transform:translateX(14px) rotate(4deg)}}'
+      + '@keyframes pqbPop{to{transform:scale(1.5);opacity:0}}';
+    document.head.appendChild(st);
+
+    // confetti canvas
+    var cv = document.createElement('canvas');
+    cv.width = W * dpr; cv.height = H * dpr;
+    cv.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:9999;pointer-events:none';
+    cv.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(cv);
+    var ctx = cv.getContext('2d'); ctx.scale(dpr, dpr);
+    var parts = [], t0 = Date.now(), RAIN_MS = 7000, END_MS = 15000, raf = 0;
+
+    function burst(x, y, n, spread, power) {
+      for (var i = 0; i < n; i++) {
+        var a = (-Math.PI / 2) + (Math.random() - .5) * spread;
+        var v = power * (.55 + Math.random() * .6);
+        parts.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, w: 6 + Math.random() * 7, h: 4 + Math.random() * 6,
+          r: Math.random() * 6.28, vr: (Math.random() - .5) * .35, c: COLORS[(Math.random() * COLORS.length) | 0], round: Math.random() < .25, life: 0 });
+      }
+    }
+    function rain(n) {
+      for (var i = 0; i < n; i++) {
+        parts.push({ x: Math.random() * W, y: -12, vx: (Math.random() - .5) * 2, vy: 1.5 + Math.random() * 3, w: 6 + Math.random() * 6, h: 4 + Math.random() * 5,
+          r: Math.random() * 6.28, vr: (Math.random() - .5) * .3, c: COLORS[(Math.random() * COLORS.length) | 0], round: Math.random() < .2, life: 0 });
+      }
+    }
+    burst(W * .1, H, 90, 1.3, 17); burst(W * .9, H, 90, 1.3, 17); burst(W * .5, H * .95, 70, 1.8, 19);
+    setTimeout(function () { burst(W * .2, H, 60, 1.2, 16); burst(W * .8, H, 60, 1.2, 16); }, 700);
+
+    function frame() {
+      var el = Date.now() - t0;
+      ctx.clearRect(0, 0, W, H);
+      if (el < RAIN_MS && Math.random() < .55) rain(2);
+      for (var i = parts.length - 1; i >= 0; i--) {
+        var p = parts[i];
+        p.vy += .22; p.vx *= .992; p.vy *= .995;
+        p.x += p.vx + Math.sin((el + i * 40) / 400) * .5; p.y += p.vy; p.r += p.vr; p.life++;
+        if (p.y > H + 30) { parts.splice(i, 1); continue; }
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c;
+        if (p.round) { ctx.beginPath(); ctx.arc(0, 0, p.w / 2.4, 0, 6.28); ctx.fill(); }
+        else { ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
+        ctx.restore();
+      }
+      if (el < END_MS || parts.length) { raf = requestAnimationFrame(frame); } else { cv.remove(); }
+    }
+    raf = requestAnimationFrame(frame);
+
+    // balloons: they rise from the bottom and can be tapped to pop
+    var balloons = [], n = W < 640 ? 14 : 24;
+    for (var b = 0; b < n; b++) (function (b) {
+      var size = 54 + Math.random() * 46;
+      var color = COLORS[(Math.random() * 5) | 0]; if (color === '#FFFFFF') color = '#D8A727';
+      var wrap = document.createElement('div'); wrap.className = 'pqb';
+      var dur = 7 + Math.random() * 6, delay = Math.random() * 3.2;
+      wrap.style.cssText = 'left:' + (Math.random() * (W - size)) + 'px;animation-duration:' + dur + 's;animation-delay:' + delay + 's;opacity:0';
+      wrap.setAttribute('aria-hidden', 'true');
+      var inn = document.createElement('div'); inn.className = 'pqb-in';
+      inn.style.animationDuration = (1.6 + Math.random() * 1.6) + 's';
+      var body = document.createElement('div'); body.className = 'pqb-body';
+      body.style.cssText = 'width:' + size + 'px;height:' + (size * 1.22) + 'px;background:' + color;
+      var knot = document.createElement('div'); knot.className = 'pqb-knot'; body.appendChild(knot);
+      var str = document.createElement('div'); str.className = 'pqb-string';
+      inn.appendChild(body); inn.appendChild(str); wrap.appendChild(inn);
+      // show it only when its delay starts (avoids a visible stack at the bottom)
+      setTimeout(function () { wrap.style.opacity = '1'; }, delay * 1000);
+      wrap.addEventListener('click', function (e) {
+        var r = body.getBoundingClientRect();
+        burst(r.left + r.width / 2, r.top + r.height / 2, 34, 6.28, 9);
+        wrap.style.animation = 'pqbPop .22s ease-out forwards'; wrap.style.pointerEvents = 'none';
+        setTimeout(function () { wrap.remove(); }, 230);
+        if (!raf) raf = requestAnimationFrame(frame);
+      });
+      document.body.appendChild(wrap); balloons.push(wrap);
+      setTimeout(function () { wrap.remove(); }, (delay + dur) * 1000 + 400);
+    })(b);
+    setTimeout(function () { st.remove(); }, 17000);
+  }
+
   // ---------- welcome pop-up (homepage only) ----------
   var popupDone = false;
   function popup(S) {
@@ -183,8 +279,8 @@
     if (S.popup_enabled === 'no') return;
     popupDone = true;
 
-    var title = (S.popup_title || ('Welcome to ' + (S.site_name || DEF.siteName))).slice(0, 80);
-    var text = (S.popup_text || ('Free past questions for every ATU student, brought to you by ' + (S.rep_name || DEF.repName) + ', ' + (S.rep_title || DEF.repTitle) + '.')).slice(0, 400);
+    var title = (S.popup_title || 'Welcome to our new website').slice(0, 80);
+    var text = (S.popup_text || ('Find past questions for every faculty and department, preview and download them free, and request any you cannot find. Log in with your Student ID to get started. Brought to you by ' + (S.rep_name || DEF.repName) + ' (' + (S.rep_nickname || DEF.repNick) + '), ' + (S.rep_title || DEF.repTitle) + '.')).slice(0, 400);
     var img = httpsUrl(S.popup_image) || 'images/Moyole1.jpg';
     var btnText = (S.popup_btn_text || 'Browse Past Questions').slice(0, 30);
     var btnLink = linkUrl(S.popup_btn_link) || 'past-questions.html';
@@ -202,7 +298,7 @@
     } catch (e) {}
 
     var st = document.createElement('style');
-    st.textContent = '#pqPopup{position:fixed;inset:0;background:rgba(10,20,40,.7);z-index:9998;display:flex;align-items:center;justify-content:center;padding:20px}.pqp-card{background:#fff;border-radius:20px;max-width:380px;width:100%;max-height:92vh;overflow:auto;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.4);font-family:Poppins,sans-serif;animation:pqpIn .3s ease}@keyframes pqpIn{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:none}}.pqp-x{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;border:none;cursor:pointer;z-index:2}.pqp-img{width:100%;display:block;max-height:420px;object-fit:cover}.pqp-body{padding:20px 24px 24px;text-align:center}.pqp-body h3{margin:0 0 8px;font-size:1.25rem;color:#0A1B36}.pqp-body p{margin:0 0 16px;font-size:.86rem;line-height:1.6;color:#555}.pqp-btn{display:block;background:#14315D;color:#fff;padding:12px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none}.pqp-btn:hover{background:#0A1B36}';
+    st.textContent = '#pqPopupBack{position:fixed;inset:0;background:rgba(10,20,40,.7);z-index:9990}#pqPopup{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;padding:20px;pointer-events:none}.pqp-card{pointer-events:auto;background:#fff;border-radius:20px;max-width:380px;width:100%;max-height:92vh;overflow:auto;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.4);font-family:Poppins,sans-serif;animation:pqpIn .3s ease}@keyframes pqpIn{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:none}}.pqp-x{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;border:none;cursor:pointer;z-index:2}.pqp-img{width:100%;display:block;max-height:420px;object-fit:cover}.pqp-body{padding:20px 24px 24px;text-align:center}.pqp-body h3{margin:0 0 8px;font-size:1.25rem;color:#0A1B36}.pqp-body p{margin:0 0 16px;font-size:.86rem;line-height:1.6;color:#555}.pqp-btn{display:block;background:#14315D;color:#fff;padding:12px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none}.pqp-btn:hover{background:#0A1B36}';
     document.head.appendChild(st);
 
     var ov = document.createElement('div'); ov.id = 'pqPopup'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true');
@@ -221,14 +317,17 @@
     }
     card.appendChild(x); card.appendChild(im); card.appendChild(body); ov.appendChild(card);
 
-    function close() { ov.remove(); }
+    var back = document.createElement('div'); back.id = 'pqPopupBack';
+    function close() { ov.remove(); back.remove(); }
     x.onclick = close;
-    ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+    back.addEventListener('click', close);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 
     var loader = document.getElementById('page-loader');
     setTimeout(function () {
+      document.body.appendChild(back);
       document.body.appendChild(ov);
+      celebrate();
       try {
         sessionStorage.setItem('pqhubPopup:' + ver, '1');
         localStorage.setItem('pqhubPopupDay:' + ver, String(Date.now()));
@@ -241,6 +340,7 @@
   function run() {
     var cached = readCache();
     apply(cached, false);                // instant, avoids flicker
+    setTimeout(function () { apply(cached, true); }, 4000);   // database slow or unreachable: still welcome the visitor
     fetchSettings().then(function (fresh) {
       var use = fresh || cached;
       if (fresh && JSON.stringify(fresh) !== JSON.stringify(cached)) writeCache(fresh);

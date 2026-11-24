@@ -10,7 +10,7 @@
 --  1. Supabase > SQL Editor > New query
 --  2. Paste this ENTIRE file
 --  3. Find the line near the bottom that says
---       admin_email text := 'atupasqo@gmail.com';
+--       insert into public.admin_emails (email) values ('atupasqo@gmail.com')
 --     (already set to atupasqo@gmail.com, change it only if needed)
 --  4. Tap Run. If Supabase warns about "destructive" or "drop"
 --     statements, tap "Run this query" anyway. That is the clean up.
@@ -26,7 +26,7 @@ declare r record;
 begin
   for r in
     select policyname, schemaname, tablename from pg_policies
-    where (schemaname = 'public' and tablename in ('users','past_questions','downloads','pq_requests','site_settings'))
+    where (schemaname = 'public' and tablename in ('users','past_questions','downloads','pq_requests','site_settings','admin_emails'))
        or (schemaname = 'storage' and tablename = 'objects'
            and (policyname ilike '%past question%' or qual ilike '%past-questions%' or with_check ilike '%past-questions%'
                or qual ilike '%site-assets%' or with_check ilike '%site-assets%'))
@@ -39,6 +39,7 @@ drop trigger if exists pqhub_on_auth_user_created on auth.users;
 drop trigger if exists pqhub_guard_is_admin_trg on public.users;
 drop function if exists public.pqhub_handle_new_user() cascade;
 drop function if exists public.pqhub_guard_is_admin() cascade;
+drop function if exists public.pqhub_sync_admin_email() cascade;
 drop function if exists public.pqhub_is_admin() cascade;
 drop function if exists public.pqhub_increment_download(bigint) cascade;
 
@@ -97,6 +98,15 @@ create table if not exists public.site_settings (
   updated_at  timestamptz default now()
 );
 
+-- Emails that are ALLOWED to be admins. Anyone whose login email is on
+-- this list becomes an admin automatically the moment the account is
+-- created in Authentication > Users. Only admins can edit this list.
+create table if not exists public.admin_emails (
+  email       text primary key check (email = lower(email) and char_length(email) <= 200),
+  created_at  timestamptz default now()
+);
+
+alter table public.admin_emails    enable row level security;
 alter table public.users           enable row level security;
 alter table public.past_questions  enable row level security;
 alter table public.downloads       enable row level security;
@@ -148,8 +158,9 @@ create trigger pqhub_guard_is_admin_trg
   before insert or update on public.users
   for each row execute function public.pqhub_guard_is_admin();
 
--- Every new login account automatically gets a row in "users",
--- always as a normal student. (Admin rights are given separately.)
+-- Every new login account automatically gets a row in "users".
+-- It is an admin ONLY if its email is on the approved list
+-- (public.admin_emails). Signup details can never grant admin rights.
 create or replace function public.pqhub_handle_new_user()
 returns trigger
 language plpgsql
@@ -157,11 +168,12 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.users (id, student_id, name)
+  insert into public.users (id, student_id, name, is_admin)
   values (
     new.id,
     coalesce(new.raw_user_meta_data->>'student_id', split_part(new.email, '@', 1)),
-    coalesce(new.raw_user_meta_data->>'full_name', '')
+    coalesce(new.raw_user_meta_data->>'full_name', ''),
+    exists (select 1 from public.admin_emails e where e.email = lower(new.email))
   )
   on conflict do nothing;
   return new;
@@ -171,6 +183,24 @@ $$;
 create trigger pqhub_on_auth_user_created
   after insert on auth.users
   for each row execute function public.pqhub_handle_new_user();
+
+-- Approving an email also upgrades an account that already exists.
+create or replace function public.pqhub_sync_admin_email()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  update public.users set is_admin = true
+  where id in (select id from auth.users where lower(email) = new.email);
+  return new;
+end;
+$$;
+
+create trigger pqhub_sync_admin_email_trg
+  after insert on public.admin_emails
+  for each row execute function public.pqhub_sync_admin_email();
 
 -- Students cannot edit past_questions directly, so counting a download
 -- goes through this one narrow function (signed-in people only, +1 only).
@@ -239,6 +269,11 @@ create policy "settings_admin_all" on public.site_settings for all
   using (public.pqhub_is_admin()) with check (public.pqhub_is_admin());
 
 
+-- ADMIN EMAILS: only admins can see or change the list
+create policy "admin_emails_admin_all" on public.admin_emails for all
+  using (public.pqhub_is_admin()) with check (public.pqhub_is_admin());
+
+
 -- ============================================================
 -- 4. STORAGE
 --    past-questions = PRIVATE bucket. Only signed-in people can
@@ -276,26 +311,19 @@ create policy "assets_admin_delete" on storage.objects for delete
 
 
 -- ============================================================
--- 5. MAKE YOUR FIRST ADMIN
---    Put the email of the account you created in
---    Authentication > Users between the quotes below.
+-- 5. FIRST ADMIN
+--    This email is approved as an admin. Create the account in
+--    Authentication > Users > Add user (Auto Confirm ON) and it is
+--    an admin straight away. Nothing else to do.
+--    (If the account already exists it is upgraded right here.)
 -- ============================================================
-do $$
-declare
-  admin_email text := 'atupasqo@gmail.com';
-  n int;
-begin
-  if admin_email = 'YOUR_EMAIL_HERE' then
-    raise notice 'No admin email set. Edit the admin_email line and run again to create your admin.';
-    return;
-  end if;
-  update public.users set is_admin = true
-  where id = (select id from auth.users where lower(email) = lower(admin_email));
-  get diagnostics n = row_count;
-  if n = 0 then
-    raise exception 'No account found for %. Check the spelling against Authentication > Users.', admin_email;
-  end if;
-end $$;
+insert into public.admin_emails (email) values ('atupasqo@gmail.com')
+on conflict do nothing;
+
+update public.users u set is_admin = true
+from auth.users a
+where a.id = u.id
+  and lower(a.email) in (select email from public.admin_emails);
 
 
 -- ============================================================

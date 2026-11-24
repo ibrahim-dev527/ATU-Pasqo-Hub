@@ -54,6 +54,7 @@
     var st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
     var wrap = document.createElement('div'); wrap.innerHTML = HTML; document.body.appendChild(wrap.firstChild);
 
+    if (window.pqhubAddEye) window.pqhubAddEye($('loginModalPassword'));
     $('loginModalOverlay').addEventListener('click', function (e) { if (e.target === this) closeLoginModal(); });
     document.querySelector('[data-lm-close]').addEventListener('click', closeLoginModal);
     $('loginModalBtn').addEventListener('click', submit);

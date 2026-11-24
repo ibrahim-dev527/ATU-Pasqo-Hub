@@ -600,7 +600,14 @@ body.side-collapsed #main{margin-left:0}
     <div class="section-view" id="section-admins">
       <div class="card set-card">
         <div class="card-title">👑 Admins <span class="card-title-count" id="adminsCount">Loading...</span></div>
-        <p class="set-help"><strong>To add a new admin:</strong> (1) in Supabase go to Authentication, Users, Add user, enter their email and password and switch Auto Confirm ON. (2) Come back here, open <strong>All Students</strong>, find them (search by the part of their email before the @) and click <strong>Make admin</strong>. They can then sign in at admin.html with that email and password. Remove an admin with the same button. You cannot remove yourself or the last admin.</p>
+        <p class="set-help"><strong>To add a new admin:</strong> (1) Type their email below and tap <strong>Approve email</strong>. (2) In Supabase go to Authentication, Users, Add user, use that same email, set their password and switch Auto Confirm ON. They are an admin straight away and can sign in at admin.html. Remove access with the Remove admin button. You cannot remove yourself or the last admin.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+          <input class="form-input" id="newAdminEmail" type="email" placeholder="admin@example.com" style="flex:1;min-width:200px">
+          <button class="set-save" type="button" onclick="approveAdminEmail()">Approve email</button>
+        </div>
+        <div class="card-title" style="font-size:.9rem;margin-bottom:8px">Approved admin emails</div>
+        <div id="approvedEmails" style="margin-bottom:20px"></div>
+        <div class="card-title" style="font-size:.9rem;margin-bottom:8px">Current admins</div>
         <div id="adminsList"></div>
       </div>
     </div>
@@ -621,6 +628,7 @@ body.side-collapsed #main{margin-left:0}
 </div><!-- end #main -->
 
 <script src="js/pq-hub.js"></script>
+<script src="js/pw-eye.js"></script>
 <script>
 // ══════════════════════════════════════════
 //  Supabase client (sb) + auth helpers come from js/pq-hub.js
@@ -1226,7 +1234,29 @@ async function setAdminRole(id, makeAdmin) {
   await loadAdminStudents();
   if (document.getElementById('section-admins').classList.contains('active')) loadAdminsList();
 }
+// Approved admin emails: an account created with one of these emails is an admin automatically
+async function loadApprovedEmails() {
+  const box = document.getElementById('approvedEmails');
+  const { data, error } = await sb.from('admin_emails').select('email').order('email');
+  if (error) { box.innerHTML = '<p class="set-help">Could not load the list. Run the latest supabase-schema.sql. (' + escHtmlS(error.message) + ')</p>'; return; }
+  box.innerHTML = (data && data.length) ? data.map(r => `<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(20,49,93,.08);font-size:.84rem"><span style="flex:1;word-break:break-all">${escHtmlS(r.email)}</span><button class="btn-role remove" onclick="removeApprovedEmail('${escHtmlS(r.email)}')">Remove</button></div>`).join('') : '<p class="set-help">None yet.</p>';
+}
+async function approveAdminEmail() {
+  const el = document.getElementById('newAdminEmail'), email = el.value.trim().toLowerCase();
+  if (!/^[^\s@"'<>]+@[^\s@"'<>]+\.[^\s@"'<>]+$/.test(email) || email.length > 200) { showToast('Enter a valid email address.', 'error'); return; }
+  const { error } = await sb.from('admin_emails').insert({ email });
+  if (error) { showToast(/duplicate/i.test(error.message) ? 'That email is already approved.' : 'Could not approve: ' + error.message, 'error'); return; }
+  el.value = ''; showToast('Approved. Now add this email in Supabase Authentication, Users, Add user.', 'success');
+  loadApprovedEmails(); loadAdminsList();
+}
+async function removeApprovedEmail(email) {
+  if (!confirm('Remove ' + email + ' from the approved list? This does not delete their account; use Remove admin for that.')) return;
+  const { error } = await sb.from('admin_emails').delete().eq('email', email);
+  if (error) { showToast('Could not remove: ' + error.message, 'error'); return; }
+  loadApprovedEmails();
+}
 async function loadAdminsList() {
+  loadApprovedEmails();
   await loadAdminStudents();
   const admins = allStudents.filter(s => s.is_admin);
   document.getElementById('adminsCount').textContent = admins.length + ' total';
@@ -1395,7 +1425,10 @@ async function adminGateSubmit() {
     }
     window.location.reload();
   } catch (e) {
-    err.textContent = e.message || 'Incorrect email or password.';
+    const raw = (e && e.message) ? e.message : '';
+    err.textContent = /failed to fetch|networkerror|load failed|network request/i.test(raw)
+      ? 'Cannot reach the database. Check your internet. If your internet is fine, open your Supabase dashboard: a free project that has been idle is paused and must be restored.'
+      : (/invalid login credentials/i.test(raw) ? 'Incorrect email or password.' : (raw || 'Incorrect email or password.'));
     err.classList.add('show');
     btn.disabled = false; btn.textContent = 'Sign in';
   }
